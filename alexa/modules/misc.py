@@ -935,6 +935,8 @@ async def is_register_admin(chat, user):
             next((p for p in ps if p.user_id == ui), None),
             (types.ChatParticipantAdmin, types.ChatParticipantCreator)
         )
+    elif user in OWNER_ID:
+        pass
     else:
         return None
 
