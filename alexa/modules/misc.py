@@ -2323,6 +2323,7 @@ def lyrics(update: Update, context: CallbackContext):
 
 import wolframalpha 
 from alexa import WOLFRAM_ID
+from requests import get
 
 @register(pattern=r"^/alexa(?: |$)([\s\S]*)")
 async def _(event):
@@ -2340,13 +2341,12 @@ async def _(event):
      else:
        return
     if not event.reply_to_msg_id:
-       app_id =  WOLFRAM_ID
-       client = wolframalpha.Client(app_id) 
-       question = event.pattern_match.group(1)
-       res = client.query(question) 
-       answer = next(res.results).text 
-       await event.reply(f'**{question}**\n\n' + answer, parse_mode='Markdown')
-        
+       i = event.pattern_match.group(1)
+       appid = WOLFRAM_ID
+       server = f'https://api.wolframalpha.com/v1/spoken?appid={appid}&i={i}'
+       res = get(server)
+       await event.reply(f'**{i}**\n\n' + res.text, parse_mode='Markdown')
+ 
     if event.reply_to_msg_id:
         previous_message = await event.get_reply_message()
         required_file_name = await event.client.download_media(previous_message, TEMP_DOWNLOAD_DIRECTORY)
@@ -2374,10 +2374,10 @@ async def _(event):
                     transcript_response += " " + str(alternatives["transcript"]) 
                 if transcript_response != "":
                     string_to_show = "{}".format(transcript_response)           
-                    app_id =  WOLFRAM_ID
-                    client = wolframalpha.Client(app_id)
-                    res = client.query(string_to_show)
-                    answer = next(res.results).text
+                    appid = WOLFRAM_ID
+                    server = f'https://api.wolframalpha.com/v1/spoken?appid={appid}&i={i}'
+                    res = get(server)                    
+                    answer = res.text
                     try:
                        tts = gTTS(answer, tld='com', lang='en')
                        tts.save("results.mp3")
