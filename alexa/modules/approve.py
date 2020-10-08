@@ -705,8 +705,18 @@ async def approve(event):
 	if MONGO_DB_URI is None:
 		return
 	chat_id = event.chat.id
-	sender = event.from_id
-	
+	sender = event.from_id 
+	approved_userss = approved_users.find({})
+	for ch in approved_userss: 
+		iid = ch['id']
+		userss = ch['user']
+	if e.is_group:
+		if (await is_register_admin(e.input_chat, e.message.sender_id)):
+			pass
+		elif e.chat_id == iid and e.from_id == userss:  
+			pass
+		else:
+			return
 	if not event.from_id:
 		await event.edit("Reply To Someone's Message To Approve Them")
 		return	
@@ -726,6 +736,19 @@ async def disapprove(event):
 		return  
 	if MONGO_DB_URI is None:	
 		return
+	chat_id = event.chat.id
+	sender = event.from_id 
+	approved_userss = approved_users.find({})
+	for ch in approved_userss: 
+		iid = ch['id']
+		userss = ch['user']
+	if e.is_group:
+		if (await is_register_admin(e.input_chat, e.message.sender_id)):
+			pass
+		elif e.chat_id == iid and e.from_id == userss:  
+			pass
+		else:
+			return
 	if not event.from_id:
 		await event.edit("Reply To Someone's Message To Disapprove Them")
 		return	
