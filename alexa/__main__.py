@@ -699,7 +699,7 @@ from alexa.modules.helper_funcs.misc import paginate_modules
 # NOTE: Module order is not guaranteed, specify that in the config file!
 
 PM_START_TEXT = f"""
-[#include <std/disclaimer.h>](https://telegra.ph/Alexa---A-Telegram-Bot-Project-08-20)
+[#include <std/disclaimer.h>](https://telegra.ph/MissAlexaRobot-10-09)
 """
 
 buttons = [[
