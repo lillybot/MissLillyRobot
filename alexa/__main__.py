@@ -704,15 +704,15 @@ PM_START_TEXT = f"""
 
 buttons = [[
     InlineKeyboardButton(text="Add to Group 👥",
-                         url="t.me/modernalexabot?startgroup=true"),
+                         url="t.me/MissAlexaRobot?startgroup=true"),
     InlineKeyboardButton(text="Support Group 🎙️",
-                         url="https://t.me/modernalexabotchat"),
+                         url="https://t.me/MissAlexaRobotSupport"),
 ]]
 
 buttons += [[
     InlineKeyboardButton(text="Commands ❓", callback_data="help_back"),
     InlineKeyboardButton(text="Source 🌐",
-                         url="https://github.com/Ayush1311/ModernAlexaBot"),
+                         url="https://github.com/Ayush1311/MissAlexaRobot"),
 ]]
 buttons += [[InlineKeyboardButton(text="Donate💲", url="https://ko-fi.com/modernalexabot")]]
 
