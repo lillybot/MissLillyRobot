@@ -1158,14 +1158,14 @@ dispatcher.add_handler(SETDESC_HANDLER)
 __mod_name__ = "Admin 🚫"
 
 __help__ = """
-Here is the help for the Admin 🚫 module:
-
  - /adminlist | /admins: list of admins in the chat
  - /pin | /unpin: pins/unpins the message in the chat
  - /invitelink: gets invitelink
  - /promote: promotes a user
  - /settitle <username> <title>: sets a custom title for an admin
  - /demote: demotes a user
+ - /zombies: count the number of deleted account in your group
+ - /kickthefools: kicks all members inactive from 1 week
  - /ban: bans a user
  - /tban <d/h/m> : temporarily bans a user from your chat
  - /unban: unbans a user
@@ -1177,7 +1177,7 @@ Here is the help for the Admin 🚫 module:
  - /setflood <number/off>: set the number of messages to take action on a user for flooding
  - /setfloodmode <mute/ban/kick/tban/tmute>: select the valid action eg. /setfloodmode tmute 5m
  - /connection <chatid>: Connect to remote chat
- - /disconnect: disconnects a chat from PM
+ - /disconnect: disconnects a chat from pm
  - /allowconnect on/yes/off/no: allow connect users to group via PM
  - /helpconnect: gets the available list commands
  - /flood: gets the current antiflood settings
@@ -1185,7 +1185,7 @@ Here is the help for the Admin 🚫 module:
  - /unblacklist <trigger> | rmblacklist <trigger> : stop blacklisting a certain blacklist trigger
  - /blacklist: list all active blacklist filters
  - /addblacklist "the admins suck" respect your admins: This will remove the text everytime someone types it
- - /addblacklist "bit.ly/*": This will remove the link everytime someone sends it matching bit.ly
+ - /addblacklist `"bit.ly/*"`: This will remove the link everytime someone sends it matching `bit.ly`
  - /filter <word> <message>: Every time someone says "word", the bot will reply with "message"
  - /stop <word>: stop that filter.
  - /filters: list all active filters in this chat.
@@ -1228,8 +1228,5 @@ Here is the help for the Admin 🚫 module:
  - /welcomemutehelp: help for welcome mutes
  - /welcomehelp: help for welcome message format
  - /cleanservice <on/off>: clean telegram's join/left message
- - /approve: Approves a user so that they can use non-admin commands
- - /disapprove: Disapproves a user so that they can't use non-admin commands
  - /unbanall: Unbans all in the chat
- - /unmuteall: Unmutes all in the chat
 """
