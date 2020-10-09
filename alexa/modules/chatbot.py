@@ -674,6 +674,8 @@ from alexa import dispatcher, LYDIA_API_KEY, OWNER_ID
 import alexa.modules.sql.chatbot_sql as sql
 from alexa.modules.helper_funcs.chat_status import user_admin
 from alexa.modules.helper_funcs.filters import CustomFilters
+from telegram.ext import (CallbackContext, CommandHandler, Filters,
+                          MessageHandler, run_async)
 
 CoffeeHouseAPI = API(LYDIA_API_KEY)
 api_client = LydiaAI(CoffeeHouseAPI)
@@ -709,7 +711,7 @@ def remove_chat(update, context):
         msg.reply_text("AI disabled successfully!")
 
 
-def check_message(context, message):
+def check_message(context: CallbackContext, message):
     reply_msg = message.reply_to_message
     if message.text.lower() == "alexa":
         return True
