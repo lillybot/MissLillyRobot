@@ -1110,8 +1110,6 @@ def __chat_settings__(chat_id, user_id):
             "administrator", "creator"))
 
 
-__mod_name__ = "Admin 🚫"
-
 PIN_HANDLER = CommandHandler("pin", pin, pass_args=True, filters=Filters.group)
 UNPIN_HANDLER = CommandHandler("unpin", unpin, filters=Filters.group)
 
@@ -1157,83 +1155,81 @@ dispatcher.add_handler(SETCHAT_TITLE_HANDLER)
 dispatcher.add_handler(SETSTICKET_HANDLER)
 dispatcher.add_handler(SETDESC_HANDLER)
 
+__mod_name__ = "Admin 🚫"
+
 __help__ = """
 Here is the help for the Admin 🚫 module:
 
-/adminlist | /admins: list of admins in the chat
-/pin | /unpin: pins/unpins the message in the chat
-/invitelink: gets invitelink
-/promote: promotes a user
-/settitle <username> <title>: sets a custom title for an admin
-/demote: demotes a user
-/zombies: count the number of deleted account in your group
-/kickthefools: kicks all members inactive from 1 week
-/ban: bans a user
-/tban <d/h/m> : temporarily bans a user from your chat
-/unban: unbans a user
-/sban: silently bans a user
-/mute: mute a user
-/tmute <d/h/m>: temporarily mute a user
-/unmute: unmutes a user
-/kick: kicks a user
-/setflood <number/off>: set the number of messages to take action on a user for flooding
-/setfloodmode <mute/ban/kick/tban/tmute>: select the valid action eg. /setfloodmode tmute 5m
-/connection <chatid>: Connect to remote chat
-/disconnect: disconnects a chat from pm
-/allowconnect on/yes/off/no: allow connect users to group via PM
-/helpconnect: gets the available list commands
-/flood: gets the current antiflood settings
-/addblacklist <trigger> : blacklists the trigger
-/unblacklist <trigger> | rmblacklist <trigger> : stop blacklisting a certain blacklist trigger
-/blacklist: list all active blacklist filters
-/addblacklist "the admins suck" respect your admins: This will remove the text everytime someone types it
-/addblacklist "bit.ly/*": This will remove the link everytime someone sends it matching bit.ly
-/filter <word> <message>: Every time someone says "word", the bot will reply with "message"
-/stop <word>: stop that filter.
-/filters: list all active filters in this chat.
-/lock <item(s)>: lock the usage of "item" for non-admins
-/unlock <item(s)>: unlock "item". Everyone can use them again
-/locks: list the lock status in the chat
-/locktypes: gets a list of all things that can be locked
-/setlog: set a log channel.
-/unsetlog: unset the log channel.
-/logchannel: get the log channel info
-/purge: deletes all messages from the message you replied to
-/purge X: deletes X messages after the message you replied to
-/del: deletes the message you replied to.
-/save <word> <sentence>: Save that sentence to the note called "word"
-/get <word> | #<word> : get the note registered to that word
-/clear <word>: delete the note called "word"
-/notes | /saved: List all notes in the chat
-/setrules <rules>: set the rules for this chat
-/clearrules: clear the rules for this chat
-/rules: get the rules for this chat
-/addurl <url>: Add a domain to the blacklist, the bot will automatically parse the url
-/delurl <url>: Remove url from the blacklist
-/warn <userhandle>: warn a user
-/resetwarn @username: reset the warnings for a user
-/addwarn <word> <message>: set a warning filter on a certain word
-/nowarn <word>: stop a warning filter
-/warnlimit <num>: set the max warning limit
-/warns <userhandle>: get a user's number, and reason, of warnings
-/warnlist: list of all current warning filters
-/strongwarn <on/yes/off/no>: exceeding warn limit will result in kick, if set to true will ban instead
-/welcome <on/off>: enable/disable welcome messages
-/welcome: should the bot welcome new members ?
-/welcome noformat: shows current welcome settings
-/goodbye: should the bot bid farewell to left members ?
-/setwelcome <text>: set a custom welcome message, you can reply to a media it too to set it
-/setgoodbye <sometext>: set a custom goodbye message, you can reply to a media it too to set it
-/resetwelcome: reset to the default welcome message
-/resetgoodbye: reset to the default goodbye message
-/cleanwelcome <on/off>: try to delete the previous welcome message to avoid spamming
-/welcomemutehelp: help for welcome mutes
-/welcomehelp: help for welcome message format
-/cleanservice <on/off>: clean telegram's join/left message
-/approve: Approves a user so that they can use non-admin commands
-/disapprove: Disapproves a user so that they can't use non-admin commands
-/unbanall: Unbans all in the chat
-/unmuteall: Unmutes all in the chat
-"""
-
-__mod_name__ = "Admin 🚫"
+ - /adminlist | /admins: list of admins in the chat
+ - /pin | /unpin: pins/unpins the message in the chat
+ - /invitelink: gets invitelink
+ - /promote: promotes a user
+ - /settitle <username> <title>: sets a custom title for an admin
+ - /demote: demotes a user
+ - /ban: bans a user
+ - /tban <d/h/m> : temporarily bans a user from your chat
+ - /unban: unbans a user
+ - /sban: silently bans a user
+ - /mute: mute a user
+ - /tmute <d/h/m>: temporarily mute a user
+ - /unmute: unmutes a user
+ - /kick: kicks a user
+ - /setflood <number/off>: set the number of messages to take action on a user for flooding
+ - /setfloodmode <mute/ban/kick/tban/tmute>: select the valid action eg. /setfloodmode tmute 5m
+ - /connection <chatid>: Connect to remote chat
+ - /disconnect: disconnects a chat from PM
+ - /allowconnect on/yes/off/no: allow connect users to group via PM
+ - /helpconnect: gets the available list commands
+ - /flood: gets the current antiflood settings
+ - /addblacklist <trigger> : blacklists the trigger
+ - /unblacklist <trigger> | rmblacklist <trigger> : stop blacklisting a certain blacklist trigger
+ - /blacklist: list all active blacklist filters
+ - /addblacklist "the admins suck" respect your admins: This will remove the text everytime someone types it
+ - /addblacklist "bit.ly/*": This will remove the link everytime someone sends it matching bit.ly
+ - /filter <word> <message>: Every time someone says "word", the bot will reply with "message"
+ - /stop <word>: stop that filter.
+ - /filters: list all active filters in this chat.
+ - /lock <item(s)>: lock the usage of "item" for non-admins
+ - /unlock <item(s)>: unlock "item". Everyone can use them again
+ - /locks: list the lock status in the chat
+ - /locktypes: gets a list of all things that can be locked
+ - /setlog: set a log channel.
+ - /unsetlog: unset the log channel.
+ - /logchannel: get the log channel info
+ - /purge: deletes all messages from the message you replied to
+ - /purge X: deletes X messages after the message you replied to
+ - /del: deletes the message you replied to.
+ - /save <word> <sentence>: Save that sentence to the note called "word"
+ - /get <word> | #<word> : get the note registered to that word
+ - /clear <word>: delete the note called "word"
+ - /notes | /saved: List all notes in the chat
+ - /setrules <rules>: set the rules for this chat
+ - /clearrules: clear the rules for this chat
+ - /rules: get the rules for this chat
+ - /addurl <url>: Add a domain to the blacklist, the bot will automatically parse the url
+ - /delurl <url>: Remove url from the blacklist
+ - /warn <userhandle>: warn a user
+ - /resetwarn @username: reset the warnings for a user
+ - /addwarn <word> <message>: set a warning filter on a certain word
+ - /nowarn <word>: stop a warning filter
+ - /warnlimit <num>: set the max warning limit
+ - /warns <userhandle>: get a user's number, and reason, of warnings
+ - /warnlist: list of all current warning filters
+ - /strongwarn <on/yes/off/no>: exceeding warn limit will result in kick, if set to true will ban instead
+ - /welcome <on/off>: enable/disable welcome messages
+ - /welcome: should the bot welcome new members ?
+ - /welcome noformat: shows current welcome settings
+ - /goodbye: should the bot bid farewell to left members ?
+ - /setwelcome <text>: set a custom welcome message, you can reply to a media it too to set it
+ - /setgoodbye <sometext>: set a custom goodbye message, you can reply to a media it too to set it
+ - /resetwelcome: reset to the default welcome message
+ - /resetgoodbye: reset to the default goodbye message
+ - /cleanwelcome <on/off>: try to delete the previous welcome message to avoid spamming
+ - /welcomemutehelp: help for welcome mutes
+ - /welcomehelp: help for welcome message format
+ - /cleanservice <on/off>: clean telegram's join/left message
+ - /approve: Approves a user so that they can use non-admin commands
+ - /disapprove: Disapproves a user so that they can't use non-admin commands
+ - /unbanall: Unbans all in the chat
+ - /unmuteall: Unmutes all in the chat
+”""
