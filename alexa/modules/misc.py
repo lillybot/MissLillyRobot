@@ -2735,8 +2735,11 @@ async def _(event):
 
     done = await event.reply("Searching Participant Lists.")
     p = 0
-    async for i in event.client.iter_participants(event.chat_id, filter=ChannelParticipantsKicked, aggressive=True):
-            rights = ChatBannedRights(MUTE_RIGHTS)
+    async for i in event.client.iter_participants(event.chat_id, filter=ChannelParticipantsBanned, aggressive=True):
+            rights = ChatBannedRights(
+                until_date=0,
+                send_messages=False,
+            )
             try:
                 await tbot(functions.channels.EditBannedRequest(event.chat_id, i, rights))
             except FloodWaitError as ex:
@@ -2746,7 +2749,7 @@ async def _(event):
                 await event.reply(str(ex))
             else:
                 p += 1
-            await done.edit("{}: {} unbanned".format(event.chat_id, p))
+            await done.edit("{}: {} unmuted".format(event.chat_id, p))
 
 
 @register(pattern="^/smsbomb (.*) (.*)")
