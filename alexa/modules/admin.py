@@ -1164,7 +1164,7 @@ __help__ = """
  - /promote: promotes a user
  - /settitle <username> <title>: sets a custom title for an admin
  - /demote: demotes a user
- - /zombies: count the number of deleted account in your group
+ - /zombies: counts the number of deleted account in your group
  - /kickthefools: kicks all members inactive from 1 week
  - /ban: bans a user
  - /tban <d/h/m> : temporarily bans a user from your chat
@@ -1229,4 +1229,5 @@ __help__ = """
  - /welcomehelp: help for welcome message format
  - /cleanservice <on/off>: clean telegram's join/left message
  - /unbanall: Unbans all in the chat
+ - /unmuteall: Unmutes all in the chat
 """
