@@ -709,19 +709,19 @@ def remove_chat(update, context):
         msg.reply_text("AI disabled successfully!")
 
 
-def check_message(bot: Bot, message):
+def check_message(context, message):
     reply_msg = message.reply_to_message
     if message.text.lower() == "alexa":
         return True
     if reply_msg:
-        if reply_msg.from_user.id == bot.get_me().id:
+        if reply_msg.from_user.id == context.bot.get_me().id:
             return True
     else:
         return False
 
 
 @run_async
-def chatbot(bot: Bot, update: Update):
+def chatbot(update, context):
     global api_client
     msg = update.effective_message
     chat_id = update.effective_chat.id
@@ -729,7 +729,7 @@ def chatbot(bot: Bot, update: Update):
     if not is_chat:
         return
     if msg.text and not msg.document:
-        if not check_message(bot, msg):
+        if not check_message(context.bot, msg):
             return
         sesh, exp = sql.get_ses(chat_id)
         query = msg.text
@@ -743,7 +743,7 @@ def chatbot(bot: Bot, update: Update):
         except ValueError:
             pass
         try:
-            bot.send_chat_action(chat_id, action='typing')
+            context.bot.send_chat_action(chat_id, action='typing')
             rep = api_client.think_thought(sesh, query)
             sleep(0.3)
             msg.reply_text(rep, timeout=60)
@@ -752,30 +752,15 @@ def chatbot(bot: Bot, update: Update):
                 OWNER_ID, f"Chatbot error: {e} occurred in {chat_id}!")
 
 
-@run_async
-def list_chatbot(bot: Bot, update: Update):
-    chats = sql.get_all_chats()
-    text = "<b>AI-Enabled Chats</b>\n"
-    for chat in chats:
-        try:
-            x = bot.get_chat(int(*chat))
-            name = x.title if x.title else x.first_name
-            text += f"• <code>{name}</code>\n"
-        except BadRequest:
-            sql.rem_chat(*chat)
-        except Unauthorized:
-            sql.rem_chat(*chat)
-        except RetryAfter as e:
-            sleep(e.retry_after)
-    update.effective_message.reply_text(text, parse_mode="HTML")
-
-
 __mod_name__ = "Chatbot"
 
 ADD_CHAT_HANDLER = CommandHandler("addchat", add_chat)
 REMOVE_CHAT_HANDLER = CommandHandler("rmchat", remove_chat)
+CHATBOT_HANDLER = MessageHandler(Filters.text & (~Filters.regex(
+    r"^#[^\s]+") & ~Filters.regex(r"^!") & ~Filters.regex(r"^s\/")), chatbot)
 
 # Filters for ignoring #note messages, !commands and sed.
 
 dispatcher.add_handler(ADD_CHAT_HANDLER)
 dispatcher.add_handler(REMOVE_CHAT_HANDLER)
+dispatcher.add_handler(CHATBOT_HANDLER)
