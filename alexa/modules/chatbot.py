@@ -682,7 +682,7 @@ api_client = LydiaAI(CoffeeHouseAPI)
 
 
 @run_async
-@user_can_change
+#@user_can_change
 @loggable
 def add_chat(update: Update, context: CallbackContext):
     global api_client
@@ -705,7 +705,7 @@ def add_chat(update: Update, context: CallbackContext):
         return ""
 
 @run_async
-@user_can_change
+#@user_can_change
 @loggable
 def remove_chat(update: Update, context: CallbackContext):
     msg = update.effective_message
