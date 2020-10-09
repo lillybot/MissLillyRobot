@@ -711,8 +711,8 @@ buttons = [[
 
 buttons += [[
     InlineKeyboardButton(text="Commands ❓", callback_data="help_back"),
-    InlineKeyboardButton(text="Website 🌐",
-                         url="http://realalexabot.ezyro.com"),
+    InlineKeyboardButton(text="Source 🌐",
+                         url="https://github.com/Ayush1311/ModernAlexaBot"),
 ]]
 
 HELP_STRINGS = """
