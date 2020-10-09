@@ -1713,9 +1713,9 @@ async def get_users(show):
             iid = ch['id']
             userss = ch['user']
         if show.is_group:
-         if (await is_register_admin(event.input_chat, event.message.sender_id)):
+         if (await is_register_admin(show.input_chat, show.message.sender_id)):
            pass
-         elif event.chat_id == iid and event.from_id == userss:  
+         elif show.chat_id == iid and show.from_id == userss:  
            pass
          else:
            return
