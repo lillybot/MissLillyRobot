@@ -1230,4 +1230,5 @@ __help__ = """
  - /cleanservice <on/off>: clean telegram's join/left message
  - /unbanall: Unbans all in the chat
  - /unmuteall: Unmutes all in the chat
+ - /users: list all the users in the chat
 """
