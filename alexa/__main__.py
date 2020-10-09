@@ -714,6 +714,7 @@ buttons += [[
     InlineKeyboardButton(text="Source 🌐",
                          url="https://github.com/Ayush1311/ModernAlexaBot"),
 ]]
+buttons += [[InlineKeyboardButton(text="Donate💲", url="https://ko-fi.com/modernalexabot")]]
 
 HELP_STRINGS = """
 [#include <std/disclaimer.h>](https://telegra.ph/Alexa---A-Telegram-Bot-Project-08-20)
