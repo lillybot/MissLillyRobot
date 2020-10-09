@@ -704,15 +704,15 @@ PM_START_TEXT = f"""
 
 buttons = [[
     InlineKeyboardButton(text="Add to Group 👥",
-                         url="t.me/realalexabot?startgroup=true"),
+                         url="t.me/modernalexabot?startgroup=true"),
     InlineKeyboardButton(text="Support Group 🎙️",
-                         url="https://t.me/realalexabotsupport"),
+                         url="https://t.me/modernalexabotchat"),
 ]]
 
 buttons += [[
     InlineKeyboardButton(text="Commands ❓", callback_data="help_back"),
     InlineKeyboardButton(text="Website 🌐",
-                         url="http://realalexabot.unaux.com/home"),
+                         url="http://realalexabot.ezyro.com"),
 ]]
 
 HELP_STRINGS = """
