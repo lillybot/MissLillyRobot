@@ -756,11 +756,12 @@ async def disapprove(event):
 		await event.edit("Reply To Someone's Message To Disapprove Them")
 		return	
 	chats = approved_users.find({})
+	reply_msg = await event.get_reply_message()	
 	for c in chats:
 		if not event.chat_id == c['id'] and reply_msg.from_id == c['user']:
 			await event.reply("This User isn't approved yet")
 			return 	
-	reply_msg = await event.get_reply_message()	
+		
 	approved_users.delete_one({'id':event.chat_id,'user':reply_msg.from_id})
 	await event.reply("Successfully Disapproved User")
 	
