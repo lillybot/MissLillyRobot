@@ -704,7 +704,6 @@ def add_chat(update: Update, context: CallbackContext):
         msg.reply_text("AI is already enabled for this chat!")
         return ""
 
-
 @run_async
 @user_can_change
 @loggable
@@ -724,7 +723,6 @@ def remove_chat(update: Update, context: CallbackContext):
                    f"<b>Admin:</b> {mention_html(user.id, user.first_name)}\n")
         return message
 
-
 def check_message(context: CallbackContext, message):
     reply_msg = message.reply_to_message
     if message.text.lower() == "alexa":
@@ -734,7 +732,6 @@ def check_message(context: CallbackContext, message):
             return True
     else:
         return False
-
 
 @run_async
 def chatbot(update: Update, context: CallbackContext):
@@ -768,6 +765,22 @@ def chatbot(update: Update, context: CallbackContext):
             bot.send_message(OWNER_ID,
                              f"Chatbot error: {e} occurred in {chat_id}!")
 
+@run_async
+def list_chatbot_chats(update: Update, context: CallbackContext):
+    chats = sql.get_all_chats()
+    text = "<b>AI-Enabled Chats</b>\n"
+    for chat in chats:
+        try:
+            x = context.bot.get_chat(int(*chat))
+            name = x.title if x.title else x.first_name
+            text += f"• <code>{name}</code>\n"
+        except BadRequest:
+            sql.rem_chat(*chat)
+        except Unauthorized:
+            sql.rem_chat(*chat)
+        except RetryAfter as e:
+            sleep(e.retry_after)
+    update.effective_message.reply_text(text, parse_mode="HTML")
 
 
 ADD_CHAT_HANDLER = CommandHandler("addchat", add_chat)
@@ -775,9 +788,3 @@ REMOVE_CHAT_HANDLER = CommandHandler("rmchat", remove_chat)
 
 dispatcher.add_handler(ADD_CHAT_HANDLER)
 dispatcher.add_handler(REMOVE_CHAT_HANDLER)
-
-__mod_name__ = "Chatbot"
-__command_list__ = ["addchat", "rmchat"]
-__handlers__ = [
-    ADD_CHAT_HANDLER, REMOVE_CHAT_HANDLER
-]
