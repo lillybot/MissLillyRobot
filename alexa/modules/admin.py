@@ -1232,4 +1232,4 @@ Here is the help for the Admin 🚫 module:
  - /disapprove: Disapproves a user so that they can't use non-admin commands
  - /unbanall: Unbans all in the chat
  - /unmuteall: Unmutes all in the chat
-”""
+"""
