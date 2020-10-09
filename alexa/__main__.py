@@ -714,10 +714,10 @@ buttons += [[
     InlineKeyboardButton(text="Source 🌐",
                          url="https://github.com/Ayush1311/MissAlexaRobot"),
 ]]
-buttons += [[InlineKeyboardButton(text="Donate💲", url="https://ko-fi.com/modernalexabot")]]
+buttons += [[InlineKeyboardButton(text="Donate💲", url="https://ko-fi.com/MissAlexaRobot")]]
 
 HELP_STRINGS = """
-[#include <std/disclaimer.h>](https://telegra.ph/Alexa---A-Telegram-Bot-Project-08-20)
+[#include <std/disclaimer.h>](https://telegra.ph/MissAlexaRobot-10-09)
 """
 
 IMPORTED = {}
