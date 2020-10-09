@@ -2375,7 +2375,7 @@ async def _(event):
                 if transcript_response != "":
                     string_to_show = "{}".format(transcript_response)           
                     appid = WOLFRAM_ID
-                    server = f'https://api.wolframalpha.com/v1/spoken?appid={appid}&i={i}'
+                    server = f'https://api.wolframalpha.com/v1/spoken?appid={appid}&i={string_to_show}'
                     res = get(server)                    
                     answer = res.text
                     try:
