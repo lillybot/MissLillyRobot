@@ -3787,8 +3787,9 @@ async def howdoi(event):
        return
 
    str = event.pattern_match.group(1)
-   let = subprocess.check_output(f"howdoi {str}")
-   await event.reply(let)
+   process = subprocess.Popen(['howdoi', f'{str}'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+   out, err = process.communicate()
+   await event.reply(out)
 
 __help__ = """
  - /id: get the current group id. If replied to user's message gets that user's id.
