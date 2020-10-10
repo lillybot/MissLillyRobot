@@ -941,7 +941,7 @@ async def is_register_admin(chat, user):
         return None
 
 from alexa import tbot
-from telethon import functions, types
+from telethon.tl import functions, types
 
 async def can_ban_users(message):
  result = await tbot.client(functions.messages.GetFullChatRequest(
