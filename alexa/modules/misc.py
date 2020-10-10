@@ -1832,9 +1832,6 @@ async def rm_deletedacc(show):
     del_u = 0
     del_status = "`No deleted accounts found, Group is cleaned as Hell`"
     
-    admin = chat.admin_rights
-    creator = chat.creator
-    
     if show.is_private:
         return
         
@@ -1856,13 +1853,6 @@ async def rm_deletedacc(show):
             \nclean them by using `/zombies clean`"
 
         await show.reply(del_status)
-        return
-
-    # Here laying the sanity check
-
-    # Well
-    if not admin and not creator:
-        await show.reply("`I am not an admin here!`")
         return
 
     await show.reply("`Deleting deleted accounts...`")
