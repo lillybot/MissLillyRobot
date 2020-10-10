@@ -1054,6 +1054,8 @@ Some memes command, find it all out yourself!
  - /sticklet <text>: Turn a text into a sticker
  - /fortune: gets a random fortune quote
  - /quotly: An alternative to @QuotlyBot, type /quotly in reply to a message
+ - /animate: Enwrap your text in a beautiful anime
+ - /savefile: Gives you a permanent link of a file so that you can download it later
 """
 
 __mod_name__ = "Memes 💢"
