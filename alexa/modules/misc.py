@@ -1835,11 +1835,11 @@ async def rm_deletedacc(show):
     if show.is_private:
         return
         
-    if event.is_group:
-       if str(event.from_id) in str(OWNER_ID):
+    if show.is_group:
+       if str(show.from_id) in str(OWNER_ID):
           pass
        else:
-         if not await can_ban_users(message=event):
+         if not await can_ban_users(message=show):
            return
     
     if con != "clean":
