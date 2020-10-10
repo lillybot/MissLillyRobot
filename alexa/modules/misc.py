@@ -2576,7 +2576,14 @@ async def _(event):
             if not status:
                return
             else:
-               c = c + 1                 
+               c = c + 1             
+    
+        if isinstance(i.status, (UserStatusLastMonth, UserStatusLastWeek)):
+            status = await event.client(EditBannedRequest(event.chat_id, i, KICK_RIGHTS))
+            if not status:
+               return
+            else:
+               c = c + 1
 
     required_string = "Successfully Kicked **{}** users"
     await event.reply(required_string.format(c))
