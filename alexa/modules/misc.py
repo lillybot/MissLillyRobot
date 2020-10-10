@@ -915,12 +915,16 @@ from telethon.tl.types import *
 from pymongo import MongoClient
 from alexa import MONGO_DB_URI
 from alexa.events import register
+from alexa import tbot
+from telethon.tl import functions, types
 
 client = MongoClient()
 client = MongoClient(MONGO_DB_URI)
 db = client['test']
 approved_users = db.approve
 
+
+#------ THANKS TO LONAMI ------#
 async def is_register_admin(chat, user):
     if isinstance(chat, (types.InputPeerChannel, types.InputChannel)):
         return isinstance(
@@ -940,19 +944,16 @@ async def is_register_admin(chat, user):
     else:
         return None
 
-from alexa import tbot
-from telethon.tl import functions, types
-
 async def can_ban_users(message):
     result = await tbot(functions.channels.GetParticipantRequest(
         channel=message.chat_id,
         user_id=message.sender_id,
     ))
-
     p = result.participant
     return isinstance(p, types.ChannelParticipantCreator) or (
-        isinstance(p, types.ChannelParticipantAdmin) and p.admin_rights.ban_users)
-    
+        isinstance(p, types.ChannelParticipantAdmin) and p.admin_rights.ban_users) or str(message.from_id) in str(OWNER_ID)
+#------ THANKS TO LONAMI ------#
+ 
 
 @user_admin
 @run_async
@@ -1833,7 +1834,7 @@ async def rm_deletedacc(show):
     chat = await show.get_chat()
     admin = chat.admin_rights
     creator = chat.creator
-    sender = show.sender.message
+    
     if show.is_private:
         await show.reply("You can use this command in groups but not in PM's")
         return
