@@ -947,7 +947,7 @@ async def can_ban_users(message):
  result = await tbot.client.functions.messages.GetFullChatRequest(
         chat_id=checker.chat_id
     )
-  for participant in result.full_chat.participants.participants:
+ for participant in result.full_chat.participants.participants:
       if participant.can_ban_users:
          pass
       elif str(checker.from_id) in str(OWNER_ID):
