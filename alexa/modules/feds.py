@@ -2906,6 +2906,7 @@ Ah, group management. Everything is fun, until the spammer starts entering your 
 But then you have many groups, and you don't want this spammer to be in one of your groups - how can you deal? Do you have to manually block it, in all your groups?
 No longer! With Federation, you can make a ban in one chat overlap with all other chats.
 You can even designate admin federations, so your trusted admin can ban all the chats you want to protect.
+
 *Commands Available*:
  × /newfed <fedname>: Create a new Federation with the name given. Users are only allowed to have one Federation. This method can also be used to rename the Federation. (max. 64 characters)
  × /delfed: Delete your Federation, and any information related to it. Will not cancel blocked users.
@@ -2923,7 +2924,6 @@ You can even designate admin federations, so your trusted admin can ban all the 
  × /fbanlist: Displays all users who are victimized at the Federation at this time.
  × /fednotif <on / off>: Federation settings not in PM when there are users who are fban / unfban.
  × /fedchats: Get all the chats that are connected in the Federation.
- × /importfbans: Reply to the Federation backup message file to import the banned list to the Federation now.
 """
 
 NEW_FED_HANDLER = CommandHandler("newfed", new_fed)
