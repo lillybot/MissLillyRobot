@@ -381,7 +381,7 @@ def __user_info__(user_id):
         user = sql.get_gbanned_user(user_id)
         if user.reason:
             text += "\nReason: {}".format(html.escape(user.reason))
-            text += "\n\nAppeal at @MissAlexaBotSupport if you think it's invalid."
+            text += "\n\nAppeal at @MissAlexaRobotSupport if you think it's invalid."
     else:
         text = text.format("No")
     return text
