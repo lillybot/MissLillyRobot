@@ -3848,8 +3848,7 @@ If you are still messed up send `/helptorrent` in pm for the tutorial !
  - /zip: reply to a telegram file to compressing in .zip format
  - /unzip: reply to a telegram file to decompress it from the .zip format
  - /git <username>: Returns info about a GitHub user or organization.
- - /repo <username>: Return the GitHub user or organization repository list 
- - /magisk: Get latest magisk updates 
+ - /repo <username>: Return the GitHub user or organization repository list  
  - /app <appname>: Search for an app in playstore 
  - /magisk: Get the latest Magisk releases
  - /device <codename>: Get info about an Android device
@@ -3859,6 +3858,7 @@ If you are still messed up send `/helptorrent` in pm for the tutorial !
  - /song <songname artist(optional)>: uploads the song in it's best quality available
  - /lyrics <songname artist (optional)>: get the lyrics of a song 
  - /barcode <text>: makes a barcode out of the text, crop the barcode if you don't want to reveal the text
+ - /smsbomb {country code} {phone no}: Take revenge upon your enemy by sending bulk messages. Syntax: `/smsbomb 91 XXXXXXXXXX`
 """
 
 __mod_name__ = "Utilities ⚡"
