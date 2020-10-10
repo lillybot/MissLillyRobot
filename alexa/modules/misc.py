@@ -940,9 +940,20 @@ async def is_register_admin(chat, user):
     else:
         return None
 
+from alexa import tbot
+from telethon import functions, types
+
 async def can_ban_users(message):
-    if not message.chat.admin_rights.ban_users:
-        return
+ result = await tbot.client.functions.messages.GetFullChatRequest(
+        chat_id=checker.chat_id
+    ))
+  for participant in result.full_chat.participants.participants:
+      if participant.can_ban_users:
+         pass
+      elif str(checker.from_id) in str(OWNER_ID):
+         pass
+      else:
+         return 
     
 
 @user_admin
