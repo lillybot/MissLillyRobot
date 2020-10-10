@@ -3770,6 +3770,26 @@ def pingall(update: Update, context: CallbackContext):
         reply_msg, parse_mode=ParseMode.HTML, disable_web_page_preview=True)
 
 
+@register(pattern="^/howdoi (.*)")
+async def howdoi(event):
+   if event.fwd_from:
+      return 
+   approved_userss = approved_users.find({})
+   for ch in approved_userss: 
+        iid = ch['id']
+        userss = ch['user']
+   if event.is_group:
+    if (await is_register_admin(event.input_chat, event.message.sender_id)):
+       pass
+    elif event.chat_id == iid and event.from_id == userss:  
+       pass
+    else:
+       return
+
+   str = event.pattern_match.group(1)
+   let = subprocess.check_output(f"howdoi {str}")
+   await event.reply(let)
+
 __help__ = """
  - /id: get the current group id. If replied to user's message gets that user's id.
  - /runs: reply a random string from an array of replies.
