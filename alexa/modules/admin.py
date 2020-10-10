@@ -1164,8 +1164,6 @@ __help__ = """
  - /promote: promotes a user
  - /settitle <username> <title>: sets a custom title for an admin
  - /demote: demotes a user
- - /zombies: counts the number of deleted account in your group
- - /kickthefools: kicks all members inactive from 1 week
  - /ban: bans a user
  - /tban <d/h/m> : temporarily bans a user from your chat
  - /unban: unbans a user
@@ -1231,4 +1229,6 @@ __help__ = """
  - /unbanall: Unbans all in the chat
  - /unmuteall: Unmutes all in the chat
  - /users: list all the users in the chat
+ - /zombies: counts the number of deleted account in your group
+ - /kickthefools: kicks all members inactive from 1 week
 """
