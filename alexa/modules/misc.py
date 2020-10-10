@@ -949,7 +949,7 @@ async def can_ban_users(message):
     user_id=message.sender_id,
  ))
  p = result.participant
- if isinstance(p, types.ChannelParticipantCreator) or isinstance(p.admin_rights.ban_users):
+ if isinstance(p, types.ChannelParticipantCreator) or isinstance(p, admin_rights.ban_users):
     print("rights validified")
     pass
  elif str(message.from_id) in str(OWNER_ID):
