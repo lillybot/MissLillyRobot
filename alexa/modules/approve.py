@@ -685,7 +685,7 @@ async def can_ban_users(message):
     ))
     p = result.participant
     return isinstance(p, types.ChannelParticipantCreator) or (
-        isinstance(p, types.ChannelParticipantAdmin) and p.admin_rights.promote_members) 
+        isinstance(p, types.ChannelParticipantAdmin) and p.admin_rights.promote_users) 
 #------ THANKS TO LONAMI ------#
  
 
