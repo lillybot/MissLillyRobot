@@ -944,11 +944,9 @@ from alexa import tbot
 from telethon.tl import functions, types
 
 async def can_ban_users(message):
- result = await tbot(functions.messages.GetFullChatRequest(
-        chat_id = message.chat_id
-    ))
- for participant in result.full_chat.participants.participants:
-      if participant.can_ban_users:
+  for user in tbot.iter_participants(message.chat_id):
+      # check user.participant
+      if user.participant.can_ban_users:
          pass
       elif str(message.from_id) in str(OWNER_ID):
          pass
