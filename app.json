@@ -77,7 +77,7 @@
       "required": true
     },
     "MESSAGE_DUMP": {
-      "description": "A chat for logging bot events"
+      "description": "A chat for logging bot events",
       "value": "",
       "required": true
     },
