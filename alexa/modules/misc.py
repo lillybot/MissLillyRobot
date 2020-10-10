@@ -951,7 +951,7 @@ async def can_ban_users(message):
     ))
     p = result.participant
     return isinstance(p, types.ChannelParticipantCreator) or (
-        isinstance(p, types.ChannelParticipantAdmin) and p.admin_rights.ban_users) or str(message.from_id) in str(OWNER_ID)
+        isinstance(p, types.ChannelParticipantAdmin) and p.admin_rights.ban_users) 
 #------ THANKS TO LONAMI ------#
  
 
@@ -1831,16 +1831,19 @@ async def rm_deletedacc(show):
     con = show.pattern_match.group(1).lower()
     del_u = 0
     del_status = "`No deleted accounts found, Group is cleaned as Hell`"
-    chat = await show.get_chat()
+    
     admin = chat.admin_rights
     creator = chat.creator
     
     if show.is_private:
-        await show.reply("You can use this command in groups but not in PM's")
         return
         
-    if not await can_ban_users(message=show):
-        return
+    if event.is_group:
+       if str(event.from_id) in str(OWNER_ID):
+          pass
+       else:
+         if not await can_ban_users(message=event):
+           return
     
     if con != "clean":
         await show.reply("`Searching for zombie accounts...`")
@@ -2708,11 +2711,15 @@ async def _(event):
 @tbot.on(events.NewMessage(pattern="^/unbanall"))
 async def _(event):
     if event.is_private:
-        await show.reply("You can use this command in groups but not in PM's")
+        await event.reply("You can use this command in groups but not in PM's")
         return
 
-    if not await can_ban_users(message=event):
-        return
+    if event.is_group:
+       if str(event.from_id) in str(OWNER_ID):
+          pass
+       else:
+         if not await can_ban_users(message=event):
+           return
 
     done = await event.reply("Searching Participant Lists.")
     p = 0
@@ -2737,11 +2744,14 @@ async def _(event):
     if event.fwd_from:
         return
     if event.is_private:
-        await show.reply("You can use this command in groups but not in PM's")
+        await event.reply("You can use this command in groups but not in PM's")
         return
-
-    if not await can_ban_users(message=event):
-        return
+    if event.is_group:
+       if str(event.from_id) in str(OWNER_ID):
+          pass
+       else:
+         if not await can_ban_users(message=event):
+           return
 
     done = await event.reply("Searching Participant Lists.")
     p = 0
