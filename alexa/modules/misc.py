@@ -944,20 +944,14 @@ from alexa import tbot
 from telethon.tl import functions, types
 
 async def can_ban_users(message):
- result = await tbot(functions.channels.GetParticipantRequest(
-    channel=message.chat_id,
-    user_id=message.sender_id,
- ))
- p = result.participant
- if isinstance(p, types.ChannelParticipantCreator) or p.admin_rights.ban_users:
-    print("rights validified")
-    pass
- elif str(message.from_id) in str(OWNER_ID):
-    print("owner can do anything")
-    pass
- else:
-    print("missing rights")
-    return
+    result = await tbot(functions.channels.GetParticipantRequest(
+        channel=message.chat_id,
+        user_id=message.sender_id,
+    ))
+
+    p = result.participant
+    return isinstance(p, types.ChannelParticipantCreator) or (
+        isinstance(p, types.ChannelParticipantAdmin) and p.admin_rights.ban_users)
     
 
 @user_admin
