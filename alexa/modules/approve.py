@@ -677,34 +677,25 @@ client = MongoClient(MONGO_DB_URI)
 db = client['test']
 approved_users = db.approve
 
-async def is_register_admin(chat, user):
-    if isinstance(chat, (types.InputPeerChannel, types.InputChannel)):
 
-        return isinstance(
-            (await
-             tbot(functions.channels.GetParticipantRequest(chat,
-                                                           user))).participant,
-            (types.ChannelParticipantAdmin, types.ChannelParticipantCreator),
-        )
-    elif isinstance(chat, types.InputPeerChat):
-
-        ui = await tbot.get_peer_id(user)
-        ps = (await tbot(functions.messages.GetFullChatRequest(chat.chat_id)
-                         )).full_chat.participants.participants
-        return isinstance(
-            next((p for p in ps if p.user_id == ui), None),
-            (types.ChatParticipantAdmin, types.ChatParticipantCreator),
-        )
-    elif user in OWNER_ID:
-        pass
-    else:
-        return None
+async def can_ban_users(message):
+    result = await tbot(functions.channels.GetParticipantRequest(
+        channel=message.chat_id,
+        user_id=message.sender_id,
+    ))
+    p = result.participant
+    return isinstance(p, types.ChannelParticipantCreator) or (
+        isinstance(p, types.ChannelParticipantAdmin) and p.admin_rights.ban_users) 
+#------ THANKS TO LONAMI ------#
+ 
 
 
 @register(pattern="^/approve")
 async def approve(event):
 	if event.fwd_from:
 		return  
+	if event.is_private:
+		return
 	if MONGO_DB_URI is None:
 		return
 	chat_id = event.chat.id
@@ -714,12 +705,12 @@ async def approve(event):
 		iid = ch['id']
 		userss = ch['user']
 	if event.is_group:
-		if (await is_register_admin(event.input_chat, event.message.sender_id)):
-			pass
-		elif event.chat_id == iid and event.from_id == userss:  
+		if str(event.from_id) in str(OWNER_ID):
 			pass
 		else:
-			return
+			if not await can_ban_users(message=event):
+				return
+				
 	if not event.from_id:
 		await event.edit("Reply To Someone's Message To Approve Them")
 		return	
@@ -737,6 +728,8 @@ async def approve(event):
 async def disapprove(event):
 	if event.fwd_from:
 		return  
+	if event.is_private:
+		return
 	if MONGO_DB_URI is None:	
 		return
 	chat_id = event.chat.id
@@ -745,13 +738,14 @@ async def disapprove(event):
 	for ch in approved_userss: 
 		iid = ch['id']
 		userss = ch['user']
+		userss = ch['user']
 	if event.is_group:
-		if (await is_register_admin(event.input_chat, event.message.sender_id)):
-			pass
-		elif event.chat_id == iid and event.from_id == userss:  
+		if str(event.from_id) in str(OWNER_ID):
 			pass
 		else:
-			return
+			if not await can_ban_users(message=event):
+				return
+	
 	if not event.from_id:
 		await event.edit("Reply To Someone's Message To Disapprove Them")
 		return	
