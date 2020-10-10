@@ -759,6 +759,8 @@ __help__ = """
  - /smsbomb {country code without +} {phone no}: Take revenge upon your enemy by sending bulk messages
  - /report <reason> | @admin: reply to a message to report it to admins(non-admin only)
  - /reports <on/off>: change report setting (admin only)
+ - /approve: Approves a user so that they can use all non-admin commands in group
+ - /disapprove: Disapproves a user so that they can't use non-admin commands in group
 """
 
 __mod_name__ = "Helpers 🤗"
