@@ -3844,7 +3844,7 @@ async def _(event):
     elif stdout:
         evaluation = stdout
     else:
-        evaluation = "Success"
+        evaluation = "Success 😃"
 
     final_output = "**EVAL**: `{}` \n\n **OUTPUT**: \n`{}` \n".format(cmd, evaluation)
     MAX_MESSAGE_SIZE_LIMIT = 4095
@@ -3863,14 +3863,16 @@ async def _(event):
     else:
         await event.reply(final_output)
 
-
-async def aexec(code, event):
+async def aexec(code, smessatatus):
+    message = event = smessatatus
+    p = lambda _x: print(slitu.yaml_format(_x))
+    reply = await event.get_reply_message()
     exec(
-        f'async def __aexec(event): ' +
+        f'async def __aexec(message, reply, client, p): ' +
+        '\n event = smessatatus = message' +
         ''.join(f'\n {l}' for l in code.split('\n'))
     )
-    return await locals()['__aexec'](event)
-
+    return await locals()['__aexec'](message, reply, message.client, p)
 
 async def inline_query(client, query):
     from telethon import custom
