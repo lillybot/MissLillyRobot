@@ -2584,8 +2584,8 @@ async def _(event):
         if last_seen:
            now = datetime.datetime.now(tz=datetime.timezone.utc)
            diff = now - last_seen
-           return diff <= datetime.timedelta(days=days)
-
+           diff <= datetime.timedelta(days=days)
+           print(diff)
     
         if isinstance(i.status, UserStatusLastMonth) and days >= 30:
             status = await event.client(EditBannedRequest(event.chat_id, i, KICK_RIGHTS))
