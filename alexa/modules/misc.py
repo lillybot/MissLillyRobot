@@ -2546,7 +2546,8 @@ from telethon import *
 from telethon.tl.functions.channels import (EditAdminRequest,
                                             EditBannedRequest,
                                             EditPhotoRequest)
-                                           
+                                   
+        
 @tbot.on(events.NewMessage(pattern="^/kickthefools"))
 async def _(event):
     if event.fwd_from:
@@ -2578,7 +2579,14 @@ async def _(event):
             else:
                c = c + 1             
     
-        if isinstance(i.status, (UserStatusLastMonth, UserStatusLastWeek)):
+        last_seen = i.status.was_online if isinstance(i.status, UserStatusOffline) else None
+        if last_seen:
+           now = datetime.datetime.now(tz=datetime.timezone.utc)
+           diff = now - last_seen
+           return diff <= datetime.timedelta(days=days)
+
+    
+        if isinstance(i.status, UserStatusLastMonth) and days >= 30:
             status = await event.client(EditBannedRequest(event.chat_id, i, KICK_RIGHTS))
             if not status:
                return
