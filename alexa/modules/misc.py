@@ -2549,6 +2549,7 @@ from telethon.tl.functions.channels import (EditAdminRequest,
                                    
 def online_within(participant):
   status = participant.status
+  print(status)
   if isinstance(status, types.UserStatusOnline) or (status, types.UserStatusRecently) or (status, types.UserStatusEmpty) or (status, types.UserStatusLastMonth) or (status, types.UserStatusLastWeek) or participant.bot:
      return False
   else:
