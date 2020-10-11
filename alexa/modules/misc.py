@@ -2549,6 +2549,7 @@ from telethon.tl.functions.channels import (EditAdminRequest,
                                    
 def online_within(participant, days):
   status = participant.status
+
   if isinstance(status, types.UserStatusOnline) or participant.bot:
     return False
 
@@ -2558,14 +2559,7 @@ def online_within(participant, days):
     now = datetime.datetime.now(tz=datetime.timezone.utc)
     diff = now - last_seen
     return diff <= datetime.timedelta(days=days)
-
-  if isinstance(status, types.UserStatusRecently) and days >= 1 \
-      or isinstance(status, types.UserStatusLastWeek) and days >= 7 \
-      or isinstance(status, types.UserStatusLastMonth) and days >= 30:
-    return True
-
-  return False
-
+    print(diff)
 
 @tbot.on(events.NewMessage(pattern="^/kickthefools"))
 async def _(event):
