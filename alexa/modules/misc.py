@@ -3802,6 +3802,9 @@ async def howdoi(event):
 
 async def inline_query(client, query):
     from telethon import custom
+    import logging
+    logging.basicConfig(level=logging.DEBUG)
+
     return custom.InlineResults(client, await client(functions.messages.GetInlineBotResultsRequest(
         bot='gamee',
         peer='me',
@@ -3817,9 +3820,6 @@ async def ramdomgames(event):
 
 	entity = await event.client.get_entity('MissAlexaRobot')
 	await inline_query(ubot, '1')
-	
-	# await games.forward_to(entity)
-
 	
      
 
