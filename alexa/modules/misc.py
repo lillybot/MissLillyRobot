@@ -3809,7 +3809,6 @@ async def howdoi(event):
 
 # Made by @MissAlexa_Robot
 
-
 @register(pattern="^/sangmata")
 async def sangmata(event):
 	if event.fwd_from:
@@ -3821,8 +3820,7 @@ async def sangmata(event):
 		return
 	reply_msg = await event.get_reply_message()
 	entity = await event.client.get_entity(OWNER_ID)
-	await tbot.foward_messages(entity, reply_msg)
-
+	await message.forward_to(entity)
 
 __help__ = """
  - /id: get the current group id. If replied to user's message gets that user's id.
