@@ -2586,13 +2586,6 @@ async def _(event):
                return
             else:
                c = c + 1             
-           
-        if online_within(i):
-            status = await event.client(EditBannedRequest(event.chat_id, i, KICK_RIGHTS))
-            if not status:
-               return
-            else:
-               c = c + 1
 
     required_string = "Successfully Kicked **{}** users"
     await event.reply(required_string.format(c))
@@ -3807,20 +3800,6 @@ async def howdoi(event):
    pit = jit.decode()
    await event.reply(pit)
 
-# Made by @MissAlexa_Robot
-
-@register(pattern="^/sangmata")
-async def sangmata(event):
-	if event.fwd_from:
-		return  
-	if not event.from_id:
-		await event.edit("Reply To Someone's Message To Get Their Details")
-		return	
-	if event.is_private:
-		return
-	reply_msg = await event.get_reply_message()
-	entity = await event.client.get_entity(OWNER_ID)
-	await reply_msg.forward_to(entity)
 
 __help__ = """
  - /id: get the current group id. If replied to user's message gets that user's id.
