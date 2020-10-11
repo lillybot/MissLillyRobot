@@ -2558,7 +2558,6 @@ def online_within(participant, days):
   if last_seen:
     now = datetime.datetime.now(tz=datetime.timezone.utc)
     diff = now - last_seen
-    return diff <= datetime.timedelta(days=days)
     print(diff)
 
 @tbot.on(events.NewMessage(pattern="^/kickthefools"))
@@ -2576,7 +2575,7 @@ async def _(event):
     KICK_RIGHTS = ChatBannedRights(until_date=None, view_messages=True)
     await event.reply("Searching Participant Lists...")
     async for i in event.client.iter_participants(event.chat_id):
-        print(i) #optional 
+        
         if isinstance(i.status, UserStatusLastMonth):
             status = await event.client(EditBannedRequest(event.chat_id, i, KICK_RIGHTS))
             if not status:
