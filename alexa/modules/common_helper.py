@@ -753,6 +753,7 @@ __help__ = """
  - /forbesify: Correct your punctuations better use the advanged spell module
  - /tr (language code) as reply to a long message.
  - /define <text>: Type the word or expression you want to search\nFor example /define Gay
+ - /emotion: Type in reply to a message to check emotions (English Only)
  - /banme: ban yourself from a chat
  - /kickme: kicks yourself from a chat
  - /markdownhelp: quick summary of how markdown works in telegram - can only be called in private chats
