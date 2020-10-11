@@ -678,7 +678,7 @@ db = client['test']
 approved_users = db.approve
 
 
-async def can_ban_users(message):
+async def can_approve_users(message):
     result = await tbot(functions.channels.GetParticipantRequest(
         channel=message.chat_id,
         user_id=message.sender_id,
@@ -708,7 +708,7 @@ async def approve(event):
 		if str(event.from_id) in str(OWNER_ID):
 			pass
 		else:
-			if not await can_ban_users(message=event):
+			if not await can_approve_users(message=event):
 				return
 				
 	if not event.from_id:
@@ -743,7 +743,7 @@ async def disapprove(event):
 		if str(event.from_id) in str(OWNER_ID):
 			pass
 		else:
-			if not await can_ban_users(message=event):
+			if not await can_approve_users(message=event):
 				return
 	
 	if not event.from_id:
