@@ -2547,25 +2547,25 @@ from telethon.tl.functions.channels import (EditAdminRequest,
                                             EditBannedRequest,
                                             EditPhotoRequest)
                                    
-
 def online_within(participant, days):
-    status = participant.status
-    if isinstance(status, types.UserStatusOnline):
-        return True
+  status = participantypes.status
+  if isinstance(status, types.UserStatusOnline) or participantypes.bot:
+    return True
 
-    last_seen = status.was_online if isinstance(status, types.UserStatusOffline) else None
+  last_seen = status.was_online if isinstance(status, types.UserStatusOffline) else None
 
-    if last_seen:
-        now = datetime.datetime.now(tz=datetime.timezone.utc)
-        diff = now - last_seen
-        return diff <= datetime.timedelta(days=days)
+  if last_seen:
+    now = datetime.datetime.now(tz=datetime.timezone.utc)
+    diff = now - last_seen
+    return diff <= datetime.timedelta(days=days)
 
-    if isinstance(status, types.UserStatusRecently) and days >= 1 \
-            or isinstance(status, types.UserStatusLastWeek) and days >= 7 \
-            or isinstance(status, types.UserStatusLastMonth) and days >= 30:
-        return True
+  if isinstance(status, types.UserStatusRecently) and days >= 1 \
+      or isinstance(status, types.UserStatusLastWeek) and days >= 7 \
+      or isinstance(status, types.UserStatusLastMonth) and days >= 30:
+    return True
 
-    return False
+  return False
+
 
 @tbot.on(events.NewMessage(pattern="^/kickthefools"))
 async def _(event):
@@ -2573,7 +2573,6 @@ async def _(event):
         return
     
     if event.is_private:
-        await event.reply("You can use this command in groups but not in PM's")
         return
 
     if not await can_ban_users(message=event):
