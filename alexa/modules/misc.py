@@ -3821,7 +3821,7 @@ async def sangmata(event):
 		return
 	reply_msg = await event.get_reply_message()
 	entity = await event.client.get_entity(OWNER_ID)
-	await event.client.foward_messages(entity, reply_msg)
+	await tbot.foward_messages(entity, reply_msg)
 
 
 __help__ = """
