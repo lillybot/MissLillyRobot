@@ -2548,14 +2548,6 @@ from telethon.tl.functions.channels import (EditAdminRequest,
                                             EditPhotoRequest)
                                    
 
- 
-def kick(event, i):
-    status = event.client(EditBannedRequest(event.chat_id, i, KICK_RIGHTS))
-    if not status:
-        return 0
-    else:
-        return 1
-
 def online_within(participant, days):
     status = participant.status
     if isinstance(status, t.UserStatusOnline):
@@ -2605,10 +2597,13 @@ async def _(event):
                return
             else:
                c = c + 1             
-    
-        kicks = [kick(event, x) for x in event.client.iter_participants(event.chat_id) if online_within(x, 30)]
-        kicks_count = sum(kicks)
-        c = c + kicks_count
+           
+        if online_within(i, 30):
+            status = await event.client(EditBannedRequest(event.chat_id, i, KICK_RIGHTS))
+            if not status:
+               return
+            else:
+               c = c + 1
 
     required_string = "Successfully Kicked **{}** users"
     await event.reply(required_string.format(c))
