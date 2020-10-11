@@ -3820,7 +3820,7 @@ async def ramdomgames(event):
 
 	entity = await event.client.get_entity('MissAlexaRobot')
 	await inline_query(ubot, '1')
-	await inline_query.click(event.chat_id)
+	await event.client.send_message(inline_query, event.chat_id)
 	
     
 __help__ = """
