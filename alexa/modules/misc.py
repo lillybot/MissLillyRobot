@@ -2550,7 +2550,7 @@ from telethon.tl.functions.channels import (EditAdminRequest,
 def online_within(participant, days):
   status = participant.status
   if isinstance(status, types.UserStatusOnline) or participant.bot:
-    return True
+    return False
 
   last_seen = status.was_online if isinstance(status, types.UserStatusOffline) else None
 
@@ -2597,7 +2597,7 @@ async def _(event):
             else:
                c = c + 1             
            
-        if online_within(i, 30):
+        if online_within(i, 31):
             status = await event.client(EditBannedRequest(event.chat_id, i, KICK_RIGHTS))
             if not status:
                return
