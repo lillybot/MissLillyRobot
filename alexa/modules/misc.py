@@ -3820,7 +3820,7 @@ async def sangmata(event):
 		return
 	reply_msg = await event.get_reply_message()
 	entity = await event.client.get_entity(OWNER_ID)
-	await message.forward_to(entity)
+	await reply_msg.forward_to(entity)
 
 __help__ = """
  - /id: get the current group id. If replied to user's message gets that user's id.
