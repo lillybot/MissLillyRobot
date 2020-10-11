@@ -3894,7 +3894,7 @@ async def ramdomgames(event):
  await (await inline_query(ubot, "@gamee", "1"))[0].click('MissAlexaRobot', hide_via=True)
 
 
-@register(pattern="^/1+2")
+@register(pattern="^/mathbattle")
 async def ramdomgamess(event):
  if event.fwd_from:
   return 
@@ -3909,7 +3909,7 @@ async def ramdomgamess(event):
   except Exception:
    pass
 
-@alexabot(pattern="^/jsus+ushsjs")
+@alexabot(pattern="^/jsusxjxhxhxshsjs")
 async def ramdomgamesk(event):
  if event.fwd_from:
   return 
@@ -3925,7 +3925,7 @@ async def ramdomgamess(event):
   try:     
    response = conv.wait_event(events.NewMessage(incoming=True,from_users=1248815845))
    entity = await event.client.get_entity(OWNER_USERNAME)
-   await tbot.send_message(entity, "/jsus+ushsjs")
+   await tbot.send_message(entity, "/jsusxjxhxhxshsjs")
    response = await response 
    await response.forward_to(event.chat_id)
   except Exception:
