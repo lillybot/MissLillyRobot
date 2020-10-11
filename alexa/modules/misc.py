@@ -3809,7 +3809,7 @@ import traceback
 from telethon import errors, events, functions, types
 
 
-@register(pattern="^/eval"))
+@register(pattern="^/eval")
 async def _(event):
     if event.fwd_from or event.via_bot_id:
         return
