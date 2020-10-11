@@ -2550,7 +2550,7 @@ from telethon.tl.functions.channels import (EditAdminRequest,
 
  
 def kick(event, i):
-    status = await event.client(EditBannedRequest(event.chat_id, i, KICK_RIGHTS))
+    status = event.client(EditBannedRequest(event.chat_id, i, KICK_RIGHTS))
     if not status:
         return 0
     else:
