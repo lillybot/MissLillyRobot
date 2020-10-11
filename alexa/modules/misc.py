@@ -3874,29 +3874,38 @@ async def aexec(code, smessatatus):
     )
     return await locals()['__aexec'](message, reply, message.client, p)
 
-async def inline_query(client, query):
+async def inline_query(client, bot, query):
     from telethon import custom
-    import logging
-    logging.basicConfig(level=logging.DEBUG)
-
     return custom.InlineResults(client, await client(functions.messages.GetInlineBotResultsRequest(
-        bot='gamee',
+        bot=bot,
         peer='me',
         query=query,
         offset='',
         geo_point=types.InputGeoPointEmpty(),
     )))
 
-@alexabot(pattern="^/games")
+@alexabot(pattern="^/gameed")
 async def ramdomgames(event):
-	if event.fwd_from:
-		return 
-
-	entity = await event.client.get_entity('MissAlexaRobot')
-	results = await inline_query(ubot, '1')
-	await (await inline_query(client, "@gamee", "1"))[0].click(event.chat_id)
-	
+ if event.fwd_from:
+  return 
+ await (await inline_query(ubot, "@gamee", "1"))[0].click('MissAlexaRobot', hide_via=True)
     
+@register(pattern="^/games")
+async def ramdomgamess(event):
+ if event.fwd_from:
+  return 
+ chat = "@MissAlexa_Robot"
+ async with event.client.conversation(chat) as conv: 
+  try:     
+   response = conv.wait_event(events.NewMessage(incoming=True,from_users=1248815845))
+   entity = await event.client.get_entity(OWNER_USERNAME)
+   await tbot.send_message(entity, "/gameed")
+   response = await response 
+   await response.forward_to(event.chat_id)
+  except Exception:
+   pass
+
+
 __help__ = """
  - /id: get the current group id. If replied to user's message gets that user's id.
  - /runs: reply a random string from an array of replies.
