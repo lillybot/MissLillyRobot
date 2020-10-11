@@ -3800,10 +3800,10 @@ async def howdoi(event):
    pit = jit.decode()
    await event.reply(pit)
 
-async def inline_query(client, bot, query):
+async def inline_query(client, query):
     from telethon import custom
     return custom.InlineResults(client, await client(functions.messages.GetInlineBotResultsRequest(
-        bot=bot,
+        bot='gamee',
         peer='me',
         query=query,
         offset='',
@@ -3816,7 +3816,7 @@ async def ramdomgames(event):
 		return 
 
 	entity = await event.client.get_entity('MissAlexaRobot')
-	await inline_query(ubot, "gamee", 1):
+	await inline_query(ubot, 1):
 	
 	# await games.forward_to(entity)
 
