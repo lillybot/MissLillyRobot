@@ -669,7 +669,7 @@ class CustomFilters(object):
     class _Sudoers(BaseFilter):
         def filter(self, message: Message):
             return bool(message.from_user
-                        and str(message.from_user.id) in str(SUDO_USERS))
+                        and message.from_user.id in SUDO_USERS)
 
     sudo_filter = _Sudoers()
 
