@@ -2554,7 +2554,7 @@ def online_within(participant, days):
     return False
 
   last_seen = status.was_online if isinstance(status, types.UserStatusOffline) else None
-
+  print(last_seen)
   if last_seen:
     now = datetime.datetime.now(tz=datetime.timezone.utc)
     diff = now - last_seen
