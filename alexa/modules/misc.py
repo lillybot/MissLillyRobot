@@ -3891,11 +3891,10 @@ async def inline_query(client, bot, query):
 async def ramdomgames(event):
  if event.fwd_from:
   return 
- await (await inline_query(ubot, "@gamee", str((randrange(1, 51)))))[0].click('MissAlexaRobot', hide_via=True)
+ await (await inline_query(ubot, "@gamee", "1"))[0].click('MissAlexaRobot', hide_via=True)
 
-from random import randrange
 
-@register(pattern="^/games")
+@register(pattern="^/1+2")
 async def ramdomgamess(event):
  if event.fwd_from:
   return 
@@ -3905,6 +3904,28 @@ async def ramdomgamess(event):
    response = conv.wait_event(events.NewMessage(incoming=True,from_users=1248815845))
    entity = await event.client.get_entity(OWNER_USERNAME)
    await tbot.send_message(entity, "/gameed")
+   response = await response 
+   await response.forward_to(event.chat_id)
+  except Exception:
+   pass
+
+@alexabot(pattern="^/jsus+ushsjs")
+async def ramdomgamesk(event):
+ if event.fwd_from:
+  return 
+ await (await inline_query(ubot, "@gamee", "2"))[0].click('MissAlexaRobot', hide_via=True)
+
+
+@register(pattern="^/motofx")
+async def ramdomgamess(event):
+ if event.fwd_from:
+  return 
+ chat = "@MissAlexa_Robot"
+ async with event.client.conversation(chat) as conv: 
+  try:     
+   response = conv.wait_event(events.NewMessage(incoming=True,from_users=1248815845))
+   entity = await event.client.get_entity(OWNER_USERNAME)
+   await tbot.send_message(entity, "/jsus+ushsjs")
    response = await response 
    await response.forward_to(event.chat_id)
   except Exception:
