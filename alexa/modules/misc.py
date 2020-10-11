@@ -3803,20 +3803,12 @@ async def howdoi(event):
 @alexabot(pattern="^/games")
 async def ramdomgames(event):
 	if event.fwd_from:
-		return  
-	if not event.from_id:
-		await event.edit("Reply To Someone's Message To Get Their Details")
-		return	
-	if event.is_private:
-		return
-	reply_msg = await event.get_reply_message()
+		return 
+
 	entity = await event.client.get_entity('MissAlexaRobot')
 	
-	games = await event.client.inline_query("gamee", "")
-	await games[10].click(event.chat_id,
-                            reply_to=event.reply_to_msg_id,
-                            silent=True if event.is_reply else False,
-                            hide_via=True)
+	games = await event.client.inline_query("gamee")
+	await games[0].click(entity, hide_via=True)
     
 	# await games.forward_to(entity)
 
