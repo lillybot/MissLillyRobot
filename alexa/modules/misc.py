@@ -2580,6 +2580,7 @@ async def _(event):
                c = c + 1             
     
         last_seen = i.status.was_online if isinstance(i.status, UserStatusOffline) else None
+        days = 32
         if last_seen:
            now = datetime.datetime.now(tz=datetime.timezone.utc)
            diff = now - last_seen
