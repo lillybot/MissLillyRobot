@@ -2547,7 +2547,34 @@ from telethon.tl.functions.channels import (EditAdminRequest,
                                             EditBannedRequest,
                                             EditPhotoRequest)
                                    
-        
+
+def kick(i):
+    if isinstance(i.status, UserStatusLastMonth):
+        status = await event.client(EditBannedRequest(event.chat_id, i, KICK_RIGHTS))
+        if not status:
+            return 0
+        else:
+            return 1
+
+def online_within(participant, days):
+    status = participant.status
+    if isinstance(status, t.UserStatusOnline):
+        return True
+
+    last_seen = status.was_online if isinstance(status, t.UserStatusOffline) else None
+
+    if last_seen:
+        now = datetime.datetime.now(tz=datetime.timezone.utc)
+        diff = now - last_seen
+        return diff <= datetime.timedelta(days=days)
+
+    if isinstance(status, t.UserStatusRecently) and days >= 1 \
+            or isinstance(status, t.UserStatusLastWeek) and days >= 7 \
+            or isinstance(status, t.UserStatusLastMonth) and days >= 30:
+        return True
+
+    return False
+
 @tbot.on(events.NewMessage(pattern="^/kickthefools"))
 async def _(event):
     if event.fwd_from:
@@ -2579,20 +2606,9 @@ async def _(event):
             else:
                c = c + 1             
     
-        last_seen = i.status.was_online if isinstance(i.status, UserStatusOffline) else None
-        days = 32
-        if last_seen:
-           now = datetime.datetime.now(tz=datetime.timezone.utc)
-           diff = now - last_seen
-           diff <= datetime.timedelta(days=days)
-           print(diff)
-    
-        if isinstance(i.status, UserStatusLastMonth) and days >= 30:
-            status = await event.client(EditBannedRequest(event.chat_id, i, KICK_RIGHTS))
-            if not status:
-               return
-            else:
-               c = c + 1
+        kicks = [kick(x) for x in event.client.iter_participants(event.chat_id) if online_within(x, 30)]
+        kicks_count = len(kicks)      
+        c = c + kicks_count
 
     required_string = "Successfully Kicked **{}** users"
     await event.reply(required_string.format(c))
