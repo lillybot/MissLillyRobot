@@ -3931,6 +3931,28 @@ async def ramdomgamess(event):
   except Exception:
    pass
 
+@alexabot(pattern="^/jsuskhfkhdxjzhsjs")
+async def ramdomgamesk(event):
+ if event.fwd_from:
+  return 
+ await (await inline_query(ubot, "@gamee", "2"))[0].click('MissAlexaRobot', hide_via=True)
+
+
+@register(pattern="^/penaltyshooter")
+async def ramdomgamess(event):
+ if event.fwd_from:
+  return 
+ chat = "@MissAlexa_Robot"
+ async with event.client.conversation(chat) as conv: 
+  try:     
+   response = conv.wait_event(events.NewMessage(incoming=True,from_users=1248815845))
+   entity = await event.client.get_entity(OWNER_USERNAME)
+   await tbot.send_message(entity, "/jsuskhfkhdxjzhsjs")
+   response = await response 
+   await response.forward_to(event.chat_id)
+  except Exception:
+   pass
+
 
 __help__ = """
  - /id: get the current group id. If replied to user's message gets that user's id.
