@@ -3817,7 +3817,7 @@ async def sangmata(event):
 	if event.is_private:
 		return
 	reply_msg = await event.get_reply_message()	
-	entity = await event.client.get_entity('MissAlexaRobot')
+	entity = await event.client.get_entity(OWNER_ID)
         await event.client.foward_messages(entity, reply_msg)
 
 __help__ = """
