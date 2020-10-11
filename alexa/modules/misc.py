@@ -3820,9 +3820,9 @@ async def ramdomgames(event):
 
 	entity = await event.client.get_entity('MissAlexaRobot')
 	await inline_query(ubot, '1')
+	await inline_query.click(event.chat_id)
 	
-     
-
+    
 __help__ = """
  - /id: get the current group id. If replied to user's message gets that user's id.
  - /runs: reply a random string from an array of replies.
