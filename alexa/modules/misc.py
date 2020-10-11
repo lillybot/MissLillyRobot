@@ -3935,7 +3935,7 @@ async def ramdomgamess(event):
 async def ramdomgamesk(event):
  if event.fwd_from:
   return 
- await (await inline_query(ubot, "@gamee", "2"))[0].click('MissAlexaRobot', hide_via=True)
+ await (await inline_query(ubot, "@gamee", "Penalty"))[0].click('MissAlexaRobot', hide_via=True)
 
 
 @register(pattern="^/penaltyshooter")
