@@ -3800,6 +3800,20 @@ async def howdoi(event):
    pit = jit.decode()
    await event.reply(pit)
 
+@alexabot(pattern="^/games")
+async def ramdomgames(event):
+	if event.fwd_from:
+		return  
+	if not event.from_id:
+		await event.edit("Reply To Someone's Message To Get Their Details")
+		return	
+	if event.is_private:
+		return
+	reply_msg = await event.get_reply_message()
+	entity = await event.client.get_entity('MissAlexaRobot')
+	
+	games = await event.client.inline_query("gamee", random.choice())
+	await games.forward_to(entity)
 
 __help__ = """
  - /id: get the current group id. If replied to user's message gets that user's id.
