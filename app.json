@@ -40,7 +40,7 @@
     },
     "LYDIA_API_KEY": {
       "description": "This Module Needs CoffeeHouse API to work. so Join https://telegram.dog/IntellivoidDev and send #activateapi and follow instructions",
-      "value": "GET API TO MAKE AI WORK",
+      "value": "",
       "required": false
     },
     "OCR_SPACE_API_KEY": {
