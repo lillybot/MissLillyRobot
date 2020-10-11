@@ -3812,8 +3812,16 @@ async def ramdomgames(event):
 	reply_msg = await event.get_reply_message()
 	entity = await event.client.get_entity('MissAlexaRobot')
 	
-	games = await event.client.inline_query("gamee", random.choice())
-	await games.forward_to(entity)
+	games = await event.client.inline_query("gamee", "")
+	await games[0].click(event.chat_id,
+                            reply_to=event.reply_to_msg_id,
+                            silent=True if event.is_reply else False,
+                            hide_via=True)
+    
+	# await games.forward_to(entity)
+
+	
+     
 
 __help__ = """
  - /id: get the current group id. If replied to user's message gets that user's id.
