@@ -2547,18 +2547,14 @@ from telethon.tl.functions.channels import (EditAdminRequest,
                                             EditBannedRequest,
                                             EditPhotoRequest)
                                    
-def online_within(participant, days):
+def online_within(participant):
   status = participant.status
-
-  if isinstance(status, types.UserStatusOnline) or participant.bot:
-    return False
-
-  last_seen = status.was_online if isinstance(status, types.UserStatusOffline) else None
-  print(last_seen)
-  if last_seen:
-    now = datetime.datetime.now(tz=datetime.timezone.utc)
-    diff = now - last_seen
-    print(diff)
+  if isinstance(status, types.UserStatusOnline) or (status, types.UserStatusRecently) or (status, types.UserStatusEmpty) or (status, types.UserStatusLastMonth) or (status, types.UserStatusLastWeek) or participant.bot:
+     return False
+  else:
+    last_seen = status.was_online if isinstance(status, types.UserStatusOffline) else None
+    print(last_seen)
+  
 
 @tbot.on(events.NewMessage(pattern="^/kickthefools"))
 async def _(event):
@@ -2590,7 +2586,7 @@ async def _(event):
             else:
                c = c + 1             
            
-        if online_within(i, 31):
+        if online_within(i):
             status = await event.client(EditBannedRequest(event.chat_id, i, KICK_RIGHTS))
             if not status:
                return
