@@ -3891,8 +3891,10 @@ async def inline_query(client, bot, query):
 async def ramdomgames(event):
  if event.fwd_from:
   return 
- await (await inline_query(ubot, "@gamee", "1"))[0].click('MissAlexaRobot', hide_via=True)
-    
+ await (await inline_query(ubot, "@gamee", str((randrange(1, 51)))))[0].click('MissAlexaRobot', hide_via=True)
+
+from random import randrange
+
 @register(pattern="^/games")
 async def ramdomgamess(event):
  if event.fwd_from:
