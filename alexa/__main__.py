@@ -712,7 +712,7 @@ buttons = [[
 buttons += [[
     InlineKeyboardButton(text="Commands ❓", callback_data="help_back"),
     InlineKeyboardButton(text="Source 🌐",
-                         url="https://github.com/Ayush1311/MissAlexaRobot"),
+                         url="https://github.com/MissAlexaRobot/MissAlexaRobot"),
 ]]
 buttons += [[InlineKeyboardButton(text="Donate💲", url="https://ko-fi.com/MissAlexaRobot")]]
 
