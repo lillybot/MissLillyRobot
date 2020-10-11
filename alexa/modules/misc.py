@@ -2548,8 +2548,8 @@ from telethon.tl.functions.channels import (EditAdminRequest,
                                             EditPhotoRequest)
                                    
 def online_within(participant, days):
-  status = participantypes.status
-  if isinstance(status, types.UserStatusOnline) or participantypes.bot:
+  status = participant.status
+  if isinstance(status, types.UserStatusOnline) or participant.bot:
     return True
 
   last_seen = status.was_online if isinstance(status, types.UserStatusOffline) else None
