@@ -659,6 +659,8 @@
 #     if any, to sign a "copyright disclaimer" for the program, if necessary.
 #     For more information on this, and how to apply and follow the GNU AGPL, see
 #     <https://www.gnu.org/licenses/>.
+
+
 from telegram import Message
 from telegram.ext import BaseFilter
 from alexa import SUDO_USERS
@@ -668,8 +670,8 @@ class CustomFilters(object):
 
     class _Sudoers(BaseFilter):
         def filter(self, message: Message):
-            return bool(message.from_user
-                        and message.from_user.id in SUDO_USERS)
+            return bool(message.from_user and
+                        message.from_user.id in SUDO_USERS)
 
     sudo_filter = _Sudoers()
 
