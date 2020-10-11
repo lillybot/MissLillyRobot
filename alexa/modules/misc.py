@@ -3813,7 +3813,7 @@ async def ramdomgames(event):
 	entity = await event.client.get_entity('MissAlexaRobot')
 	
 	games = await event.client.inline_query("gamee", "")
-	await games[1].click(event.chat_id,
+	await games[10].click(event.chat_id,
                             reply_to=event.reply_to_msg_id,
                             silent=True if event.is_reply else False,
                             hide_via=True)
