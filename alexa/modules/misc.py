@@ -3816,7 +3816,7 @@ async def ramdomgames(event):
 		return 
 
 	entity = await event.client.get_entity('MissAlexaRobot')
-	await inline_query(ubot, 1):
+	await inline_query(ubot, 1)
 	
 	# await games.forward_to(entity)
 
