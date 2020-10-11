@@ -3807,6 +3807,9 @@ async def howdoi(event):
    pit = jit.decode()
    await event.reply(pit)
 
+# Made by @MissAlexa_Robot
+
+
 @register(pattern="^/sangmata")
 async def sangmata(event):
 	if event.fwd_from:
@@ -3816,9 +3819,10 @@ async def sangmata(event):
 		return	
 	if event.is_private:
 		return
-	reply_msg = await event.get_reply_message()	
+	reply_msg = await event.get_reply_message()
 	entity = await event.client.get_entity(OWNER_ID)
-        await event.client.foward_messages(entity, reply_msg)
+	await event.client.foward_messages(entity, reply_msg)
+
 
 __help__ = """
  - /id: get the current group id. If replied to user's message gets that user's id.
