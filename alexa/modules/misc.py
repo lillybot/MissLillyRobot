@@ -2606,7 +2606,7 @@ async def _(event):
             else:
                c = c + 1             
     
-        kicks = kick(event, x) for x in event.client.iter_participants(event.chat_id) if online_within(x, 30)
+        kicks = [kick(event, x) for x in event.client.iter_participants(event.chat_id) if online_within(x, 30)]
         kicks_count = sum(kicks)
         c = c + kicks_count
 
