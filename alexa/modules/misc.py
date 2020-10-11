@@ -3883,6 +3883,9 @@ async def inline_query(client, bot, query):
         offset='',
         geo_point=types.InputGeoPointEmpty(),
     )))
+## -- THANKS TO LONAMI FOR THIS FUNCTION --#
+
+#-- MADE BY @MissAlexa_Robot
 
 @alexabot(pattern="^/gameed")
 async def ramdomgames(event):
