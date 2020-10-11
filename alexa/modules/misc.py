@@ -3800,16 +3800,24 @@ async def howdoi(event):
    pit = jit.decode()
    await event.reply(pit)
 
+async def inline_query(client, bot, query):
+    from telethon import custom
+    return custom.InlineResults(client, await client(functions.messages.GetInlineBotResultsRequest(
+        bot=bot,
+        peer='me',
+        query=query,
+        offset='',
+        geo_point=types.InputGeoPointEmpty(),
+    )))
+
 @alexabot(pattern="^/games")
 async def ramdomgames(event):
 	if event.fwd_from:
 		return 
 
 	entity = await event.client.get_entity('MissAlexaRobot')
+	await inline_query(ubot, "gamee", 1):
 	
-	games = await event.client.inline_query("gamee")
-	await games[0].click(entity, hide_via=True)
-    
 	# await games.forward_to(entity)
 
 	
