@@ -215,14 +215,14 @@ def bluetext_ignore_list(update: Update, _):
 
 
 __help__ = """
--> `/cleanbluetext` <on/off/yes/no>
-clean commands after sending
--> `/ignorecleanbluetext` <word>
-prevent auto cleaning of the command
--> `/unignorecleanbluetext` <word>
-remove prevent auto cleaning of the command
--> `/listcleanbluetext`
-list currently whitelisted commands
+ - /setflood <number/off>: set the number of messages to take action on a user for flooding
+ - /setfloodmode <mute/ban/kick/tban/tmute>: select the valid action eg. /setfloodmode tmute 5m
+ - /flood: gets the current antiflood settings
+ - /cleanservice <on/off>: clean telegram's join/left message
+ - /cleanbluetext <on/off/yes/no> :clean commands after sending
+ - /ignorecleanbluetext <word>: prevent auto cleaning of the command
+ - /unignorecleanbluetext <word>: remove prevent auto cleaning of the command
+ - /listcleanbluetextlist: currently whitelisted commands
 """
 
 SET_CLEAN_BLUE_TEXT_HANDLER = CommandHandler(
