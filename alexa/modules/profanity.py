@@ -801,7 +801,7 @@ async def chat_bot_update(event):
   chats = spammers.find({})
   
   for c in chats:
-     if event.chat_id == c['id']:     	
+    if event.chat_id == c['id']:     	
        if profanity.contains_profanity(msg) == True:
        	  await msg.delete()
           final = f'@{let} **{msg}** is detected as a slang word and your message has been deleted'
