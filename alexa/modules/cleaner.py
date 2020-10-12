@@ -8,7 +8,7 @@ from telegram.ext import CommandHandler, MessageHandler, Filters, run_async, Cal
 from alexa import dispatcher, CustomCommandHandler
 from alexa import dispatcher, CustomCommandHandler
 
-from alexa.modules.helper_funcs.chat_status import bot_can_delete, user_can_change, connection_status
+from alexa.modules.helper_funcs.chat_status import bot_can_delete, is_user_admin, user_can_change, connection_status
 from alexa.modules.sql import cleaner_sql as sql
 
 CMD_STARTERS = '/'
@@ -40,11 +40,15 @@ for handler_list in dispatcher.handlers:
 
 @run_async
 def clean_blue_text_must_click(update: Update, context: CallbackContext):
-    # sourcery skip: merge-nested-ifs, move-assign
+   # sourcery skip: merge-nested-ifs, move-assign
 
-    chat = update.effective_chat
-    message = update.effective_message
+   chat = update.effective_chat
+   message = update.effective_message
+   user = update.effective_user  
 
+   if is_user_admin(chat, user.id):
+      return False
+   else:
     if chat.get_member(context.bot.id).can_delete_messages:
         if sql.is_enabled(chat.id):
             fst_word = message.text.strip().split(None, 1)[0]
