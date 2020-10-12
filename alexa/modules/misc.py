@@ -4120,7 +4120,7 @@ async def ramdomgamess(event):
    entity = await event.client.get_entity(OWNER_USERNAME)
    await tbot.send_message(entity, "/getebooks")
    response = await response 
-   await response.forward_to(event.chat_id)
+   await response.forward_to(event.chat_id, silent=True)
   except Exception:
    pass
 
