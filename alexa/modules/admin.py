@@ -1160,7 +1160,7 @@ __mod_name__ = "Admin 🚫"
 __help__ = """
  - /adminlist | /admins: list of admins in the chat
  - /pin | /unpin: pins/unpins the message in the chat
- - /invitelink: gets invitelink
+ - /invitelink: gets invitelink of the chat
  - /promote: promotes a user
  - /settitle <username> <title>: sets a custom title for an admin
  - /setdescription <text>: set group description
@@ -1175,12 +1175,9 @@ __help__ = """
  - /tmute <d/h/m>: temporarily mute a user
  - /unmute: unmutes a user
  - /kick: kicks a user
+ - /allowconnect on/yes/off/no: allow connect users to group via PM (admin only)
  - /setflood <number/off>: set the number of messages to take action on a user for flooding
  - /setfloodmode <mute/ban/kick/tban/tmute>: select the valid action eg. /setfloodmode tmute 5m
- - /connection <chatid>: Connect to remote chat
- - /disconnect: disconnects a chat from pm
- - /allowconnect on/yes/off/no: allow connect users to group via PM
- - /helpconnect: gets the available list commands
  - /flood: gets the current antiflood settings
  - /addblacklist <trigger> : blacklists the trigger
  - /unblacklist <trigger> | rmblacklist <trigger> : stop blacklisting a certain blacklist trigger
