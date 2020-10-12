@@ -669,6 +669,8 @@ from telegram import ParseMode
 from telegram import Update
 from telegram import User
 from telegram.ext import CallbackContext
+from telegram import Chat, ChatMember, ParseMode, Update
+from telegram.ext import CallbackContext
 
 from alexa import DEL_CMDS
 from alexa import OWNER_ID
@@ -942,3 +944,36 @@ def user_can_delete(func):
         return func(update, context, *args, **kwargs)
 
     return user_can_deletee
+
+
+def connection_status(func):
+    @wraps(func)
+    def connected_status(update: Update, context: CallbackContext, *args,
+                         **kwargs):
+        conn = connected(
+            context.bot,
+            update,
+            update.effective_chat,
+            update.effective_user.id,
+            need_admin=False)
+
+        if conn:
+            chat = dispatcher.bot.getChat(conn)
+            update.__setattr__("_effective_chat", chat)
+            return func(update, context, *args, **kwargs)
+        else:
+            if update.effective_message.chat.type == "private":
+                update.effective_message.reply_text(
+                    "Send /connect in a group that you and I have in common first."
+                )
+                return connected_status
+
+            return func(update, context, *args, **kwargs)
+
+    return connected_status
+
+
+# Workaround for circular import with connection.py
+from alexa.modules import connection
+
+connected = connection.connected
