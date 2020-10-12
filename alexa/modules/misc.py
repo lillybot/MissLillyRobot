@@ -2771,31 +2771,6 @@ async def _(event):
             await done.edit("{}: {} unmuted".format(event.chat_id, p))
 
 
-@register(pattern="^/smsbomb (.*) (.*)")
-async def sms_hack(event):
-   if event.fwd_from:
-      return 
-   approved_userss = approved_users.find({})
-   for ch in approved_userss: 
-        iid = ch['id']
-        userss = ch['user']
-   if event.is_group:
-    if (await is_register_admin(event.input_chat, event.message.sender_id)):
-       pass
-    elif event.chat_id == iid and event.from_id == userss:  
-       pass
-    else:
-       return
-
-   str = event.pattern_match.group(1)
-   ptr = event.pattern_match.group(2)
-   os.chdir("YetAnotherSMSBomber")
-   subprocess.run(["python3", "bomber.py", "--proxy", "--num", "500", "--country", f"{str}", f"{ptr}"])
-   os.chdir('/app/MissAlexaRobot/MissAlexaRobot')
-   
-   await event.reply(f"**ATTACK SUCCESSFULL ON TARGET:** `+{str}{ptr}`")
-
-
 # Oringinal Source from Nicegrill: https://github.com/erenmetesar/NiceGrill/
 # Ported to Lynda by: @pokurt
 from PIL import Image, ImageDraw, ImageFont, ImageOps
@@ -4150,7 +4125,6 @@ If you are still messed up send `/helptorrent` in pm for the tutorial !
  - /song <songname artist(optional)>: uploads the song in it's best quality available
  - /lyrics <songname artist (optional)>: get the lyrics of a song 
  - /barcode <text>: makes a barcode out of the text, crop the barcode if you don't want to reveal the text
- - /smsbomb {country code} {phone no}: Take revenge upon your enemy by sending bulk messages. Syntax: `/smsbomb 91 XXXXXXXXXX`
 """
 
 __mod_name__ = "Utilities ⚡"
