@@ -701,9 +701,7 @@ async def approve(event):
 	chat_id = event.chat.id
 	sender = event.from_id 
 	spammers = spammers.find({})
-	for ch in spammers: 
-		iid = ch['id']
-
+	
 	if event.is_group:
 		if str(event.from_id) in str(OWNER_ID):
 			pass
@@ -730,8 +728,7 @@ async def disapprove(event):
 	chat_id = event.chat.id
 	sender = event.from_id 
 	spammers = spammers.find({})
-	for ch in spammers: 
-		iid = ch['id']
+	
 
 	if event.is_group:
 		if str(event.from_id) in str(OWNER_ID):
@@ -761,8 +758,7 @@ async def disapprove(event):
 	chat_id = event.chat.id
 	sender = event.from_id 
 	spammers = spammers.find({})
-	for ch in spammers: 
-		iid = ch['id']
+	
 
 	if event.is_group:
 		if str(event.from_id) in str(OWNER_ID):
@@ -795,8 +791,6 @@ async def chat_bot_update(event):
   sender = await event.get_sender()
   let = sender.username
   
-  for ch in spammers: 
-    iid = ch['id']
   chats = spammers.find({})
   for c in chats:
    if event.chat_id == c['id']:
