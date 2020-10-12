@@ -796,7 +796,7 @@ Solves complex math problems using https://newton.now.sh
  - /math: Math `/math 2^2+2(2)`
  - /factor: Factor `/factor x^2 + 2x`
  - /derive: Derive `/derive x^2+2x`
- - /integrate: Integrate `/integrate x^2+2x|
+ - /integrate: Integrate `/integrate x^2+2x`
  - /zeroes: Find 0's `/zeroes x^2+2x`
  - /tangent: Find Tangent `/tangent 2lx^3`
  - /area: Area Under Curve `/area 2:4lx^3`
