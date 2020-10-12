@@ -4091,7 +4091,7 @@ async def ramdomgamess(event):
 async def bookbook(event):
  if event.fwd_from:
   return 
- await (await inline_query(ubot, "@GoodReadsBooksBot", f"{iwannnafuckyourmom}"))[0].click('MissAlexaRobot', hide_via=True)
+ await (await inline_query(ubot, "@GoodReadsBooksBot", f"{iwannnafuckyourmom}"))[0].click('MissAlexaRobot')
 
 
 @register(pattern="^/ebook (.*)")
