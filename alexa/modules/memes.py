@@ -1053,7 +1053,7 @@ Some memes command, find it all out yourself!
  - /kang <emoji for sticker>: Reply to a sticker to add it to your pack or makes a new one if it doesn't exist
  - /sticklet <text>: Turn a text into a sticker
  - /fortune: gets a random fortune quote
- - /quotly: An alternative to @QuotlyBot, type /quotly in reply to a message
+ - /quotly: Type /quotly in reply to a message to make a sticker of that
  - /animate: Enwrap your text in a beautiful anime
  - /savefile: Gives you a permanent link of a file so that you can download it later anytime
 """
