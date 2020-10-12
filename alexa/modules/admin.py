@@ -880,7 +880,7 @@ def invite(update, context):
         chat = update.effective_chat
 
     if chat.username:
-        msg.reply_text(chat.username)
+        msg.reply_text("@"+chat.username)
     elif chat.type == chat.SUPERGROUP or chat.type == chat.CHANNEL:
         bot_member = chat.get_member(context.bot.id)
         if bot_member.can_invite_users:
@@ -1163,6 +1163,9 @@ __help__ = """
  - /invitelink: gets invitelink
  - /promote: promotes a user
  - /settitle <username> <title>: sets a custom title for an admin
+ - /setdescription <text>: set group description
+ - /setgpic: reply to an image to set as group photo
+ - /delgpic: deletes the current group photo
  - /demote: demotes a user
  - /ban: bans a user
  - /tban <d/h/m> : temporarily bans a user from your chat
