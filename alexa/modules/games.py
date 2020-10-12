@@ -6,4 +6,7 @@ __help__ = """
 /motofx
 /mathbattle
 /penaltyshooter
+/racingcar
+/karate
+/footballchamp
 """
