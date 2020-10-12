@@ -3891,7 +3891,7 @@ async def inline_query(client, bot, query):
 async def ramdomgames(event):
  if event.fwd_from:
   return 
- await (await inline_query(ubot, "@gamee", "1"))[0].click('MissAlexaRobot', hide_via=True)
+ await (await inline_query(ubot, "@gamee", "1+"))[0].click('MissAlexaRobot', hide_via=True)
 
 
 @register(pattern="^/mathbattle")
@@ -3925,7 +3925,7 @@ async def ramdomgamess(event):
 async def ramdomgamesk(event):
  if event.fwd_from:
   return 
- await (await inline_query(ubot, "@gamee", "2"))[0].click('MissAlexaRobot', hide_via=True)
+ await (await inline_query(ubot, "@gamee", "MotoFX"))[0].click('MissAlexaRobot', hide_via=True)
 
 
 @register(pattern="^/motofx")
