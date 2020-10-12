@@ -4060,7 +4060,7 @@ async def ramdomgamesk(event):
  await (await inline_query(ubot, "@gamee", "Football"))[0].click('MissAlexaRobot', hide_via=True)
 
 
-@register(pattern="^/footballchamp")
+@register(pattern="^/footballstar")
 async def ramdomgamess(event):
  if event.fwd_from:
   return 
