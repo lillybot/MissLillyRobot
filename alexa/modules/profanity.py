@@ -783,7 +783,6 @@ async def disapprove(event):
 from better_profanity import profanity
 profanity.load_censor_words()
 
-
 @tbot.on(events.NewMessage())      
 async def chat_bot_update(event):
   if event.fwd_from:
@@ -797,17 +796,14 @@ async def chat_bot_update(event):
   let = sender.username
   
   for ch in spammers: 
-      iid = ch['id']
+    iid = ch['id']
   chats = spammers.find({})
-  
   for c in chats:
-    if event.chat_id == c['id']:     	
-       if profanity.contains_profanity(msg) == True:
-       	  await msg.delete()
-          final = f'@{let} **{msg}** is detected as a slang word and your message has been deleted'
-  	  await event.reply(event.chat_id, final)
-          await asyncio.sleep(2)
-       else:
-          return
-          
-        
+   if event.chat_id == c['id']:
+    await msg.delete()
+    final = f'@{let} **{msg}** is detected as a slang word and your message has been deleted'
+    await event.reply(event.chat_id, final)
+    await asyncio.sleep(2)
+   else:
+      return
+    
