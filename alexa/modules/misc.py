@@ -3904,7 +3904,7 @@ async def ramdomgamess(event):
 async def ramdomgamesk(event):
  if event.fwd_from:
   return 
- await (await inline_query(ubot, "@gamee", "Moto"))[0].click('MissAlexaRobot', hide_via=True)
+ await (await inline_query(ubot, "@gamee", "Moto"))[1].click('MissAlexaRobot', hide_via=True)
 
 
 @register(pattern="^/motofx")
@@ -4003,7 +4003,7 @@ async def ramdomgamess(event):
 async def ramdomgamesk(event):
  if event.fwd_from:
   return 
- await (await inline_query(ubot, "@gamee", "Karate"))[0].click('MissAlexaRobot', hide_via=True)
+ await (await inline_query(ubot, "@gamee", "Karate"))[1].click('MissAlexaRobot', hide_via=True)
 
 
 @register(pattern="^/karate")
@@ -4065,7 +4065,104 @@ async def ramdomgamess(event):
   except Exception:
    pass
 
+@alexabot(pattern="^/jsddjdhiwws")
+async def ramdomgamesk(event):
+ if event.fwd_from:
+  return 
+ await (await inline_query(ubot, "@gamee", "Neon"))[0].click('MissAlexaRobot', hide_via=True)
 
+
+@register(pattern="^/neonblaster")
+async def ramdomgamess(event):
+ if event.fwd_from:
+  return 
+ approved_userss = approved_users.find({})
+ for ch in approved_userss: 
+        iid = ch['id']
+        userss = ch['user']
+ if event.is_group:
+     if (await is_register_admin(event.input_chat, event.message.sender_id)):
+       pass
+     elif event.chat_id == iid and event.from_id == userss:  
+       pass
+     else:
+       return
+ chat = "@MissAlexa_Robot"
+ async with event.client.conversation(chat) as conv: 
+  try:     
+   response = conv.wait_event(events.NewMessage(incoming=True,from_users=1248815845))
+   entity = await event.client.get_entity(OWNER_USERNAME)
+   await tbot.send_message(entity, "/jsddjdhiwws")
+   response = await response 
+   await response.forward_to(event.chat_id)
+  except Exception:
+   pass
+
+@alexabot(pattern="^/whwyywwhewws")
+async def ramdomgamesk(event):
+ if event.fwd_from:
+  return 
+ await (await inline_query(ubot, "@gamee", "Disco"))[0].click('MissAlexaRobot', hide_via=True)
+
+
+@register(pattern="^/discoball")
+async def ramdomgamess(event):
+ if event.fwd_from:
+  return 
+ approved_userss = approved_users.find({})
+ for ch in approved_userss: 
+        iid = ch['id']
+        userss = ch['user']
+ if event.is_group:
+     if (await is_register_admin(event.input_chat, event.message.sender_id)):
+       pass
+     elif event.chat_id == iid and event.from_id == userss:  
+       pass
+     else:
+       return
+ chat = "@MissAlexa_Robot"
+ async with event.client.conversation(chat) as conv: 
+  try:     
+   response = conv.wait_event(events.NewMessage(incoming=True,from_users=1248815845))
+   entity = await event.client.get_entity(OWNER_USERNAME)
+   await tbot.send_message(entity, "/whwyywwhewws")
+   response = await response 
+   await response.forward_to(event.chat_id)
+  except Exception:
+   pass
+
+@alexabot(pattern="^/wssksskxxskss")
+async def ramdomgamesk(event):
+ if event.fwd_from:
+  return 
+ await (await inline_query(ubot, "@gamee", "Gravity"))[0].click('MissAlexaRobot', hide_via=True)
+
+
+@register(pattern="^/gravityninja")
+async def ramdomgamess(event):
+ if event.fwd_from:
+  return 
+ approved_userss = approved_users.find({})
+ for ch in approved_userss: 
+        iid = ch['id']
+        userss = ch['user']
+ if event.is_group:
+     if (await is_register_admin(event.input_chat, event.message.sender_id)):
+       pass
+     elif event.chat_id == iid and event.from_id == userss:  
+       pass
+     else:
+       return
+ chat = "@MissAlexa_Robot"
+ async with event.client.conversation(chat) as conv: 
+  try:     
+   response = conv.wait_event(events.NewMessage(incoming=True,from_users=1248815845))
+   entity = await event.client.get_entity(OWNER_USERNAME)
+   await tbot.send_message(entity, "/wssksskxxskss")
+   response = await response 
+   await response.forward_to(event.chat_id)
+  except Exception:
+   pass
 
 __help__ = """
  - /id: get the current group id. If replied to user's message gets that user's id.
