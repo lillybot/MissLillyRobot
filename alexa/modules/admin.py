@@ -1175,7 +1175,7 @@ __help__ = """
  - /tmute <d/h/m>: temporarily mute a user
  - /unmute: unmutes a user
  - /kick: kicks a user
- - /allowconnect on/yes/off/no: allow connect users to group via PM (admin only)
+ - /allowconnect on/yes/off/no: allow connect users to group via PM 
  - /setflood <number/off>: set the number of messages to take action on a user for flooding
  - /setfloodmode <mute/ban/kick/tban/tmute>: select the valid action eg. /setfloodmode tmute 5m
  - /flood: gets the current antiflood settings
