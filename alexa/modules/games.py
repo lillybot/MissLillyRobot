@@ -8,5 +8,5 @@ __help__ = """
 /penaltyshooter
 /racingcar
 /karate
-/footballchamp
+/footballstar
 """
