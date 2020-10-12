@@ -1176,9 +1176,6 @@ __help__ = """
  - /unmute: unmutes a user
  - /kick: kicks a user
  - /allowconnect on/yes/off/no: allow connect users to group via PM 
- - /setflood <number/off>: set the number of messages to take action on a user for flooding
- - /setfloodmode <mute/ban/kick/tban/tmute>: select the valid action eg. /setfloodmode tmute 5m
- - /flood: gets the current antiflood settings
  - /addblacklist <trigger> : blacklists the trigger
  - /unblacklist <trigger> | rmblacklist <trigger> : stop blacklisting a certain blacklist trigger
  - /blacklist: list all active blacklist filters
@@ -1225,7 +1222,6 @@ __help__ = """
  - /cleanwelcome <on/off>: try to delete the previous welcome message to avoid spamming
  - /welcomemutehelp: help for welcome mutes
  - /welcomehelp: help for welcome message format
- - /cleanservice <on/off>: clean telegram's join/left message
  - /unbanall: Unbans all in the chat
  - /unmuteall: Unmutes all in the chat
  - /users: list all the users in the chat
