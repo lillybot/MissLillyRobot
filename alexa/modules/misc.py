@@ -4091,7 +4091,7 @@ async def ramdomgamess(event):
 async def bookbook(event):
  if event.fwd_from:
   return 
- await (await inline_query(ubot, "@pdfobot", f"{chudedebokintu}"))[0].click('MissAlexaRobot', hide_via=True)
+ await (await inline_query(ubot, "@GoodReadsBooksBot", f"{iwannnafuckyourmom}"))[0].click('MissAlexaRobot', hide_via=True)
 
 
 @register(pattern="^/ebook (.*)")
@@ -4100,8 +4100,8 @@ async def ramdomgamess(event):
   return 
  approved_userss = approved_users.find({})
 
- global chudedebokintu
- chudedebokintu = event.pattern_match.group(1)
+ global iwannnafuckyourmom
+ iwannnafuckyourmom = event.pattern_match.group(1)
  
  for ch in approved_userss: 
         iid = ch['id']
@@ -4113,12 +4113,12 @@ async def ramdomgamess(event):
        pass
      else:
        return
- chat = "@pdfobot"
+ chat = "@GoodReadsBooksBot"
  async with event.client.conversation(chat) as conv: 
   try:     
    response = conv.wait_event(events.NewMessage(incoming=True,from_users=1248815845))
    entity = await event.client.get_entity(OWNER_USERNAME)
-   await tbot.send_message(entity, "/jsdndbafjaffajlxvqs")
+   await tbot.send_message(entity, "/getebooks")
    response = await response 
    await response.forward_to(event.chat_id)
   except Exception:
