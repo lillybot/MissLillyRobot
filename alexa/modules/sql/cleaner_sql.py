@@ -2,7 +2,7 @@ import threading
 
 from sqlalchemy import Column, UnicodeText, Boolean
 
-from lynda.modules.sql import BASE, SESSION
+from alexa.modules.sql import BASE, SESSION
 
 
 class CleanerBlueTextChatSettings(BASE):
