@@ -1,5 +1,6 @@
 # ALeXa - A Telegram Bot Project
 
+[![AGPLv3 license](https://img.shields.io/badge/License-AGPLv3-red.svg)]
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/6070b197c3644c03bb3f0ec79d641675)](https://app.codacy.com/manual/Ayush1311/RealAlexaBot?utm_source=github.com&utm_medium=referral&utm_content=Ayush1311/MissAlexaRobot&utm_campaign=Badge_Grade_Dashboard)
 
 **A modular telegram Python bot running on python3 with an sqlalchemy
