@@ -11,7 +11,7 @@ from alexa import dispatcher, CustomCommandHandler
 from alexa.modules.helper_funcs.chat_status import bot_can_delete, is_user_admin, user_can_change, connection_status
 from alexa.modules.sql import cleaner_sql as sql
 from pymongo import MongoClient
-from alexa import MONGO_DB_URI
+from alexa import MONGO_DB_URI, OWNER_ID
 from alexa.events import register
 
 client = MongoClient()
