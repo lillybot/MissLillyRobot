@@ -709,7 +709,7 @@ def is_user_admin(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
             userss = c['user']
     print(user_id)
     print(chat.id)
-    if (chat.type == "private" or str(user_id) in str(OWNER_ID) or user_id == str(777000) or user_id == iid and chat.id == userss or chat.all_members_are_administrators):
+    if (chat.type == "private" or str(user_id) in str(OWNER_ID) or user_id == str(777000) or user_id in iid and chat.id in userss or chat.all_members_are_administrators):
         return True
     
     if not member: 
@@ -805,7 +805,7 @@ def user_admin(func):
             return func(update, context, *args, **kwargs)
         elif not user:
            pass
-        elif user.id == iid and chat.id == userss:
+        elif user.id in iid and chat.id in userss:
           pass
         else:
             return
