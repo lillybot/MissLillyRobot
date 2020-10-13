@@ -719,6 +719,7 @@ async def approve(event):
 	if reply_msg.from_id == event.from_id:
 		await event.reply('Why are you trying to approve yourself ?')
 		return
+		
 	if reply_msg.from_id == 1361631434:
 		await event.reply('I am not gonna approve myself')
 		return
@@ -728,8 +729,9 @@ async def approve(event):
 		if event.chat_id == c['id'] and reply_msg.from_id == c['user']:
 			await event.reply("This User is Already Approved")
 			return 
-	approved_users.insert_one({'id':event.chat_id,'user':reply_msg.from_id})
-	await event.reply("Successfully Approved User")
+		else:
+			approved_users.insert_one({'id':event.chat_id,'user':reply_msg.from_id})
+			await event.reply("Successfully Approved User")
 	
 @register(pattern="^/disapprove")
 async def disapprove(event):
@@ -770,7 +772,8 @@ async def disapprove(event):
 		if not event.chat_id == c['id'] and reply_msg.from_id == c['user']:
 			await event.reply("This User isn't approved yet")
 			return 	
-		
-	approved_users.delete_one({'id':event.chat_id,'user':reply_msg.from_id})
-	await event.reply("Successfully Disapproved User")
+		else:
+			approved_users.delete_one({'id':event.chat_id,'user':reply_msg.from_id})
+			await event.reply("Successfully Disapproved User")
+	
 	
