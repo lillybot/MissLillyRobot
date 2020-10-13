@@ -4235,8 +4235,9 @@ async def sticklet(event):
        await event.reply("I only understand by on or off")
        return
      
-	
-			
+from nudity import Nudity
+nudity = Nudity()
+
 @tbot.on(events.NewMessage())      
 async def spam_update(event):
   if event.fwd_from:
@@ -4252,25 +4253,38 @@ async def spam_update(event):
     if (await is_register_admin(event.input_chat, event.message.sender_id)):
        return
     else:
-       pass
+       pass     
   chats = spammers.find({})
   for c in chats:
-   if event.chat_id == c['id']:
-    if profanity.contains_profanity(msg) == True:
+   if event.text: 
+    if event.chat_id == c['id']:
+     if profanity.contains_profanity(msg) == True:
         await event.delete()
         if sender.username == None:
            st = sender.first_name
            hh = sender.id
            final = f"[{st}](tg://user?id={hh}) **{msg}** is detected as a slang word and your message has been deleted"
-        else:
+       else:
            final = f'@{let} **{msg}** is detected as a slang word and your message has been deleted'
-        dev = await event.respond(final)
-        await asyncio.sleep(5)
-        await dev.delete()
-    else:
-        return
-
-
+       dev = await event.respond(final)
+       await asyncio.sleep(10)
+       await dev.delete()
+    if event.photo:
+    	await event.client.download_media(event, "nudes.jpg")
+        if nudity.has('./nudes.jpg'):
+             await event.delete()
+        if sender.username == None:
+           st = sender.first_name
+           hh = sender.id
+           final = f"[{st}](tg://user?id={hh}) your message has been deleted due to pornographic content"
+       else:
+           final = f'@{let} your message has been deleted due to pornographic content'
+       dev = await event.respond(final)
+       await asyncio.sleep(10)
+       await dev.delete()
+       os.remove("nudes.jpg")
+    		
+			
 			
 
 __help__ = """
