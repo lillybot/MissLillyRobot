@@ -249,6 +249,7 @@ __help__ = """
  - /ignorecleanbluetext <word>: prevent auto cleaning of the command
  - /unignorecleanbluetext <word>: remove prevent auto cleaning of the command
  - /listcleanbluetext: list currently whitelisted commands
+ - /profanity on/off: filters all explict/abusive words sent by non admins also filters explicit/porn images
 """
 
 SET_CLEAN_BLUE_TEXT_HANDLER = CommandHandler(
