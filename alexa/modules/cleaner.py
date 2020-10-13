@@ -47,8 +47,7 @@ for handler_list in dispatcher.handlers:
 
 
 def is_user_adminn(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
-    if (chat.type == "private" or str(user_id) in str(OWNER_ID)
-            or user_id == str(777000) or chat.all_members_are_administrators):
+    if (chat.type == "private" or str(user_id) in str(OWNER_ID) or user_id == str(777000) or chat.all_members_are_administrators):
         return True
 
     approved_userss = approved_users.find({})
@@ -57,7 +56,7 @@ def is_user_adminn(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
     for ch in approved_userss: 
             iid = ch['id']
             userss = ch['user']
-    if chat == iid and user_id == userss:  
+    if chat.id == iid and user_id == userss:  
        return True
     elif member.status in ("administrator", "creator"):
        return True
@@ -73,7 +72,7 @@ def clean_blue_text_must_click(update: Update, context: CallbackContext):
    message = update.effective_message
    user = update.effective_user  
 
-   if is_user_adminn(chat.id, user.id):
+   if is_user_adminn(chat, user.id):
       return False
 
    else:
