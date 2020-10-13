@@ -8,7 +8,7 @@ from telegram import Chat, ChatMember
 from alexa import dispatcher, CustomCommandHandler
 from alexa import dispatcher, CustomCommandHandler
 
-from alexa.modules.helper_funcs.chat_status import bot_can_delete, is_user_admin, user_can_change, connection_status
+from alexa.modules.helper_funcs.chat_status import bot_can_delete, user_can_change, connection_status
 from alexa.modules.sql import cleaner_sql as sql
 from pymongo import MongoClient
 from alexa import MONGO_DB_URI, OWNER_ID
@@ -32,7 +32,7 @@ approved_users = db.approve
 
 
 # Cache admin status for 5 mins to avoid extra requests.
-def is_user_adminn(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
+def is_user_admin(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
     chats = approved_users.find({})
     
     for c in chats:
@@ -47,7 +47,21 @@ def is_user_adminn(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
     
     return member.status in ("administrator", "creator") or str(user_id) in str(usersss) and str(chat.id) in str(iiid)
       
+def user_admin(func):
+    @wraps(func)
+    def is_admin(update, context, *args, **kwargs):
+        user = update.effective_user  # type: Optional[User]
+        chat = update.effective_chat
+    
+        if user and is_user_admin(update.effective_chat, user.id):
+            return func(update, context, *args, **kwargs)
+        elif not user:
+           pass
+        
+        else:
+            return
 
+    return is_admin
 
 
 CMD_STARTERS = '/'
@@ -85,7 +99,7 @@ def clean_blue_text_must_click(update: Update, context: CallbackContext):
    message = update.effective_message
    user = update.effective_user  
 
-   if is_user_adminn(chat, user.id):
+   if user_admin(chat, user.id):
      return
 
    if chat.get_member(context.bot.id).can_delete_messages:
