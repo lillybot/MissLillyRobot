@@ -55,7 +55,7 @@ def clean_blue_text_must_click(update: Update, context: CallbackContext):
    user = update.effective_user  
    
    if is_user_admin(chat, user.id):
-      return False
+      return 
      
    if chat.get_member(context.bot.id).can_delete_messages:
         if sql.is_enabled(chat.id):
