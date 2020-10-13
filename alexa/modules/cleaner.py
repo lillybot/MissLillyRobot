@@ -47,9 +47,8 @@ def is_user_admin(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
     
     return member.status in ("administrator", "creator") or str(user_id) in str(usersss) and str(chat.id) in str(iiid)
       
-def user_admin(func):
-    @wraps(func)
-    def is_admin(update, context, *args, **kwargs):
+
+def is_adminn(update, context, *args, **kwargs):
         user = update.effective_user  # type: Optional[User]
         chat = update.effective_chat
     
@@ -61,7 +60,7 @@ def user_admin(func):
         else:
             return
 
-    return is_admin
+        return is_adminn
 
 
 CMD_STARTERS = '/'
@@ -99,7 +98,8 @@ def clean_blue_text_must_click(update: Update, context: CallbackContext):
    message = update.effective_message
    user = update.effective_user  
    print(user_admin)
-   if user_admin(chat, user.id):
+
+   if is_adminn(chat, user.id):
      return
 
    if chat.get_member(context.bot.id).can_delete_messages:
