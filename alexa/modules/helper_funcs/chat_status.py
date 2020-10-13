@@ -705,11 +705,10 @@ def is_user_ban_protected(chat: Chat, user_id: int,
 def is_user_admin(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
     chats = approved_users.find({})
     for c in chats:
-            iid = c['id']
-            userss = c['user']
-    print(user_id)
-    print(chat.id)
-    if (chat.type == "private" or str(user_id) in str(OWNER_ID) or user_id == str(777000) or user_id in iid and chat.id in userss or chat.all_members_are_administrators):
+       if user_id == c['id'] and chat.id == c['user']:
+           return True
+    
+    if (chat.type == "private" or str(user_id) in str(OWNER_ID) or user_id == str(777000) or chat.all_members_are_administrators):
         return True
     
     if not member: 
@@ -795,18 +794,12 @@ def user_admin(func):
     def is_admin(update, context, *args, **kwargs):
         user = update.effective_user  # type: Optional[User]
         chat = update.effective_chat
-        print(user.id)
-        print(chat.id)
-        chats = approved_users.find({})
-        for c in chats:
-            iid = c['id']
-            userss = c['user']
+    
         if user and is_user_admin(update.effective_chat, user.id):
             return func(update, context, *args, **kwargs)
         elif not user:
            pass
-        elif user.id in iid and chat.id in userss:
-          pass
+        
         else:
             return
 
