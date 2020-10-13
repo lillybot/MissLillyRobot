@@ -690,7 +690,7 @@ async def can_approve_users(message):
  
 # MADE BY @MissAlexa_Robot
 
-@register(pattern="^/profanity on")
+@register(pattern="^/profanity (.*)")
 async def approve(event):
 	if event.fwd_from:
 		return  
@@ -700,104 +700,37 @@ async def approve(event):
 		return
 	chat_id = event.chat.id
 	sender = event.from_id 
-	spammers = spammers.find({})
-	
-	if event.is_group:
-		if str(event.from_id) in str(OWNER_ID):
-			pass
-		else:
-			if not await can_approve_users(message=event):
-				return
-				
-	chats = spammers.find({})
-	for c in chats:
-		if event.chat_id == c['id']:
-			await event.reply("Profanity filter is already activated for this chat.")
-			return 
-	spammers.insert_one({'id':event.chat_id})
-	await event.reply("Profanity filter turned on for this chat.")
-	
-@register(pattern="^/profanity off")
-async def disapprove(event):
-	if event.fwd_from:
-		return  
-	if event.is_private:
-		return
-	if MONGO_DB_URI is None:	
-		return
-	chat_id = event.chat.id
-	sender = event.from_id 
-	spammers = spammers.find({})
-	
-
-	if event.is_group:
-		if str(event.from_id) in str(OWNER_ID):
-			pass
-		else:
-			if not await can_approve_users(message=event):
-				return
-	
-	chats = spammers.find({})
-	
-	for c in chats:
-		if not event.chat_id == c['id']:
-			await event.reply("Profanity filter isn't activated for this chat.")
-			return 	
-		
-	spammers.delete_one({'id':event.chat_id})
-	await event.reply("Profanity filter turned off for this chat.")
-	
-@register(pattern="^/profanity (.*)")
-async def disapprove(event):
-	if event.fwd_from:
-		return  
-	if event.is_private:
-		return
-	if MONGO_DB_URI is None:	
-		return
-	chat_id = event.chat.id
-	sender = event.from_id 
-	spammers = spammers.find({})
-	
-
-	if event.is_group:
-		if str(event.from_id) in str(OWNER_ID):
-			pass
-		else:
-			if not await can_approve_users(message=event):
-				return
+	input = event.pattern_match.group(1)
 	if not input:
 		await event.reply("Give an argument on or off")
-	else:
-		return
 	if not "on" or "off" in input:
 		await event.reply("I only understand by on or off")
-	else:
-		return
+	if input in "on": 
+		if event.is_group:
+			if str(event.from_id) in str(OWNER_ID):
+				pass
+			else:
+				if not await can_approve_users(message=event):
+					return
+		chats = spammers.find({})
+		for c in chats:
+			if event.chat_id == c['id']:
+				await event.reply("Profanity filter is already activated for this chat.")
+				return
+			spammers.insert_one({'id':event.chat_id})
+			await event.reply("Profanity filter turned on for this chat.")
+	if input in "off": 
+		if event.is_group:
+			if str(event.from_id) in str(OWNER_ID):
+				pass
+			else:
+				if not await can_approve_users(message=event):
+					return
+		chats = spammers.find({})
+		for c in chats:
+			if event.chat_id == c['id']:
+				await event.reply("Profanity filter isn't activated for this chat.")
+				return
+			spammers.delete_one({'id':event.chat_id})
+			await event.reply("Profanity filter turned off for this chat.")
 	
-
-from better_profanity import profanity
-profanity.load_censor_words()
-
-@tbot.on(events.NewMessage())      
-async def chat_bot_update(event):
-  if event.fwd_from:
-    return  
-  if event.is_private:  	
-   return
-  if MONGO_DB_URI is None:
-   return
-  msg = str(event.text)
-  sender = await event.get_sender()
-  let = sender.username
-  
-  chats = spammers.find({})
-  for c in chats:
-   if event.chat_id == c['id']:
-    await msg.delete()
-    final = f'@{let} **{msg}** is detected as a slang word and your message has been deleted'
-    await event.reply(event.chat_id, final)
-    await asyncio.sleep(2)
-   else:
-      return
-    
