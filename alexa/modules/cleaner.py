@@ -62,13 +62,13 @@ def clean_blue_text_must_click(update: Update, context: CallbackContext):
    member = chat.get_member(int(user.id))
 
    if member.status in ("administrator", "creator"):
-      pass
+      return
    elif str(user.id) in str(OWNER_ID):
-      pass
+      return
    elif chat.id == iid and user.id == userss:
-      pass
+      return
    else:
-     return
+     pass
      
    if chat.get_member(context.bot.id).can_delete_messages:
         if sql.is_enabled(chat.id):
