@@ -4238,11 +4238,13 @@ async def spam_update(event):
     if profanity.contains_profanity(msg) == True:
         await event.delete()
         if sender.username == None:
-           final = f"[sender.first_name](tg://user?id=sender.id) **{msg}** is detected as a slang word and your message has been deleted"
+           st = sender.first_name
+           hh = sender.id
+           final = f"[{st}](tg://user?id={hh}) **{msg}** is detected as a slang word and your message has been deleted"
         else:
            final = f'@{let} **{msg}** is detected as a slang word and your message has been deleted'
         dev = await event.respond(final)
-        await asyncio.sleep(2)
+        await asyncio.sleep(5)
         await dev.delete()
     else:
         return
