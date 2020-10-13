@@ -4216,7 +4216,7 @@ async def sticklet(event):
 	
 			
 @tbot.on(events.NewMessage())      
-async def chat_bot_update(event):
+async def spam_update(event):
   if event.fwd_from:
     return  
   if event.is_private:  	
