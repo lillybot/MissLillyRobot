@@ -717,7 +717,12 @@ async def approve(event):
 		
 	reply_msg = await event.get_reply_message()	
 	if reply_msg.from_id == event.from_id:
+		await event.reply('Why are you trying to approve yourself ?')
 		return
+	if reply_msg.from_id == 1361631434:
+		await event.reply('I am not gonna approve myself')
+		return
+		
 	chats = approved_users.find({})
 	for c in chats:
 		if event.chat_id == c['id'] and reply_msg.from_id == c['user']:
@@ -754,9 +759,13 @@ async def disapprove(event):
 	
 	chats = approved_users.find({})
 	reply_msg = await event.get_reply_message()	
+	
 	if reply_msg.from_id == event.from_id:
+		await event.reply('Why are you trying to disapprove yourself ?')
 		return
-		
+	if reply_msg.from_id == 1361631434:
+		await event.reply('I am not gonna approve myself')
+		return
 	for c in chats:
 		if not event.chat_id == c['id'] and reply_msg.from_id == c['user']:
 			await event.reply("This User isn't approved yet")
