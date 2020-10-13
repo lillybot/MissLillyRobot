@@ -34,8 +34,7 @@ approved_users = db.approve
 # Cache admin status for 5 mins to avoid extra requests.
 def is_user_adminn(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
     chats = approved_users.find({})
-    global iiid
-    global usersss
+    
     for c in chats:
        iiid= c['id']
        usersss = c['user']
@@ -46,8 +45,8 @@ def is_user_adminn(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
     if not member: 
        member = chat.get_member(user_id)
     
-    if str(user_id) in str(usersss) and str(chat.id) in str(iiid):
-       return True
+    return member.status in ("administrator", "creator") or str(user_id) in str(usersss) and str(chat.id) in str(iiid):
+      
 
 
 
@@ -86,7 +85,7 @@ def clean_blue_text_must_click(update: Update, context: CallbackContext):
    message = update.effective_message
    user = update.effective_user  
 
-   if is_user_adminn(chat, user.id) == True:
+   if is_user_adminn(chat, user.id):
      return
 
    if chat.get_member(context.bot.id).can_delete_messages:
