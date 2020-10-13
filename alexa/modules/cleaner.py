@@ -44,8 +44,8 @@ def is_user_adminn(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
     if not member: 
        member = chat.get_member(user_id)
     
-    return member.status in ("administrator", "creator") or str(user_id) in str(userss) and str(chat.id) in str(iid)
-
+    if str(user_id) in str(userss) and str(chat.id) in str(iid):
+       return True
 
 
 
@@ -83,7 +83,10 @@ def clean_blue_text_must_click(update: Update, context: CallbackContext):
    chat = update.effective_chat
    message = update.effective_message
    user = update.effective_user  
-   is_user_adminn(chat, user.id)
+
+   if is_user_adminn(chat, user.id) == True:
+     return
+
    if chat.get_member(context.bot.id).can_delete_messages:
         if sql.is_enabled(chat.id):
             fst_word = message.text.strip().split(None, 1)[0]
