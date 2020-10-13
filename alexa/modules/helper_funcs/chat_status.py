@@ -707,14 +707,16 @@ def is_user_admin(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
     for c in chats:
        iid= c['id']
        userss = c['user']
-    
+       if str(user_id) in str(userss) and str(chat.id) in str(iid):
+          return
+
     if (chat.type == "private" or str(user_id) in str(OWNER_ID) or user_id == str(777000) or chat.all_members_are_administrators):
         return True
     
     if not member: 
        member = chat.get_member(user_id)
     
-    return member.status in ("administrator", "creator") or str(user_id) in str(userss) and str(chat.id) in str(iid)
+    return member.status in ("administrator", "creator") 
 
 
 def is_bot_admin(chat: Chat, bot_id: int,
