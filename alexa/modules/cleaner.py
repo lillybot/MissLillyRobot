@@ -56,7 +56,7 @@ def is_user_adminn(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
     for ch in approved_userss: 
             iid = ch['id']
             userss = ch['user']
-    if chat.id in iid and user_id in userss:  
+    if chat.id == iid and user_id == userss:  
        return True
     elif member.status in ("administrator", "creator"):
        return True
