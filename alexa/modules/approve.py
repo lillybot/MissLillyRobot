@@ -769,7 +769,7 @@ async def disapprove(event):
 
 	chats = approved_users.find({})
 	for c in chats:
-		if not event.chat_id == c['id'] and reply_msg.from_id == c['user']:
+		if not event.chat_id == c['id'] or reply_msg.from_id == c['user']:
 			await event.reply("This User isn't approved yet")
 			return
 		else:
