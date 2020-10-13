@@ -661,7 +661,7 @@
 #     <https://www.gnu.org/licenses/>.
 
 
-#  This is made by @AyushChatterjee
+#  This is made by @MissAlexa_Robot
 #  If you kang this without credits I swear ur mom will die
 
 
@@ -671,10 +671,12 @@ from alexa.events import register
 from telethon import events
 from telethon import types
 from telethon.tl import functions
+from better_profanity import profanity
+profanity.load_censor_words()
 
 client = MongoClient()
 client = MongoClient(MONGO_DB_URI)
-db = client['spam']
+db = client['test']
 spammers = db.spammer
 
 
@@ -736,9 +738,6 @@ async def profanity(event):
 				await event.reply("Profanity filter turned off for this chat.")
 	
 			
-from better_profanity import profanity
-profanity.load_censor_words()
-
 @tbot.on(events.NewMessage())      
 async def chat_bot_update(event):
   if event.fwd_from:
