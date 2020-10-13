@@ -688,6 +688,8 @@ async def can_approve_users(message):
         isinstance(p, types.ChannelParticipantAdmin) and p.admin_rights.add_admins) 
 #------ THANKS TO LONAMI ------#
  
+import logging
+logging.basicConfig(level=logging.DEBUG)
 
 @register(pattern="^/approve")
 async def approve(event):
