@@ -694,36 +694,28 @@ logging.basicConfig(level=logging.DEBUG)
 @register(pattern="^/approve")
 async def approve(event):
 	if event.fwd_from:
-		print("1")
 		return  
-	if event.is_private:
-		print("2")
-		return
 	if MONGO_DB_URI is None:
-		print("3")
 		return
 	chat_id = event.chat.id
 	sender = event.from_id 
+	reply_msg = await event.get_reply_message()	
 	approved_userss = approved_users.find({})
-	print(approved_userss)
 	for ch in approved_userss: 
 		iid = ch['id']
 		userss = ch['user']
 	if event.is_group:
-		if str(event.from_id) in str(OWNER_ID):
+		if (await is_register_admin(event.input_chat, event.message.sender_id)):
+			pass
+		elif event.chat_id == iid and event.from_id == userss:  
 			pass
 		else:
-			if not await can_approve_users(message=event):
-				print("4")
-				return
-				
+			return
+			
 	if not event.reply_to_msg_id:
 		await event.reply("Reply To Someone's Message To Approve Them")
-		print("5")
 		return	
-		
-	reply_msg = await event.get_reply_message()	
-
+	
 	if reply_msg.from_id == event.from_id:
 		await event.reply('Why are you trying to approve yourself ?')
 		print("6")
@@ -733,15 +725,15 @@ async def approve(event):
 		await event.reply('I am not gonna approve myself')
 		print("7")
 		return
-		
-	if event.chat_id in iid and reply_msg.from_id in userss:
+
+	chats = approved_users.find({})
+	for c in chats:
+		if event.chat_id == c['id'] and reply_msg.from_id == c['user']:
 			await event.reply("This User is Already Approved")
-			print("8")
 			return 
-	else:
-		print("ok")
-		approved_users.insert_one({'id':event.chat_id,'user':reply_msg.from_id})
-		await event.reply("Successfully Approved User")
+
+	approved_users.insert_one({'id':event.chat_id,'user':reply_msg.from_id})
+	await event.reply("Successfully Approved User")
 	
 
 @register(pattern="^/disapprove")
