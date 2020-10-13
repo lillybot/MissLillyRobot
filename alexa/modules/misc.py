@@ -4237,7 +4237,7 @@ async def spam_update(event):
    if event.chat_id == c['id']:
     if profanity.contains_profanity(msg) == True:
         await event.delete()
-        if sender.username = None:
+        if sender.username == None:
            final = f"[sender.first_name](tg://user?id=sender.id) **{msg}** is detected as a slang word and your message has been deleted"
         else:
            final = f'@{let} **{msg}** is detected as a slang word and your message has been deleted'
