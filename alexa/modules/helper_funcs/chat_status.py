@@ -714,7 +714,7 @@ def is_user_admin(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
     if not member: 
        member = chat.get_member(user_id)
     
-    return member.status in ("administrator", "creator") or user_id in userss and chat.id in iid
+    return member.status in ("administrator", "creator") or str(user_id) in str(userss) and str(chat.id) in str(iid)
 
 
 def is_bot_admin(chat: Chat, bot_id: int,
