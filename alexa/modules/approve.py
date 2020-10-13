@@ -738,44 +738,41 @@ async def approve(event):
 async def disapprove(event):
 	if event.fwd_from:
 		return  
-	if event.is_private:
-		return
-	if MONGO_DB_URI is None:	
+	if MONGO_DB_URI is None:
 		return
 	chat_id = event.chat.id
 	sender = event.from_id 
+	reply_msg = await event.get_reply_message()	
 	approved_userss = approved_users.find({})
 	for ch in approved_userss: 
 		iid = ch['id']
 		userss = ch['user']
-
 	if event.is_group:
-		if str(event.from_id) in str(OWNER_ID):
-			pass
+		if not await can_approve_users(message=event):
+			return
 		else:
-			if not await can_approve_users(message=event):
-				return
-	
+			pass
+			
 	if not event.reply_to_msg_id:
-		await event.reply("Reply To Someone's Message To Disapprove Them")
+		await event.reply("Reply To Someone's Message To Approve Them")
 		return	
-	
-	chats = approved_users.find({})
-	reply_msg = await event.get_reply_message()	
 	
 	if reply_msg.from_id == event.from_id:
 		await event.reply('Why are you trying to disapprove yourself ?')
+		print("6")
 		return
+		
 	if reply_msg.from_id == 1361631434:
 		await event.reply('I am not gonna disapprove myself')
+		print("7")
 		return
 
+	chats = approved_users.find({})
 	for c in chats:
 		if event.chat_id == c['id'] and reply_msg.from_id == c['user']:
 			await event.reply("This User isn't approved yet")
-			return 	
-		else:
-			approved_users.delete_one({'id':event.chat_id,'user':reply_msg.from_id})
-			await event.reply("Successfully Disapproved User")
-	
+			return 
+
+	approved_users.delete_one({'id':event.chat_id,'user':reply_msg.from_id})
+	await event.reply("Successfully Disapproved User")
 	
