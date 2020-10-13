@@ -77,14 +77,13 @@ for handler_list in dispatcher.handlers:
 
 
 @run_async
-@user_admin
 def clean_blue_text_must_click(update: Update, context: CallbackContext):
    # sourcery skip: merge-nested-ifs, move-assign
 
    chat = update.effective_chat
    message = update.effective_message
    user = update.effective_user  
-   
+   is_user_adminn(chat, user.id)
    if chat.get_member(context.bot.id).can_delete_messages:
         if sql.is_enabled(chat.id):
             fst_word = message.text.strip().split(None, 1)[0]
