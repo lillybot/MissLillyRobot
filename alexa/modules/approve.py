@@ -734,8 +734,9 @@ async def approve(event):
 		return
 		
 	chats = approved_users.find({})
+	print(chats)
 	for c in chats:
-		if event.chat_id in iid and reply_msg.from_id in userss:
+		if event.chat_id == c['id'] and reply_msg.from_id == c['user']:
 			await event.reply("This User is Already Approved")
 			print("8")
 			return 
@@ -743,7 +744,6 @@ async def approve(event):
 			print("ok")
 			approved_users.insert_one({'id':event.chat_id,'user':reply_msg.from_id})
 			await event.reply("Successfully Approved User")
-	
 
 
 @register(pattern="^/disapprove")
