@@ -717,7 +717,7 @@ async def approve(event):
 				return
 				
 	if not event.reply_to_msg_id:
-		await event.edit("Reply To Someone's Message To Approve Them")
+		await event.reply("Reply To Someone's Message To Approve Them")
 		print("5")
 		return	
 		
@@ -769,7 +769,7 @@ async def disapprove(event):
 				return
 	
 	if not event.reply_to_msg_id:
-		await event.edit("Reply To Someone's Message To Disapprove Them")
+		await event.reply("Reply To Someone's Message To Disapprove Them")
 		return	
 	
 	chats = approved_users.find({})
