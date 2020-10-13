@@ -4212,7 +4212,7 @@ async def sticklet(event):
              return
        spammers.insert_one({'id':event.chat_id})
        await event.reply("Profanity filter turned on for this chat.")
-		
+     
 	
 			
 @tbot.on(events.NewMessage())      
@@ -4224,13 +4224,14 @@ async def chat_bot_update(event):
   if MONGO_DB_URI is None:
    return
   msg = str(event.text)
+  msgg = event.text
   sender = await event.get_sender()
   let = sender.username
 
   chats = spammers.find({})
   for c in chats:
    if event.chat_id == c['id']:
-    await msg.delete()
+    await msgg.delete()
     final = f'@{let} **{msg}** is detected as a slang word and your message has been deleted'
     await event.reply(event.chat_id, final)
     await asyncio.sleep(2)
@@ -4238,6 +4239,7 @@ async def chat_bot_update(event):
       return
 
 
+			
 
 __help__ = """
  - /id: get the current group id. If replied to user's message gets that user's id.
