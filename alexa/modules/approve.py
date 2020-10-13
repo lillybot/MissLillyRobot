@@ -764,7 +764,7 @@ async def disapprove(event):
 		await event.reply('Why are you trying to disapprove yourself ?')
 		return
 	if reply_msg.from_id == 1361631434:
-		await event.reply('I am not gonna approve myself')
+		await event.reply('I am not gonna disapprove myself')
 		return
 	for c in chats:
 		if not event.chat_id == c['id'] and reply_msg.from_id == c['user']:
