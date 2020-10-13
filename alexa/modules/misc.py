@@ -4224,14 +4224,17 @@ async def spam_update(event):
   if MONGO_DB_URI is None:
    return
   msg = str(event.text)
-  msgg = event.text
   sender = await event.get_sender()
   let = sender.username
-
+  if event.is_group:
+    if (await is_register_admin(event.input_chat, event.message.sender_id)):
+       return
+    else:
+       pass
   chats = spammers.find({})
   for c in chats:
    if event.chat_id == c['id']:
-    await msgg.delete()
+    await event.delete()
     final = f'@{let} **{msg}** is detected as a slang word and your message has been deleted'
     await event.reply(event.chat_id, final)
     await asyncio.sleep(2)
