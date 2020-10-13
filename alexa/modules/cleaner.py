@@ -98,7 +98,7 @@ def clean_blue_text_must_click(update: Update, context: CallbackContext):
    chat = update.effective_chat
    message = update.effective_message
    user = update.effective_user  
-
+   print(user_admin)
    if user_admin(chat, user.id):
      return
 
