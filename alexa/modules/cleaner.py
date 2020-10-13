@@ -31,38 +31,6 @@ db = client['test']
 approved_users = db.approve
 
 
-# Cache admin status for 5 mins to avoid extra requests.
-def is_user_admin(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
-    chats = approved_users.find({})
-    
-    for c in chats:
-       iiid= c['id']
-       usersss = c['user']
-    
-    if (chat.type == "private" or str(user_id) in str(OWNER_ID) or user_id == str(777000) or chat.all_members_are_administrators):
-        return True
-    
-    if not member: 
-       member = chat.get_member(user_id)
-    
-    return member.status in ("administrator", "creator") or str(user_id) in str(usersss) and str(chat.id) in str(iiid)
-      
-
-def is_adminn(update, context, *args, **kwargs):
-        user = update.effective_user  # type: Optional[User]
-        chat = update.effective_chat
-    
-        if user and is_user_admin(update.effective_chat, user.id):
-            return func(update, context, *args, **kwargs)
-        elif not user:
-           pass
-        
-        else:
-            return
-
-        return is_adminn
-
-
 CMD_STARTERS = '/'
 
 BLUE_TEXT_CLEAN_GROUP = 15
@@ -91,14 +59,20 @@ for handler_list in dispatcher.handlers:
 
 
 @run_async
-@user_admin
 def clean_blue_text_must_click(update: Update, context: CallbackContext):
    # sourcery skip: merge-nested-ifs, move-assign
 
    chat = update.effective_chat
    message = update.effective_message
    user = update.effective_user  
-   
+   member = chat.get_member(user.id)
+   chats = approved_users.find({})  
+   for c in chats:
+       iiid= c['id']
+       usersss = c['user']
+   if member.status in ("administrator", "creator") or str(user.id) in str(usersss) and str(chat.id) in str(iiid):
+      return False
+    
    if chat.get_member(context.bot.id).can_delete_messages:
         if sql.is_enabled(chat.id):
             fst_word = message.text.strip().split(None, 1)[0]
