@@ -680,7 +680,7 @@ db = client['test']
 spammers = db.spammer
 
 
-async def can_approve_users(message):
+async def can_change_info(message):
     result = await tbot(functions.channels.GetParticipantRequest(
         channel=message.chat_id,
         user_id=message.sender_id,
@@ -712,7 +712,7 @@ async def profanity(event):
 			if str(event.from_id) in str(OWNER_ID):
 				pass
 			else:
-				if not await can_approve_users(message=event):
+				if not await can_change_info(message=event):
 					return
 			chats = spammers.find({})
 			for c in chats:
@@ -727,7 +727,7 @@ async def profanity(event):
 			if str(event.from_id) in str(OWNER_ID):
 				pass
 			else:
-				if not await can_approve_users(message=event):
+				if not await can_change_info(message=event):
 					return
 			chats = spammers.find({})
 			for c in chats:
