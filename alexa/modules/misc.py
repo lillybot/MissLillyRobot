@@ -4209,7 +4209,7 @@ async def sticklet(event):
        for c in chats:
          if event.chat_id == c['id']:
              await event.reply("Profanity filter is already activated for this chat.")
-                  return
+             return
        spammers.insert_one({'id':event.chat_id})
        await event.reply("Profanity filter turned on for this chat.")
 		
