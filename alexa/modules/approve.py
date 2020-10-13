@@ -754,7 +754,7 @@ async def disapprove(event):
 			pass
 			
 	if not event.reply_to_msg_id:
-		await event.reply("Reply To Someone's Message To Approve Them")
+		await event.reply("Reply To Someone's Message To Disapprove Them")
 		return	
 	
 	if reply_msg.from_id == event.from_id:
