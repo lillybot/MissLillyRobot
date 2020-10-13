@@ -4175,7 +4175,7 @@ profanity.load_censor_words()
 
 client = MongoClient()
 client = MongoClient(MONGO_DB_URI)
-db = client['test']
+db = client['spam']
 spammers = db.spammer
 
 
