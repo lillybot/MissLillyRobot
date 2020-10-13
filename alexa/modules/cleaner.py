@@ -8,7 +8,7 @@ from telegram import Chat, ChatMember
 from alexa import dispatcher, CustomCommandHandler
 from alexa import dispatcher, CustomCommandHandler
 
-from alexa.modules.helper_funcs.chat_status import bot_can_delete, user_can_change, connection_status
+from alexa.modules.helper_funcs.chat_status import bot_can_delete, user_admin, user_can_change, connection_status
 from alexa.modules.sql import cleaner_sql as sql
 from pymongo import MongoClient
 from alexa import MONGO_DB_URI, OWNER_ID
@@ -91,17 +91,14 @@ for handler_list in dispatcher.handlers:
 
 
 @run_async
+@user_admin
 def clean_blue_text_must_click(update: Update, context: CallbackContext):
    # sourcery skip: merge-nested-ifs, move-assign
 
    chat = update.effective_chat
    message = update.effective_message
    user = update.effective_user  
-   print(user_admin)
-
-   if is_adminn(chat, user.id):
-     return
-
+   
    if chat.get_member(context.bot.id).can_delete_messages:
         if sql.is_enabled(chat.id):
             fst_word = message.text.strip().split(None, 1)[0]
