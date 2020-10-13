@@ -705,12 +705,10 @@ async def approve(event):
 		iid = ch['id']
 		userss = ch['user']
 	if event.is_group:
-		if (await can_approve_users(event.input_chat, event.message.sender_id)):
-			pass
-		elif event.chat_id == iid and event.from_id == userss:  
-			pass
-		else:
+		if not await can_approve_users(message=event):
 			return
+		else:
+			pass
 			
 	if not event.reply_to_msg_id:
 		await event.reply("Reply To Someone's Message To Approve Them")
