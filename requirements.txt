@@ -71,3 +71,4 @@ alphabet_detector
 Text2Emotion
 howdoi
 better-profanity
+nudity
