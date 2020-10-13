@@ -4200,7 +4200,10 @@ async def sticklet(event):
     if MONGO_DB_URI is None:
         return
     input = event.pattern_match.group(1)
-    if event.is_group:
+    if not input:
+       await event.reply("Give some argument on or off")
+    if input in "on": 
+     if event.is_group:
        if str(event.from_id) in str(OWNER_ID):
            pass
        else:
@@ -4213,6 +4216,23 @@ async def sticklet(event):
              return
        spammers.insert_one({'id':event.chat_id})
        await event.reply("Profanity filter turned on for this chat.")
+    if input in "off":
+      if event.is_group:
+       if str(event.from_id) in str(OWNER_ID):
+           pass
+       else:
+          if not await can_change_info(message=event):
+             return
+       chats = spammers.find({})
+       for c in chats:
+         if event.chat_id == c['id']:            
+           spammers.delete_one({'id':event.chat_id})
+           await event.reply("Profanity filter turned off for this chat.")
+           return
+         await event.reply("Profanity filter isn't turned on for this chat.")
+    if not "on" or "off" in input:
+       await event.reply("I only understand by on or off")
+       return
      
 	
 			
