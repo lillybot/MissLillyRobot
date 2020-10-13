@@ -692,7 +692,7 @@ async def can_change_info(message):
  
 # MADE BY @MissAlexa_Robot
 
-@register(pattern="^/profanity (.*)")
+@tbot.on(events.NewMessage(pattern="^/profanity (.*)"))      
 async def profanity(event):
 	if event.fwd_from:
 		return  
