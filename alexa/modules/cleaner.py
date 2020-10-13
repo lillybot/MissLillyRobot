@@ -46,24 +46,6 @@ for handler_list in dispatcher.handlers:
                 command_list += handler.command
 
 
-def is_user_adminn(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
-    if (chat.type == "private" or str(user_id) in str(OWNER_ID) or user_id == str(777000) or chat.all_members_are_administrators):
-        return True
-
-    approved_userss = approved_users.find({})
-    if not member:
-        member = chat.get_member(user_id)
-    for ch in approved_userss: 
-            iid = ch['id']
-            userss = ch['user']
-    if chat.id == iid and user_id == userss:  
-       return True
-    elif member.status in ("administrator", "creator"):
-       return True
-    else:
-      return False
-
-
 @run_async
 def clean_blue_text_must_click(update: Update, context: CallbackContext):
    # sourcery skip: merge-nested-ifs, move-assign
@@ -71,13 +53,23 @@ def clean_blue_text_must_click(update: Update, context: CallbackContext):
    chat = update.effective_chat
    message = update.effective_message
    user = update.effective_user  
+   
+   for ch in approved_userss: 
+            iid = ch['id']
+            userss = ch['user']
+
    member = chat.get_member(int(user.id))
 
-   if is_user_adminn(chat, user.id, member=member) == True:
-      return
-     
+   if member.status in ("administrator", "creator"):
+      pass
+   elif str(user.id) in str(OWNER_ID):
+      pass
+   elif chat.id == iid and user.id == userss:
+      pass
    else:
-    if chat.get_member(context.bot.id).can_delete_messages:
+     return
+     
+   if chat.get_member(context.bot.id).can_delete_messages:
         if sql.is_enabled(chat.id):
             fst_word = message.text.strip().split(None, 1)[0]
 
