@@ -4269,7 +4269,7 @@ async def spam_update(event):
         await dev.delete()
    if event.photo:
      if event.chat_id == c['id']:
-    	await event.client.download_media(event, "nudes.jpg")
+        await event.client.download_media(event, "nudes.jpg")
         #  if nudity.has('./nudes.jpg'):
            #  await event.delete()
         if sender.username == None:
