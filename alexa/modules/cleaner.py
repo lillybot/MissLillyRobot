@@ -10,6 +10,14 @@ from alexa import dispatcher, CustomCommandHandler
 
 from alexa.modules.helper_funcs.chat_status import bot_can_delete, is_user_admin, user_can_change, connection_status
 from alexa.modules.sql import cleaner_sql as sql
+from pymongo import MongoClient
+from alexa import MONGO_DB_URI
+from alexa.events import register
+
+client = MongoClient()
+client = MongoClient(MONGO_DB_URI)
+db = client['test']
+approved_users = db.approve
 
 CMD_STARTERS = '/'
 
@@ -38,6 +46,25 @@ for handler_list in dispatcher.handlers:
                 command_list += handler.command
 
 
+def is_user_adminn(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
+    if (chat.type == "private" or str(user_id) in str(OWNER_ID)
+            or user_id == str(777000) or chat.all_members_are_administrators):
+        return True
+
+    approved_userss = approved_users.find({})
+    if not member:
+        member = chat.get_member(user_id)
+    for ch in approved_userss: 
+            iid = ch['id']
+            userss = ch['user']
+    if user.id == iid and chat.id == userss:  
+       return True
+    elif member.status in ("administrator", "creator"):
+       return True
+    else:
+      return False
+
+
 @run_async
 def clean_blue_text_must_click(update: Update, context: CallbackContext):
    # sourcery skip: merge-nested-ifs, move-assign
@@ -46,7 +73,7 @@ def clean_blue_text_must_click(update: Update, context: CallbackContext):
    message = update.effective_message
    user = update.effective_user  
 
-   if is_user_admin(chat, user.id):
+   if is_user_adminn(chat, user.id):
       return False
    else:
     if chat.get_member(context.bot.id).can_delete_messages:
