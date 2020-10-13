@@ -4264,10 +4264,11 @@ async def spam_update(event):
            final = f"[{st}](tg://user?id={hh}) **{msg}** is detected as a slang word and your message has been deleted"
         else:
            final = f'@{let} **{msg}** is detected as a slang word and your message has been deleted'
-       dev = await event.respond(final)
-       await asyncio.sleep(10)
-       await dev.delete()
-    if event.photo:
+        dev = await event.respond(final)
+        await asyncio.sleep(10)
+        await dev.delete()
+   if event.photo:
+     if event.chat_id == c['id']:
     	await event.client.download_media(event, "nudes.jpg")
         #  if nudity.has('./nudes.jpg'):
            #  await event.delete()
@@ -4275,12 +4276,12 @@ async def spam_update(event):
            st = sender.first_name
            hh = sender.id
            final = f"[{st}](tg://user?id={hh}) your message has been deleted due to pornographic content"
-       else:
+        else:
            final = f'@{let} your message has been deleted due to pornographic content'
-       dev = await event.respond(final)
-       await asyncio.sleep(10)
-       await dev.delete()
-       os.remove("nudes.jpg")
+        dev = await event.respond(final)
+        await asyncio.sleep(10)
+        await dev.delete()
+        os.remove("nudes.jpg")
     		
 			
 			
