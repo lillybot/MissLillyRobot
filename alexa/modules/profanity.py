@@ -685,7 +685,7 @@ async def can_approve_users(message):
     ))
     p = result.participant
     return isinstance(p, types.ChannelParticipantCreator) or (
-        isinstance(p, types.ChannelParticipantAdmin) and p.admin_rights.add_admins) 
+        isinstance(p, types.ChannelParticipantAdmin) and p.admin_rights.change_info) 
 #------ THANKS TO LONAMI ------#
  
 # MADE BY @MissAlexa_Robot
@@ -712,13 +712,14 @@ async def profanity(event):
 			else:
 				if not await can_approve_users(message=event):
 					return
-		chats = spammers.find({})
-		for c in chats:
-			if event.chat_id == c['id']:
-				await event.reply("Profanity filter is already activated for this chat.")
-				return
-			spammers.insert_one({'id':event.chat_id})
-			await event.reply("Profanity filter turned on for this chat.")
+			chats = spammers.find({})
+			for c in chats:
+				if event.chat_id == c['id']:
+					await event.reply("Profanity filter is already activated for this chat.")
+					return
+				spammers.insert_one({'id':event.chat_id})
+				await event.reply("Profanity filter turned on for this chat.")
+		
 	if input in "off": 
 		if event.is_group:
 			if str(event.from_id) in str(OWNER_ID):
@@ -726,14 +727,15 @@ async def profanity(event):
 			else:
 				if not await can_approve_users(message=event):
 					return
-		chats = spammers.find({})
-		for c in chats:
-			if event.chat_id == c['id']:
-				await event.reply("Profanity filter isn't activated for this chat.")
-				return
-			spammers.delete_one({'id':event.chat_id})
-			await event.reply("Profanity filter turned off for this chat.")
+			chats = spammers.find({})
+			for c in chats:
+				if event.chat_id == c['id']:
+					await event.reply("Profanity filter isn't activated for this chat.")
+					return
+				spammers.delete_one({'id':event.chat_id})
+				await event.reply("Profanity filter turned off for this chat.")
 	
+			
 from better_profanity import profanity
 profanity.load_censor_words()
 
