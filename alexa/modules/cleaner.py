@@ -54,10 +54,11 @@ def clean_blue_text_must_click(update: Update, context: CallbackContext):
    message = update.effective_message
    user = update.effective_user  
    
+   approved_userss = approved_users.find({})
    for ch in approved_userss: 
             iid = ch['id']
             userss = ch['user']
-
+   
    member = chat.get_member(int(user.id))
 
    if member.status in ("administrator", "creator"):
