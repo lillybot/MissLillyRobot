@@ -677,7 +677,7 @@ from alexa import OWNER_ID
 from alexa.mwt import MWT
 
 from pymongo import MongoClient
-from alexa import MONGO_DB_URI
+from alexa import MONGO_DB_URI, OWNER_ID
 from alexa.events import register
 
 client = MongoClient()
@@ -707,8 +707,7 @@ def is_user_admin(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
             or user_id == str(777000) or chat.all_members_are_administrators):
         return True
 
-    if not member:
-        member = chat.get_member(user_id)
+    
     return member.status in ("administrator", "creator")
 
 
@@ -800,8 +799,7 @@ def user_admin(func):
         if user and is_user_admin(update.effective_chat, user.id):
             return func(update, context, *args, **kwargs)
 
-        elif user.id == iid and chat.id == userss:  
-             pass
+        
              
         elif str(user.id) in str(OWNER_ID):
              pass
