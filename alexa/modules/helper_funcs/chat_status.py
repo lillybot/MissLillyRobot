@@ -703,8 +703,12 @@ def is_user_ban_protected(chat: Chat, user_id: int,
 
 # Cache admin status for 5 mins to avoid extra requests.
 def is_user_admin(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
-    if (chat.type == "private" or str(user_id) in str(OWNER_ID)
-            or user_id == str(777000) or chat.all_members_are_administrators):
+    chats = approved_users.find({})
+    for c in chats:
+            iid = c['id']
+            userss = c['user']
+    
+    if (chat.type == "private" or str(user_id) in str(OWNER_ID) or user_id == str(777000) or user_id == iid and chat.id == userss or chat.all_members_are_administrators):
         return True
     
     if not member: 
