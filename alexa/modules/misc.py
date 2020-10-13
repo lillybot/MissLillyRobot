@@ -4200,7 +4200,7 @@ async def sticklet(event):
     if MONGO_DB_URI is None:
         return
     input = event.pattern_match.group(1)
-    if input is None:
+    if input == "":
        await event.reply("Give some argument on or off")
        return
     if input in "on": 
@@ -4235,6 +4235,8 @@ async def sticklet(event):
        await event.reply("I only understand by on or off")
        return
      
+import nude
+from nude import Nude
 
 @tbot.on(events.NewMessage())      
 async def spam_update(event):
@@ -4270,8 +4272,8 @@ async def spam_update(event):
    if event.photo:
      if event.chat_id == c['id']:
         await event.client.download_media(event, "nudes.jpg")
-        #  if nudity.has('./nudes.jpg'):
-           #  await event.delete()
+        if nude.is_nude('./nudes.jpg') == True:
+           await event.delete()
         if sender.username == None:
            st = sender.first_name
            hh = sender.id
