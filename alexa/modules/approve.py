@@ -689,14 +689,16 @@ async def can_approve_users(message):
 #------ THANKS TO LONAMI ------#
  
 
-
 @register(pattern="^/approve")
 async def approve(event):
 	if event.fwd_from:
+		print("1")
 		return  
 	if event.is_private:
+		print("2")
 		return
 	if MONGO_DB_URI is None:
+		print("3")
 		return
 	chat_id = event.chat.id
 	sender = event.from_id 
@@ -709,31 +711,39 @@ async def approve(event):
 			pass
 		else:
 			if not await can_approve_users(message=event):
+				print("4")
 				return
 				
-	if not event.from_id:
+	if not event.reply_to_msg_id:
 		await event.edit("Reply To Someone's Message To Approve Them")
+		print("5")
 		return	
 		
 	reply_msg = await event.get_reply_message()	
 
 	if reply_msg.from_id == event.from_id:
 		await event.reply('Why are you trying to approve yourself ?')
+		print("6")
 		return
 		
 	if reply_msg.from_id == 1361631434:
 		await event.reply('I am not gonna approve myself')
+		print("7")
 		return
 		
 	chats = approved_users.find({})
 	for c in chats:
-		if event.chat_id == c['id'] and reply_msg.from_id == c['user']:
+		if event.chat_id in iid and reply_msg.from_id in userss:
 			await event.reply("This User is Already Approved")
+			print("8")
 			return 
 		else:
+			print("ok")
 			approved_users.insert_one({'id':event.chat_id,'user':reply_msg.from_id})
 			await event.reply("Successfully Approved User")
 	
+
+
 @register(pattern="^/disapprove")
 async def disapprove(event):
 	if event.fwd_from:
@@ -756,7 +766,7 @@ async def disapprove(event):
 			if not await can_approve_users(message=event):
 				return
 	
-	if not event.from_id:
+	if not event.reply_to_msg_id:
 		await event.edit("Reply To Someone's Message To Disapprove Them")
 		return	
 	
