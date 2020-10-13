@@ -716,6 +716,8 @@ async def approve(event):
 		return	
 		
 	reply_msg = await event.get_reply_message()	
+	if reply_msg.from_id == event.from_id:
+		return
 	chats = approved_users.find({})
 	for c in chats:
 		if event.chat_id == c['id'] and reply_msg.from_id == c['user']:
@@ -749,8 +751,12 @@ async def disapprove(event):
 	if not event.from_id:
 		await event.edit("Reply To Someone's Message To Disapprove Them")
 		return	
+	
 	chats = approved_users.find({})
 	reply_msg = await event.get_reply_message()	
+	if reply_msg.from_id == event.from_id:
+		return
+		
 	for c in chats:
 		if not event.chat_id == c['id'] and reply_msg.from_id == c['user']:
 			await event.reply("This User isn't approved yet")
