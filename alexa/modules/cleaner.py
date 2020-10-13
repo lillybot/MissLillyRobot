@@ -70,7 +70,7 @@ def clean_blue_text_must_click(update: Update, context: CallbackContext):
    for c in chats:
        iiid= c['id']
        usersss = c['user']
-   if member.status in ("administrator", "creator") or str(user.id) in str(usersss) and str(chat.id) in str(iiid):
+   if member.status in ("administrator", "creator"):
       return False
     
    if chat.get_member(context.bot.id).can_delete_messages:
