@@ -708,7 +708,7 @@ def is_user_admin(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
        iid= c['id']
        userss = c['user']
        if str(user_id) in str(userss) and str(chat.id) in str(iid):
-          return
+          return True
 
     if (chat.type == "private" or str(user_id) in str(OWNER_ID) or user_id == str(777000) or chat.all_members_are_administrators):
         return True
