@@ -691,7 +691,7 @@ async def can_approve_users(message):
 # MADE BY @MissAlexa_Robot
 
 @register(pattern="^/profanity (.*)")
-async def approve(event):
+async def profanity(event):
 	if event.fwd_from:
 		return  
 	if event.is_private:
@@ -734,3 +734,27 @@ async def approve(event):
 			spammers.delete_one({'id':event.chat_id})
 			await event.reply("Profanity filter turned off for this chat.")
 	
+from better_profanity import profanity
+profanity.load_censor_words()
+
+@tbot.on(events.NewMessage())      
+async def chat_bot_update(event):
+  if event.fwd_from:
+    return  
+  if event.is_private:  	
+   return
+  if MONGO_DB_URI is None:
+   return
+  msg = str(event.text)
+  sender = await event.get_sender()
+  let = sender.username
+
+  chats = spammers.find({})
+  for c in chats:
+   if event.chat_id == c['id']:
+    await msg.delete()
+    final = f'@{let} **{msg}** is detected as a slang word and your message has been deleted'
+    await event.reply(event.chat_id, final)
+    await asyncio.sleep(2)
+   else:
+      return
