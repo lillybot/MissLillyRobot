@@ -4191,50 +4191,28 @@ async def can_change_info(message):
  
 # MADE BY @MissAlexa_Robot
 
-@register(pattern="/profanity (.*)") 
-async def profanity(event):
-	if event.fwd_from:
-		return  
-	if event.is_private:
-		return
-	if MONGO_DB_URI is None:
-		return
-	chat_id = event.chat.id
-	sender = event.from_id 
-	input = event.pattern_match.group(1)
-	if not input:
-		await event.reply("Give an argument on or off")
-	if not "on" or "off" in input:
-		await event.reply("I only understand by on or off")
-	if input in "on": 
-		if event.is_group:
-			if str(event.from_id) in str(OWNER_ID):
-				pass
-			else:
-				if not await can_change_info(message=event):
-					return
-			chats = spammers.find({})
-			for c in chats:
-				if event.chat_id == c['id']:
-					await event.reply("Profanity filter is already activated for this chat.")
-					return
-				spammers.insert_one({'id':event.chat_id})
-				await event.reply("Profanity filter turned on for this chat.")
+@register(pattern="^/profanity (.*)")
+async def sticklet(event):
+    if event.fwd_from:
+        return  
+    if event.is_private:
+        return
+    if MONGO_DB_URI is None:
+        return
+    if event.is_group:
+       if str(event.from_id) in str(OWNER_ID):
+           pass
+       else:
+          if not await can_change_info(message=event):
+             return
+       chats = spammers.find({})
+       for c in chats:
+         if event.chat_id == c['id']:
+             await event.reply("Profanity filter is already activated for this chat.")
+                  return
+       spammers.insert_one({'id':event.chat_id})
+       await event.reply("Profanity filter turned on for this chat.")
 		
-	if input in "off": 
-		if event.is_group:
-			if str(event.from_id) in str(OWNER_ID):
-				pass
-			else:
-				if not await can_change_info(message=event):
-					return
-			chats = spammers.find({})
-			for c in chats:
-				if event.chat_id == c['id']:
-					await event.reply("Profanity filter isn't activated for this chat.")
-					return
-				spammers.delete_one({'id':event.chat_id})
-				await event.reply("Profanity filter turned off for this chat.")
 	
 			
 @tbot.on(events.NewMessage())      
