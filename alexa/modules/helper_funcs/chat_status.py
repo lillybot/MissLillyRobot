@@ -706,6 +706,11 @@ def is_user_admin(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
     if (chat.type == "private" or str(user_id) in str(OWNER_ID)
             or user_id == str(777000) or chat.all_members_are_administrators):
         return True
+    
+    chats = approved_users.find({})
+    for c in chats:
+       if user_id == c['id'] and chat.id == c['user']:
+          return True
 
     if not member: 
        member = chat.get_member(user_id)
@@ -790,22 +795,12 @@ def user_admin(func):
     def is_admin(update, context, *args, **kwargs):
         user = update.effective_user  # type: Optional[User]
         chat = update.effective_chat
-        print(user.id)
-        print(chat.id)
-        approved_userss = approved_users.find({})
-
-        for ch in approved_userss: 
-            iid = ch['id']
-            userss = ch['user']
+        
 
         if user and is_user_admin(update.effective_chat, user.id):
             return func(update, context, *args, **kwargs)
-
-        elif chat.id == iid and user.id == userss:      
-             pass
-             
-        elif str(user.id) in str(OWNER_ID):
-             pass
+        elif not user:
+           pass
              
         else:
             return
