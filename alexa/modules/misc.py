@@ -4199,6 +4199,7 @@ async def sticklet(event):
         return
     if MONGO_DB_URI is None:
         return
+    input = event.pattern_match.group(1)
     if event.is_group:
        if str(event.from_id) in str(OWNER_ID):
            pass
@@ -4236,9 +4237,13 @@ async def spam_update(event):
    if event.chat_id == c['id']:
     if profanity.contains_profanity(msg) == True:
         await event.delete()
-        final = f'@{let} **{msg}** is detected as a slang word and your message has been deleted'
-        await event.respond(final)
+        if sender.username = None:
+           final = f"[sender.first_name](tg://user?id=sender.id) **{msg}** is detected as a slang word and your message has been deleted"
+        else:
+           final = f'@{let} **{msg}** is detected as a slang word and your message has been deleted'
+        dev = await event.respond(final)
         await asyncio.sleep(2)
+        await dev.delete()
     else:
         return
 
