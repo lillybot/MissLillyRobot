@@ -34,9 +34,11 @@ approved_users = db.approve
 # Cache admin status for 5 mins to avoid extra requests.
 def is_user_adminn(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
     chats = approved_users.find({})
+    global iiid
+    global usersss
     for c in chats:
-       iid= c['id']
-       userss = c['user']
+       iiid= c['id']
+       usersss = c['user']
     
     if (chat.type == "private" or str(user_id) in str(OWNER_ID) or user_id == str(777000) or chat.all_members_are_administrators):
         return True
@@ -44,7 +46,7 @@ def is_user_adminn(chat: Chat, user_id: int, member: ChatMember = None) -> bool:
     if not member: 
        member = chat.get_member(user_id)
     
-    if str(user_id) in str(userss) and str(chat.id) in str(iid):
+    if str(user_id) in str(usersss) and str(chat.id) in str(iiid):
        return True
 
 
