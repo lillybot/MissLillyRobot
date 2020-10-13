@@ -801,7 +801,7 @@ def user_admin(func):
         if user and is_user_admin(update.effective_chat, user.id):
             return func(update, context, *args, **kwargs)
 
-        elif user.id in userss and chat.id == iid:  
+        elif chat.id == iid and user.id == userss:      
              pass
              
         elif str(user.id) in str(OWNER_ID):
