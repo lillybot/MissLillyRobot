@@ -659,11 +659,20 @@
 #     if any, to sign a "copyright disclaimer" for the program, if necessary.
 #     For more information on this, and how to apply and follow the GNU AGPL, see
 #     <https://www.gnu.org/licenses/>.
-from alexa.modules.helper_funcs.telethn.chatstatus import (
-    can_delete_messages, user_is_admin)
+
 from alexa import tbot
 import time
 from telethon import events
+
+async def can_del(message):
+    result = await tbot(functions.channels.GetParticipantRequest(
+        channel=message.chat_id,
+        user_id=message.sender_id,
+    ))
+    p = result.participant
+    return isinstance(p, types.ChannelParticipantCreator) or (
+        isinstance(p, types.ChannelParticipantAdmin) and p.admin_rights.delete_messages) 
+#------ THANKS TO LONAMI ------#
 
 
 @tbot.on(events.NewMessage(pattern="^/purge$"))
@@ -672,12 +681,7 @@ async def purge_messages(event):
     if event.from_id is None:
         return
 
-    if not await user_is_admin(user_id=event.from_id, message=event):
-        await event.reply("Only Admins are allowed to use this command")
-        return
-
-    if not await can_delete_messages(message=event):
-        await event.reply("Can't seem to purge the message")
+    if not await can_del(message=event):
         return
 
     reply_msg = await event.get_reply_message()
@@ -707,12 +711,7 @@ async def delete_messages(event):
     if event.from_id is None:
         return
 
-    if not await user_is_admin(user_id=event.from_id, message=event):
-        await event.reply("Only Admins are allowed to use this command")
-        return
-
-    if not await can_delete_messages(message=event):
-        await event.reply("Can't seem to delete this?")
+    if not await can_del(message=event):
         return
 
     message = await event.get_reply_message()
