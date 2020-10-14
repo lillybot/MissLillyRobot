@@ -1078,13 +1078,6 @@ def info(update, context):
         text += ("\n\nThis person is one of my sudo users! "
                  "Nearly as powerful as my owner - so watch it.")
 
-    chats = approved_users.find({})
-    for c in chats:
-      if chat.id == c['id'] and user.id == c['user']:
-         text += "\n\n<b>Is Approved</b>: True"
-      else:
-         text += "\n\n<b>Is Approved</b>: False"
-
     try:
         memstatus = chat.get_member(user.id).status
         if memstatus == "administrator" or memstatus == "creator":
@@ -1093,6 +1086,14 @@ def info(update, context):
                 text += f"\n\nThis user has custom title <b>{result.custom_title}</b> in this chat."
     except BadRequest:
         pass
+
+    chats = approved_users.find({})
+    for c in chats:
+      if chat.id == c['id'] and user.id == c['user']:
+         text += "\n\n<b>Is Approved</b>: True"
+      else:
+         text += "\n\n<b>Is Approved</b>: False"
+
         
     for mod in USER_INFO:
         try:
