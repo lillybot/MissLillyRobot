@@ -776,3 +776,35 @@ async def disapprove(event):
 	await event.reply("This User isn't approved yet")
 	
 	
+@register(pattern="^/checkstatus")
+async def checkst(event):
+	if event.fwd_from:
+		return  
+	if MONGO_DB_URI is None:
+		return
+	chat_id = event.chat.id
+	sender = event.from_id 
+	reply_msg = await event.get_reply_message()	
+	approved_userss = approved_users.find({})
+	for ch in approved_userss: 
+		iid = ch['id']
+		userss = ch['user']
+	if event.is_group:
+		if not await can_approve_users(message=event):
+			return
+		else:
+			pass
+			
+	if not event.reply_to_msg_id:
+		await event.reply("Reply To Someone's Message To Check Status")
+		return	
+
+	chats = approved_users.find({})
+	for c in chats:
+		if event.chat_id == c['id'] and reply_msg.from_id == c['user']:
+			await event.reply("This User is Approved")
+			return 
+
+	await event.reply("This user isn't approved")
+
+
