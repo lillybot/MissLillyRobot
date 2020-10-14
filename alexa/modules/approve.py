@@ -865,16 +865,16 @@ async def apprlst(event):
 	chats = approved_users.find({})
 	for c in chats:
 		if event.chat_id == c['id']:
-			async for userss in approved_users:
-				gay = await tbot.get_entity(userss)
-				if not gay.username:
-					gg = gay.first_name
-					hh = gay.id
-					final = f"[{gg}](tg://user?id={hh})\n"
-				else:
-					final += gay.username+"\n"
-					print(final)
-					await event.reply(final)
+			gay = await tbot.get_entity(userss)
+			final = ""
+			if not gay.username:
+				gg = gay.first_name
+				hh = gay.id
+				final += f"[{gg}](tg://user?id={hh})\n"
+			else:
+				final += gay.username+"\n"
+				print(final)
+				await event.reply(final)
 		else:
 			await event.reply("No one is approved in this chat.")
 			return 
