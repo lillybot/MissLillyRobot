@@ -1021,7 +1021,7 @@ profanity.load_censor_words()
 
 client = MongoClient()
 client = MongoClient(MONGO_DB_URI)
-db = client['spam']
+db = client['test']
 approved_users = db.approve
 
 
@@ -1069,6 +1069,7 @@ def info(update, context):
 
     text += "\nNumber of profile pics: {}".format(
         context.bot.get_user_profile_photos(user.id).total_count)
+    
 
     if user.id == OWNER_ID:
         text += "\n\nAy, this guy is my owner.\nI would never do anything against him!"
@@ -1076,6 +1077,14 @@ def info(update, context):
     elif user.id in SUDO_USERS:
         text += ("\n\nThis person is one of my sudo users! "
                  "Nearly as powerful as my owner - so watch it.")
+
+    chats = approved_users.find({})
+    for c in chats:
+      if chat.id == c['id'] and user.id == c['user']:
+         text += "\n\n<b>Is Approved</b>: True"
+      else:
+         text += "\n\n<b>Is Approved</b>: False"
+
     try:
         memstatus = chat.get_member(user.id).status
         if memstatus == "administrator" or memstatus == "creator":
@@ -1085,13 +1094,6 @@ def info(update, context):
     except BadRequest:
         pass
         
-    chats = approved_users.find({})
-    for c in chats:
-      if chat.id == c['id'] and user.id == c['user']:
-         text += "*Is Approved*: True"
-      else:
-         text += "*Is Approved*: False"
-
     for mod in USER_INFO:
         try:
             mod_info = mod.__user_info__(user.id).strip()
@@ -1099,7 +1101,6 @@ def info(update, context):
             mod_info = mod.__user_info__(user.id, chat.id).strip()
         if mod_info:
             text += "\n\n" + mod_info
-      
 
     try:
         profile = context.bot.get_user_profile_photos(user.id).photos[0][-1]
