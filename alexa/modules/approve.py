@@ -827,7 +827,7 @@ async def apprlst(event):
 	msg = "**APPROVED USERS**\n"
 	for i in autos:
 		if event.chat_id == i['id']:
-			dev = list(i['user'])
+			dev = [i['user']]
 			print(dev)
 			msg += " - "+str(i['user'])+"\n"
 	
