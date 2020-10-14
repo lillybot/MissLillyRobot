@@ -851,30 +851,20 @@ async def apprlst(event):
 	chat_id = event.chat.id
 	sender = event.from_id 
 	reply_msg = await event.get_reply_message()	
-	approved_userss = approved_users.find({})
-	for ch in approved_userss: 
-		iid = ch['id']
-		userss = ch['user']
-		
+	
 	if event.is_group:
 		if not await can_approve_users(message=event):
 			return
 		else:
 			pass
-
-	chats = approved_users.find({})
-	for c in chats:
+	
+	autos = approved_users.find({})
+	msg = "**Data in Your DB:**\nAPPROVED USERS\n"
+	for i in autos:
 		if event.chat_id == c['id']:
-			gay = await tbot.get_entity(userss)
-			final = ""
-			if not gay.username:
-				gg = gay.first_name
-				hh = gay.id
-				final += f"[{gg}](tg://user?id={hh})\n"
-			else:
-				final += gay.username+"\n"
-				print(final)
-				await event.reply(final)
-		else:
-			await event.reply("No one is approved in this chat.")
-			return 
+			msg += "User: `"+str(i['user'])+"`\nChat: `"+str(i['id'])+"`\n"
+	
+	await event.reply(msg)	
+	
+	
+			
