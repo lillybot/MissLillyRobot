@@ -869,6 +869,10 @@ async def apprlst(event):
 def __user_info__(user_id, chat_id):
     chats = approved_users.find({})
     for c in chats:
+      print(chat_id)
+      print(user_id)
+      print(c['id'])
+      print(c['user'])
       if chat_id == c['id'] and user_id == c['user']:
         text = "<b>Is Approved</b>: True"
       else:
