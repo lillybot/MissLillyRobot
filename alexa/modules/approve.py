@@ -866,11 +866,10 @@ async def apprlst(event):
 	chats = approved_users.find({})
 	for c in chats:
 		if event.chat_id == c['id'] :
-			for pussy in userss:
-				gay = await tbot.get_input_entity(pussy)
-				fuck = gay.username
-				print(fuck)
-				await event.reply(fuck)
+			gay = await tbot.get_input_entity(userss)
+			fuck = gay.username
+			print(fuck)
+			await event.reply(fuck)
 		else:
 			await event.reply("No one is approved in this chat.")
 			return 
