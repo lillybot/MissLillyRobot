@@ -2044,7 +2044,7 @@ import requests
 import os
 import datetime
 
-@register(pattern="^/stt")
+@register(pattern="^/stt$")
 async def _(event):
     if event.fwd_from:
         return
@@ -2113,7 +2113,7 @@ from bs4 import BeautifulSoup as soup
 from urllib.request import urlopen
 
 
-@register(pattern="^/news")
+@register(pattern="^/news$")
 async def _(event):
   if event.is_group:
      return
@@ -2138,7 +2138,7 @@ async def _(event):
 
 from telethon.tl.types import InputMediaDice
 
-@register(pattern="^/dice")
+@register(pattern="^/dice$")
 async def _(event):
     if event.fwd_from:
         return
@@ -2164,7 +2164,7 @@ async def _(event):
         except:
             pass
 
-@register(pattern="^/basketball")
+@register(pattern="^/basketball$")
 async def _(event):
     if event.fwd_from:
         return
@@ -2191,7 +2191,7 @@ async def _(event):
             pass
 
 
-@register(pattern="^/dart")
+@register(pattern="^/dart$")
 async def _(event):
     if event.fwd_from:
         return
@@ -2471,7 +2471,7 @@ async def tor_search(event):
    response = telegraph.create_page(seta, html_content=op)
    await event.reply('Magnet Links for {}:\n\nhttps://telegra.ph/{}'.format(str,response['path']), link_preview=False) 
 
-@register(pattern="^/fortune")
+@register(pattern="^/fortune$")
 async def fortunate(event):
    if event.fwd_from:
       return 
@@ -2492,7 +2492,7 @@ async def fortunate(event):
 
 from alexa import *
 
-@register(pattern="^/helptorrent")
+@register(pattern="^/helptorrent$")
 async def helptorrent(event):
  if event.fwd_from or event.is_group:
     return 
@@ -2501,7 +2501,7 @@ async def helptorrent(event):
    file = await event.client.upload_file(topa) 
    await event.client.send_file(event.chat_id, file, caption="Tutorial For Torrent Module", reply_to=event.id)
    
-@register(pattern="^/helpcamscanner")
+@register(pattern="^/helpcamscanner$")
 async def helpcam(event):
  if event.fwd_from or event.is_group:
     return 
@@ -2613,7 +2613,7 @@ async def _(event):
 import os
 import sys
 
-@register(pattern="^/camscanner")
+@register(pattern="^/camscanner$")
 async def asciiart(event):
   if event.fwd_from:
      return  
@@ -2726,7 +2726,7 @@ async def _(event):
     await event.reply("Created BarCode in {} seconds".format(ms))
 
 
-@tbot.on(events.NewMessage(pattern="^/unbanall"))
+@tbot.on(events.NewMessage(pattern="^/unbanall$"))
 async def _(event):
     if event.is_private:
         await event.reply("You can use this command in groups but not in PM's")
@@ -2757,7 +2757,7 @@ async def _(event):
                 p += 1
             await done.edit("{}: {} unbanned".format(event.chat_id, p))
 
-@tbot.on(events.NewMessage(pattern="^/unmuteall"))
+@tbot.on(events.NewMessage(pattern="^/unmuteall$"))
 async def _(event):
     if event.fwd_from:
         return
@@ -3165,7 +3165,7 @@ async def replied_user(draw, tot, text, maxlength, title):
                 draw.text((180 + space, 132), letter, font=textfont, fill="white")
                 space += textfont.getsize(letter)[0]
                 
-@register(pattern="^/quotly")
+@register(pattern="^/quotly$")
 async def _(event):
     if event.fwd_from:
         return
@@ -3302,7 +3302,7 @@ async def saat(event):
 
 
 
-@register(pattern="^/savefile")
+@register(pattern="^/savefile$")
 async def savel(event):
   if event.fwd_from:
     return 
@@ -3416,7 +3416,7 @@ async def get_font_file(client, channel_id):
 import text2emotion as machi
 
 # NEW EMOTION DETECTOR MADE BY @AyushChatterjee
-@register(pattern="^/emotion")
+@register(pattern="^/emotion$")
 async def _(event):
     if event.fwd_from:
         return
@@ -3892,7 +3892,7 @@ async def ramdomgames(event):
  await (await inline_query(ubot, "@gamee", "1+"))[0].click('MissAlexaRobot', hide_via=True)
 
 
-@register(pattern="^/mathbattle")
+@register(pattern="^/mathbattle$")
 async def ramdomgamess(event):
  if event.fwd_from:
   return 
@@ -3926,7 +3926,7 @@ async def ramdomgamesk(event):
  await (await inline_query(ubot, "@gamee", "MotoFX"))[0].click('MissAlexaRobot')
 
 
-@register(pattern="^/motofx")
+@register(pattern="^/motofx$")
 async def ramdomgamess(event):
  if event.fwd_from:
   return 
@@ -3959,7 +3959,7 @@ async def ramdomgamesk(event):
  await (await inline_query(ubot, "@gamee", "Penalty"))[0].click('MissAlexaRobot', hide_via=True)
 
 
-@register(pattern="^/penaltyshooter")
+@register(pattern="^/penaltyshooter$")
 async def ramdomgamess(event):
  if event.fwd_from:
   return 
@@ -3992,7 +3992,7 @@ async def ramdomgamesk(event):
  await (await inline_query(ubot, "@gamee", "F1"))[0].click('MissAlexaRobot', hide_via=True)
 
 
-@register(pattern="^/racingcar")
+@register(pattern="^/racingcar$")
 async def ramdomgamess(event):
  if event.fwd_from:
   return 
@@ -4025,7 +4025,7 @@ async def ramdomgamesk(event):
  await (await inline_query(ubot, "@gamee", "Karate"))[1].click('MissAlexaRobot', hide_via=True)
 
 
-@register(pattern="^/karate")
+@register(pattern="^/karate$")
 async def ramdomgamess(event):
  if event.fwd_from:
   return 
@@ -4058,7 +4058,7 @@ async def ramdomgamesk(event):
  await (await inline_query(ubot, "@gamee", "Football"))[0].click('MissAlexaRobot', hide_via=True)
 
 
-@register(pattern="^/footballstar")
+@register(pattern="^/footballstar$")
 async def ramdomgamess(event):
  if event.fwd_from:
   return 
@@ -4091,7 +4091,7 @@ async def ramdomgamesk(event):
  await (await inline_query(ubot, "@gamee", "Neon"))[0].click('MissAlexaRobot', hide_via=True)
 
 
-@register(pattern="^/neonblaster")
+@register(pattern="^/neonblaster$")
 async def ramdomgamess(event):
  if event.fwd_from:
   return 
@@ -4124,7 +4124,7 @@ async def ramdomgamesk(event):
  await (await inline_query(ubot, "@gamee", "Disco"))[0].click('MissAlexaRobot', hide_via=True)
 
 
-@register(pattern="^/discoball")
+@register(pattern="^/discoball$")
 async def ramdomgamess(event):
  if event.fwd_from:
   return 
@@ -4157,7 +4157,7 @@ async def ramdomgamesk(event):
  await (await inline_query(ubot, "@gamee", "Gravity"))[0].click('MissAlexaRobot', hide_via=True)
 
 
-@register(pattern="^/gravityninja")
+@register(pattern="^/gravityninja$")
 async def ramdomgamess(event):
  if event.fwd_from:
   return 
