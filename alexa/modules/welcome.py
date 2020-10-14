@@ -1325,26 +1325,26 @@ def clean_welcome(update, context) -> str:
 
 @run_async
 @user_can_change
-def cleanservice(update, context):
-    chat = update.effective_chat  # type: Optional[Chat]
+def cleanservice(update: Update, context: CallbackContext) -> str:
     args = context.args
+    chat = update.effective_chat  # type: Optional[Chat]
     if chat.type != chat.PRIVATE:
         if len(args) >= 1:
             var = args[0]
-            if var == "no" or var == "off":
+            if var in ("no", "off"):
                 sql.set_clean_service(chat.id, False)
                 update.effective_message.reply_text(
-                    "Turned off service messages cleaning.")
-            elif var == "yes" or var == "on":
+                    "Welcome clean service is : off")
+            elif var in ("yes", "on"):
                 sql.set_clean_service(chat.id, True)
                 update.effective_message.reply_text(
-                    "Turned on service messages cleaning!")
+                    "Welcome clean service is : on")
             else:
                 update.effective_message.reply_text(
                     "Invalid option", parse_mode=ParseMode.MARKDOWN)
         else:
-            update.effective_message.reply_text("Usage is on/yes or off/no",
-                                                parse_mode=ParseMode.MARKDOWN)
+            update.effective_message.reply_text(
+                "Usage is on/yes or off/no", parse_mode=ParseMode.MARKDOWN)
     else:
         curr = sql.clean_service(chat.id)
         if curr:
@@ -1352,8 +1352,8 @@ def cleanservice(update, context):
                 "Welcome clean service is : on", parse_mode=ParseMode.MARKDOWN)
         else:
             update.effective_message.reply_text(
-                "Welcome clean service is : off",
-                parse_mode=ParseMode.MARKDOWN)
+                "Welcome clean service is : off", parse_mode=ParseMode.MARKDOWN)
+
 
 
 @run_async
