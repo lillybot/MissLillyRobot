@@ -867,7 +867,7 @@ async def apprlst(event):
 	for c in chats:
 		if event.chat_id == c['id']:
 			print (userss)
-			gay = await tbot.get_input_entity(userss)
+			gay = await tbot.get_entity(userss)
 			fuck = gay.username
 			print(fuck)
 			await event.reply(fuck)
