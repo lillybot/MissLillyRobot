@@ -872,7 +872,7 @@ async def apprlst(event):
 				print(fuck)
 				await event.reply(fuck)
 		else:
-			await event.reply("No one is approved in this chat.)
+			await event.reply("No one is approved in this chat.")
 			return 
 
 
