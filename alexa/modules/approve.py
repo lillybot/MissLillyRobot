@@ -838,3 +838,40 @@ async def checkst(event):
 			await event.reply("This User is Approved")
 			return 
 	await event.reply("This user isn't Approved")
+
+
+@register(pattern="^/listapproved$")
+async def apprlst(event):
+	if event.fwd_from:
+		return  
+	if MONGO_DB_URI is None:
+		return
+	chat_id = event.chat.id
+	sender = event.from_id 
+	reply_msg = await event.get_reply_message()	
+	
+	if event.is_group:
+		if not await can_approve_users(message=event):
+			return
+		else:
+			pass
+	
+	autos = approved_users.find({})
+	msg = "**APPROVED USERS**\n"
+	list1 = []
+	for i in autos:
+		if event.chat_id == i['id']:
+			list1 += [i['user']]
+			list1 = iter(list1) 
+			val = ""
+			while (1) : 
+				val += await event.get_entity(list1, 'end').username
+				if val == 'end': 
+					break
+				else : 
+					print (val)
+					###if not me.username: 
+						#go += f"[{me.first_name}](tg://user?id={me.id})"
+					#else:
+						#go += me.username
+					#print(go)
