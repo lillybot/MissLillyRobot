@@ -4200,9 +4200,6 @@ async def sticklet(event):
     if MONGO_DB_URI is None:
         return
     input = event.pattern_match.group(1)
-    if input == "":
-       await event.reply("Give some argument on or off")
-       return
     if input in "on": 
      if event.is_group:
        if str(event.from_id) in str(OWNER_ID):
@@ -4274,16 +4271,16 @@ async def spam_update(event):
         await event.client.download_media(event.photo, "nudes.jpg")
         if nude.is_nude('./nudes.jpg') == True:
            await event.delete()
-        if sender.username == None:
-           st = sender.first_name
-           hh = sender.id
-           final = f"[{st}](tg://user?id={hh}) your message has been deleted due to pornographic content"
-        else:
-           final = f'@{let} your message has been deleted due to pornographic content'
-        dev = await event.respond(final)
-        await asyncio.sleep(10)
-        await dev.delete()
-        os.remove("nudes.jpg")
+           if sender.username == None:
+             st = sender.first_name
+             hh = sender.id
+             final = f"[{st}](tg://user?id={hh}) your message has been deleted due to pornographic content"
+           else:
+             final = f'@{let} your message has been deleted due to pornographic content'
+           dev = await event.respond(final)
+           await asyncio.sleep(10)
+           await dev.delete()
+           os.remove("nudes.jpg")
     		
 			
 			
