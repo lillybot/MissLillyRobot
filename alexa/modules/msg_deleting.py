@@ -663,6 +663,9 @@
 from alexa import tbot
 import time
 from telethon import events
+from telethon import events
+from telethon import types
+from telethon.tl import functions
 
 async def can_del(message):
     result = await tbot(functions.channels.GetParticipantRequest(
