@@ -1102,13 +1102,13 @@ def info(update, context):
         context.bot.send_photo(
             chat.id,
             photo=profile,
-            caption=(rem),
+            caption=(text),
             parse_mode=ParseMode.HTML,
             disable_web_page_preview=True,
         )
     except IndexError:
         context.bot.sendChatAction(chat.id, "typing")
-        msg.reply_text(rem,
+        msg.reply_text(text,
                        parse_mode=ParseMode.HTML,
                        disable_web_page_preview=True)
     finally:
