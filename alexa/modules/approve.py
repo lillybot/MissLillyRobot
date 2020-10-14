@@ -842,9 +842,6 @@ async def checkst(event):
 	await event.reply("This user isn't approved")
 
 
-
-@
-
 @register(pattern="^/listapproved$")
 async def apprlst(event):
 	if event.fwd_from:
