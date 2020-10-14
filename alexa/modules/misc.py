@@ -1010,6 +1010,20 @@ def stats(update: Update, context: CallbackContext):
     update.effective_message.reply_text(
         "Current stats:\n" + "\n".join([mod.__stats__() for mod in STATS]))
 
+from pymongo import MongoClient
+from alexa import MONGO_DB_URI, tbot, ubot, OWNER_ID
+from alexa.events import register
+from telethon import events
+from telethon import types
+from telethon.tl import functions
+from better_profanity import profanity
+profanity.load_censor_words()
+
+client = MongoClient()
+client = MongoClient(MONGO_DB_URI)
+db = client['spam']
+approved_users = db.approve
+
 
 @user_admin
 @run_async
@@ -1018,7 +1032,7 @@ def info(update, context):
     msg = update.effective_message  # type: Optional[Message]
     user_id = extract_user(update.effective_message, args)
     chat = update.effective_chat
-
+    
     if user_id:
         user = context.bot.get_chat(user_id)
 
@@ -1070,6 +1084,13 @@ def info(update, context):
                 text += f"\n\nThis user has custom title <b>{result.custom_title}</b> in this chat."
     except BadRequest:
         pass
+        
+    chats = approved_users.find({})
+    for c in chats:
+           if chat.id == c['id'] and user.id == c['user']:
+               text += <p>\n\n<em>Is Approved</em>: True</p>
+           else:
+               text += <p>\n\n<em>Is Approved</em>: False</p>
 
     for mod in USER_INFO:
         try:
@@ -1078,6 +1099,7 @@ def info(update, context):
             mod_info = mod.__user_info__(user.id, chat.id).strip()
         if mod_info:
             text += "\n\n" + mod_info
+      
 
     try:
         profile = context.bot.get_user_profile_photos(user.id).photos[0][-1]
@@ -1096,6 +1118,8 @@ def info(update, context):
                        disable_web_page_preview=True)
     finally:
         del_msg.delete()
+
+
 
 @user_admin
 @run_async
