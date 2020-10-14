@@ -1098,6 +1098,11 @@ def info(update, context):
 
     chats = approved_users.find({})
     for c in chats:
+      print(chat.id)
+      print(user.id)
+      print(c['id'])
+      print(c['user'])
+
       if chat.id == c['id'] and user.id == c['user']:
          rem = text+"\n\n<b>Is Approved</b>: True"
       else:
