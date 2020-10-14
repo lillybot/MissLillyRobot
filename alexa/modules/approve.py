@@ -859,10 +859,10 @@ async def apprlst(event):
 			pass
 	
 	autos = approved_users.find({})
-	msg = "**Data in Your DB:**\nAPPROVED USERS\n"
+	msg = "**APPROVED USERS**\n"
 	for i in autos:
 		if event.chat_id == i['id']:
-			msg += "User: `"+str(i['user'])+"`\nChat: `"+str(i['id'])+"`\n"
+			msg += " - "+str(i['user'])+"\n"
 	
 	await event.reply(msg)	
 	
