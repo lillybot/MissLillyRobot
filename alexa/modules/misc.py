@@ -1087,13 +1087,6 @@ def info(update, context):
     except BadRequest:
         pass
 
-    chats = approved_users.find({})
-    for c in chats:
-      if chat.id == c['id'] and user.id == c['user']:
-         text += "\n\n<b>Is Approved</b>: True"
-      else:
-         text += "\n\n<b>Is Approved</b>: False"
-
         
     for mod in USER_INFO:
         try:
@@ -1102,6 +1095,14 @@ def info(update, context):
             mod_info = mod.__user_info__(user.id, chat.id).strip()
         if mod_info:
             text += "\n\n" + mod_info
+
+    chats = approved_users.find({})
+    for c in chats:
+      if chat.id == c['id'] and user.id == c['user']:
+         text += "\n\n<b>Is Approved</b>: True"
+      else:
+         text += "\n\n<b>Is Approved</b>: False"
+
 
     try:
         profile = context.bot.get_user_profile_photos(user.id).photos[0][-1]
