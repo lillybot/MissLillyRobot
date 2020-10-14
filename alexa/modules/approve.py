@@ -715,7 +715,7 @@ async def is_register_admin(chat, user):
 import logging
 logging.basicConfig(level=logging.DEBUG)
 
-@register(pattern="^/approve")
+@register(pattern="^/approve$")
 async def approve(event):
 	if event.fwd_from:
 		return  
@@ -762,7 +762,7 @@ async def approve(event):
 	await event.reply("Successfully Approved User")
 	
 
-@register(pattern="^/disapprove")
+@register(pattern="^/disapprove$")
 async def disapprove(event):
 	if event.fwd_from:
 		return  
@@ -806,7 +806,7 @@ async def disapprove(event):
 			return
 	await event.reply("This User isn't approved yet")
 	
-@register(pattern="^/checkstatus")
+@register(pattern="^/checkstatus$")
 async def checkst(event):
 	if event.fwd_from:
 		return  
@@ -842,7 +842,8 @@ async def checkst(event):
 	await event.reply("This user isn't approved")
 
 
-@register(pattern="^/listapproved")
+
+@register(pattern="^/listapproved$")
 async def apprlst(event):
 	if event.fwd_from:
 		return  
@@ -865,7 +866,13 @@ async def apprlst(event):
 	chats = approved_users.find({})
 	for c in chats:
 		if event.chat_id == c['id'] :
-			print(iid)
+			for pussy in userss:
+				gay = await tbot.get_input_entity(pussy)
+				fuck = gay.username
+				print(fuck)
+				await event.reply(fuck)
+		else:
+			await event.reply("No one is approved in this chat.)
 			return 
 
 
