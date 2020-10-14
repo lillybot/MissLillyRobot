@@ -701,8 +701,12 @@ async def purge_messages(event):
     for msg_id in range(message_id, delete_to + 1):
         messages.append(msg_id)
         if len(messages) == 100:
-            await event.client.delete_messages(event.chat_id, messages)
-            messages = []
+           try:
+              await event.client.delete_messages(event.chat_id, messages)
+              messages = []
+           except MessageDeleteForbiddenError:
+              await event.reply("I can't delete messages that are too old")
+              return
     try:
        await event.client.delete_messages(event.chat_id, messages)
     except MessageDeleteForbiddenError:
