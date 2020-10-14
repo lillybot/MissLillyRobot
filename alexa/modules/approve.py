@@ -865,6 +865,15 @@ async def apprlst(event):
 			msg += " - "+str(i['user'])+"\n"
 	
 	await event.reply(msg)	
-	
-	
-			
+
+def __user_info__(user_id, chat_id):
+    chats = approved_users.find({})
+    for c in chats:
+      if chat_id == c['id'] and user_id == c['user']:
+        text = "<b>Is Approved</b>: True"
+      else:
+        text = "<b>Is Approved</b>: False"
+    return text
+
+
+__mod_name__ = "Approval"
