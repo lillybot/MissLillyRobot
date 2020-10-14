@@ -1087,10 +1087,10 @@ def info(update, context):
         
     chats = approved_users.find({})
     for c in chats:
-           if chat.id == c['id'] and user.id == c['user']:
-               text += "<p>\n\n<em>Is Approved</em>: True</p>"
-           else:
-               text += "<p>\n\n<em>Is Approved</em>: False</p>"
+      if chat.id == c['id'] and user.id == c['user']:
+         text += "*Is Approved*: True"
+      else:
+         text += "*Is Approved*: False"
 
     for mod in USER_INFO:
         try:
