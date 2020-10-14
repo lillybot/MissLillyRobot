@@ -863,7 +863,7 @@ async def apprlst(event):
 			pass
 
 	chats = approved_users.find({})
-	for c in chats:
+	async for c in chats:
 		if event.chat_id == c['id']:
 			gay = await tbot.get_entity(userss)
 			final = ""
