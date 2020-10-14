@@ -668,9 +668,6 @@
 from pymongo import MongoClient
 from alexa import MONGO_DB_URI, tbot, ubot, OWNER_ID
 from alexa.events import register
-from telethon import events
-from telethon import types
-from telethon.tl import functions
 
 client = MongoClient()
 client = MongoClient(MONGO_DB_URI)
@@ -686,7 +683,31 @@ async def can_approve_users(message):
     p = result.participant
     return isinstance(p, types.ChannelParticipantCreator) or (
         isinstance(p, types.ChannelParticipantAdmin) and p.admin_rights.add_admins) 
+
+ 
+async def is_register_admin(chat, user):
+    if isinstance(chat, (types.InputPeerChannel, types.InputChannel)):
+
+        return isinstance(
+            (await
+             tbot(functions.channels.GetParticipantRequest(chat,
+                                                           user))).participant,
+            (types.ChannelParticipantAdmin, types.ChannelParticipantCreator),
+        )
+    elif isinstance(chat, types.InputPeerChat):
+
+        ui = await tbot.get_peer_id(user)
+        ps = (await tbot(functions.messages.GetFullChatRequest(chat.chat_id)
+                         )).full_chat.participants.participants
+        return isinstance(
+            next((p for p in ps if p.user_id == ui), None),
+            (types.ChatParticipantAdmin, types.ChatParticipantCreator),
+        )
+    else:
+        return None
+
 #------ THANKS TO LONAMI ------#
+
  
 import logging
 logging.basicConfig(level=logging.DEBUG)
@@ -709,6 +730,10 @@ async def approve(event):
 			return
 		else:
 			pass
+			
+	if await is_register_admin(event.input_chat, reply_msg.from_id):
+		await event.reply("Why will I approve an admin ?")
+		return
 			
 	if not event.reply_to_msg_id:
 		await event.reply("Reply To Someone's Message To Approve Them")
@@ -752,6 +777,10 @@ async def disapprove(event):
 			return
 		else:
 			pass
+	
+	if await is_register_admin(event.input_chat, reply_msg.from_id):
+		await event.reply("Why will i disapprove an admin ?")
+		return
 			
 	if not event.reply_to_msg_id:
 		await event.reply("Reply To Someone's Message To Disapprove Them")
@@ -759,7 +788,6 @@ async def disapprove(event):
 	
 	if reply_msg.from_id == event.from_id:
 		await event.reply('Why are you trying to disapprove yourself ?')
-		print("6")
 		return
 		
 	if reply_msg.from_id == 1361631434:
@@ -774,7 +802,6 @@ async def disapprove(event):
 			await event.reply("Successfully Disapproved User")
 			return
 	await event.reply("This User isn't approved yet")
-	
 	
 @register(pattern="^/checkstatus")
 async def checkst(event):
@@ -795,6 +822,10 @@ async def checkst(event):
 		else:
 			pass
 			
+	if await is_register_admin(event.input_chat, reply_msg.from_id):
+		await event.reply("Why will i check approve status of an admin ?")
+		return
+			
 	if not event.reply_to_msg_id:
 		await event.reply("Reply To Someone's Message To Check Status")
 		return	
@@ -806,5 +837,32 @@ async def checkst(event):
 			return 
 
 	await event.reply("This user isn't approved")
+
+
+@register(pattern="^/listapproved")
+async def apprlst(event):
+	if event.fwd_from:
+		return  
+	if MONGO_DB_URI is None:
+		return
+	chat_id = event.chat.id
+	sender = event.from_id 
+	reply_msg = await event.get_reply_message()	
+	approved_userss = approved_users.find({})
+	for ch in approved_userss: 
+		iid = ch['id']
+		userss = ch['user']
+		
+	if event.is_group:
+		if not await can_approve_users(message=event):
+			return
+		else:
+			pass
+
+	chats = approved_users.find({})
+	for c in chats:
+		if event.chat_id == c['id'] :
+			print(iid)
+			return 
 
 
