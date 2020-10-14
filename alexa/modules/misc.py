@@ -1096,19 +1096,6 @@ def info(update, context):
         if mod_info:
             text += "\n\n" + mod_info
 
-    chats = approved_users.find({})
-    for c in chats:
-      print(chat.id)
-      print(user.id)
-      print(c['id'])
-      print(c['user'])
-
-      if chat.id == c['id'] and user.id == c['user']:
-         rem = text+"\n\n<b>Is Approved</b>: True"
-      else:
-         rem = text+"\n\n<b>Is Approved</b>: False"
-
-
     try:
         profile = context.bot.get_user_profile_photos(user.id).photos[0][-1]
         context.bot.sendChatAction(chat.id, "upload_photo")
