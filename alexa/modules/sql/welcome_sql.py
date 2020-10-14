@@ -1026,6 +1026,7 @@ def set_clean_service(chat_id: Union[int, str], setting: bool):
         SESSION.commit()
 
 
+
 def migrate_chat(old_chat_id, new_chat_id):
     with INSERTION_LOCK:
         chat = SESSION.query(Welcome).get(str(old_chat_id))
