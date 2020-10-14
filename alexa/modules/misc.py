@@ -1099,9 +1099,9 @@ def info(update, context):
     chats = approved_users.find({})
     for c in chats:
       if chat.id == c['id'] and user.id == c['user']:
-         text += "\n\n<b>Is Approved</b>: True"
+         rem = text+"\n\n<b>Is Approved</b>: True"
       else:
-         text += "\n\n<b>Is Approved</b>: False"
+         rem = text+"\n\n<b>Is Approved</b>: False"
 
 
     try:
@@ -1110,13 +1110,13 @@ def info(update, context):
         context.bot.send_photo(
             chat.id,
             photo=profile,
-            caption=(text),
+            caption=(rem),
             parse_mode=ParseMode.HTML,
             disable_web_page_preview=True,
         )
     except IndexError:
         context.bot.sendChatAction(chat.id, "typing")
-        msg.reply_text(text,
+        msg.reply_text(rem,
                        parse_mode=ParseMode.HTML,
                        disable_web_page_preview=True)
     finally:
