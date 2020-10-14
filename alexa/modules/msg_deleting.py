@@ -666,6 +666,7 @@ from telethon import events
 from telethon import events
 from telethon import types
 from telethon.tl import functions
+from telethon.errors.rpcerrorlist import MessageDeleteForbiddenError
 
 async def can_del(message):
     result = await tbot(functions.channels.GetParticipantRequest(
@@ -702,8 +703,11 @@ async def purge_messages(event):
         if len(messages) == 100:
             await event.client.delete_messages(event.chat_id, messages)
             messages = []
-
-    await event.client.delete_messages(event.chat_id, messages)
+    try:
+       await event.client.delete_messages(event.chat_id, messages)
+    except MessageDeleteForbiddenError:
+       await event.reply("I can't delete messages that are too old")
+       return
     time_ = time.perf_counter() - start
     text = f"Purged Successfully in {time_:0.2f} Second(s)"
     await event.respond(text, parse_mode='markdown')
@@ -723,7 +727,11 @@ async def delete_messages(event):
         return
     chat = await event.get_input_chat()
     del_message = [message, event.message]
-    await event.client.delete_messages(chat, del_message)
+    try:
+      await event.client.delete_messages(chat, del_message)
+    except MessageDeleteForbiddenError:
+       await event.reply("I can't delete messages that are too old")
+       return
 
 
 __mod_name__ = "Purges"
