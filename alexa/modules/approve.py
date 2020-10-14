@@ -843,6 +843,8 @@ async def checkst(event):
 
 
 
+@
+
 @register(pattern="^/listapproved$")
 async def apprlst(event):
 	if event.fwd_from:
@@ -866,17 +868,16 @@ async def apprlst(event):
 	chats = approved_users.find({})
 	for c in chats:
 		if event.chat_id == c['id']:
-			print (userss)
-			gay = await tbot.get_entity(userss)
-			if not gay.username:
-				gg = gay.first_name
-				hh = gay.id
-				final = f"[{gg}](tg://user?id={hh})"
-			else:
-				final = gay.username
-			print(final)
-			await event.reply(final)
+			async for userss in approved_users:
+				gay = await tbot.get_entity(userss)
+				if not gay.username:
+					gg = gay.first_name
+					hh = gay.id
+					final = f"[{gg}](tg://user?id={hh})\n"
+				else:
+					final += gay.username+"\n"
+					print(final)
+					await event.reply(final)
 		else:
 			await event.reply("No one is approved in this chat.")
 			return 
-
