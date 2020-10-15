@@ -5,6 +5,8 @@ import pytz
 from alexa import tbot, SQLDATEALERT
 from telethon import events
 
+loop = asyncio.get_event_loop()
+
 async def check_db():
     LT = datetime.datetime.now(pytz.timezone('Asia/Kolkata'))
     OT = LT.strftime("%d|%m|%y")
@@ -13,4 +15,6 @@ async def check_db():
            await tbot.send_message(-1001158277850, "**ALERT**\n\n__Hello moderators please upgrade my SQL database for my proper functioning !\nSet a new DATABASE_URL__")
            await asyncio.sleep(5)
 
-tbot.loop.run_until_complete(check_db())
+future = loop.create_task(check_db())
+loop.run_until_complete(future)
+
