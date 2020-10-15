@@ -857,6 +857,7 @@ async def apprlst(event):
 			pass
 	
 	autos = approved_users.find({})
+	list1 = []
 	for i in autos:
 		if event.chat_id == i['id']:
 			h = await tbot.get_entity(i['user'])
@@ -865,5 +866,7 @@ async def apprlst(event):
 				c += " - "+"[h.first_name](tg://user?id=h.id)"+"\n"
 			else:
 				c += " - "+"@"+h.username+"\n"
-			let = c 
-			await event.reply(let)
+			for a in c:
+				print(a)
+				await event.reply(a)
+			
