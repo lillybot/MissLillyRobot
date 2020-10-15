@@ -669,7 +669,7 @@ from pymongo import MongoClient
 from alexa import MONGO_DB_URI, tbot, ubot, OWNER_ID
 from alexa.events import register
 from telethon import events
-from telethon import types
+from telethon import types, 
 from telethon.tl import functions
 
 client = MongoClient()
@@ -863,9 +863,9 @@ async def apprlst(event):
 			h = await tbot.get_entity(i['user'])
 			getmyass = ""
 			if not h.username:
-				getmyass += " - "+"[h.first_name](tg://user?id=h.id)"+"\n"
+				getmyass += f"- [{h.first_name}](tg://user?id={h.id})\n"
 			else:
-				getmyass += " - "+"@"+h.username+"\n"
+				getmyass += "- @"+h.username+"\n"
 			pp += str(getmyass)
 	await event.reply(pp)
 			
