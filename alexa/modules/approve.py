@@ -870,5 +870,8 @@ async def apprlst(event):
 				pp += str(getmyass)
 			except ValueError:
 				pass
-		
-	await event.reply(pp)
+	try:
+		await event.reply(pp)
+	except Exception:
+		await event.reply("No one is approved in this chat.")
+	
