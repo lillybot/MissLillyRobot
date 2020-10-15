@@ -2,7 +2,7 @@ import asyncio
 import datetime
 import time
 import pytz
-from alexa import tbot
+from alexa import tbot, SQLDATEALERT
     
 async def check_db():
     LT = datetime.datetime.now(pytz.timezone('Asia/Kolkata'))
