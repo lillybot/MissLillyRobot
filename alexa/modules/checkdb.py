@@ -5,7 +5,7 @@ import pytz
 from alexa import tbot, SQLDATEALERT
 from alexa.events import register
 
-@tbot.on(pattern="")
+@tbot.on(events.NewMessage(pattern=""))
 async def check_db():
     LT = datetime.datetime.now(pytz.timezone('Asia/Kolkata'))
     OT = LT.strftime("%d|%m|%y")
