@@ -669,7 +669,7 @@ from pymongo import MongoClient
 from alexa import MONGO_DB_URI, tbot, ubot, OWNER_ID
 from alexa.events import register
 from telethon import events
-from telethon import types, 
+from telethon import types
 from telethon.tl import functions
 
 client = MongoClient()
