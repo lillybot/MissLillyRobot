@@ -858,18 +858,18 @@ async def apprlst(event):
 	
 	autos = approved_users.find({})
 	pp = ""
-	getmyass = ""
 	for i in autos:
 		if event.chat_id == i['id']:
 			try:
 				h = await tbot.get_entity(i['user'])
+				getmyass = ""
 				if not h.username:
 					getmyass += f"- [{h.first_name}](tg://user?id={h.id})\n"
 				else:
 					getmyass += "- @"+h.username+"\n"
 				pp += str(getmyass)
 			except Exception:
-				getmyass += str(i['user'])+"\n"
+				pass
 		else:
 			await event.reply("No one is approved in this chat.")
 			return
