@@ -4318,7 +4318,6 @@ __help__ = """
  - /runs: reply a random string from an array of replies.
  - /slap: slap a user, or get slapped if not a reply.
  - /info: get information about a user.
- - /gdpr: deletes your information from the bot's database. Private chats only.
  - /paste: Create a paste or a shortened url using del.dog
  - /getpaste: Get the content of a paste or shortened url from del.dog
  - /pastestats: Get stats of a paste or shortened url from del.dog
