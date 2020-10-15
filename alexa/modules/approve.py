@@ -866,7 +866,6 @@ async def apprlst(event):
 				c += " - "+"[h.first_name](tg://user?id=h.id)"+"\n"
 			else:
 				c += " - "+"@"+h.username+"\n"
-			m = f"{c}"
-			print(m)
-			await event.reply(m)
+	print(c)
+	await event.reply(c)
 			
