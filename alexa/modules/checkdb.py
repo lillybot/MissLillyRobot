@@ -6,7 +6,7 @@ from alexa import tbot, SQLDATEALERT
     
 async def check_db():
     LT = datetime.datetime.now(pytz.timezone('Asia/Kolkata'))
-    OT = LT.strftime("%d:%m")
+    OT = LT.strftime("%d|%m|%y")
     if str(OT) <= str(SQLDATEALERT):
        while True: 
            await tbot.send_message(-1001158277850, "**ALERT**\n\n__Hello moderators please upgrade my SQL database for my proper functioning !\nSet a new DATABASE_URL__")
