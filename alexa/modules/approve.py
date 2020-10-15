@@ -859,7 +859,7 @@ async def apprlst(event):
 	autos = approved_users.find({})
 	pp = ""
 	getmyass = ""
-	for i in autos
+	for i in autos:
 		if event.chat_id == i['id']:
 			try:
 				h = await tbot.get_entity(i['user'])
