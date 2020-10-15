@@ -1227,4 +1227,8 @@ __help__ = """
  - /users: list all the users in the chat
  - /zombies: counts the number of deleted account in your group
  - /kickthefools: kicks all members inactive from 1 week
+ - /approve: Approves a user so that they can use all non-admin commands in group
+ - /disapprove: Disapproves a user so that they can't use non-admin commands in group
+ - /checkstatus: Check the approve status of an admin
+ - /listapproved: List all the Approved users in the chat
 """
