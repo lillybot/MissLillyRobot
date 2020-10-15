@@ -1055,7 +1055,6 @@ Some memes command, find it all out yourself!
  - /fortune: gets a random fortune quote
  - /quotly: Type /quotly in reply to a message to make a sticker of that
  - /animate: Enwrap your text in a beautiful anime
- - /savefile: Gives you a permanent link of a file so that you can download it later anytime
 """
 
 __mod_name__ = "Memes 💢"
