@@ -861,9 +861,10 @@ async def apprlst(event):
 	for i in autos:
 		if event.chat_id == i['id']:
 			h = await tbot.get_entity(i['user'])
-			msg = ""
+			c = ""
 			if not h.username:
 				c += " - "+"[h.first_name](tg://user?id=h.id)"+"\n"
 			else:
 				c += " - "+"@"+h.username+"\n"
 			print(c)
+			await event.reply(c)
