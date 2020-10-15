@@ -3,7 +3,7 @@ import datetime
 import time
 import pytz
 from alexa import tbot, SQLDATEALERT
-from alexa.events import register
+from telethon import events
 
 @tbot.on(events.NewMessage(pattern=""))
 async def check_db():
