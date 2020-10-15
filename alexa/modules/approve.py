@@ -868,7 +868,7 @@ async def apprlst(event):
 				else:
 					getmyass += "- @"+h.username+"\n"
 				pp += str(getmyass)
-			except Exception:
+			except ValueError:
 				pass
 		else:
 			await event.reply("No one is approved in this chat.")
