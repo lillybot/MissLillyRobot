@@ -1,9 +1,14 @@
-# Alexa - A Telegram Bot Project
+Alexa - A Telegram Bot Project
+========
+.. epigraph::
+
+  ⭐️ Thanks to **everyone** who has starred the project, it means a lot!
 
 [![AGPLv3 license](https://img.shields.io/badge/License-AGPLv3-red.svg)]
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/b5531bcac1e1486fb5eb13d5852f5bd1)](https://app.codacy.com/gh/MissAlexaRobot/MissAlexaRobot?utm_source=github.com&utm_medium=referral&utm_content=MissAlexaRobot/MissAlexaRobot&utm_campaign=Badge_Grade)
 
-**A modular telegram bot running on python3 with an sqlalchemy
+
+**Alexa is a modular telegram bot running on python3 with an sqlalchemy
 database.**
 
 Deploy Alexa to Heroku:
