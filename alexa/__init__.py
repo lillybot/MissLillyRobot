@@ -769,8 +769,7 @@ if ENV:
     UPSTREAM_REPO_URL = os.environ.get("UPSTREAM_REPO_URL", "https://github.com/MissAlexaRobot/MissAlexaRobot.git")
     TEMPORARY_DATA = os.environ.get("TEMPORARY_DATA", None)
     SPAMMERS = list(SPAMMERS)
-    SQLDATEALERT = os.environ.get("SQLDATEALERT", None)
-
+    
     try:
         from alexa.antispam import (antispam_cek_user, antispam_restrict_user,
                                     detect_user)
