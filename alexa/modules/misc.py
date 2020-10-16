@@ -1172,16 +1172,31 @@ This will create two buttons on a single line, instead of one button per line.
 Keep in mind that your message <b>MUST</b> contain some text other than just a button!
 """
 
+def markdown_help_sender(update: Update):
+    update.effective_message.reply_text(
+        MARKDOWN_HELP, parse_mode=ParseMode.HTML)
+    update.effective_message.reply_text(
+        "Try forwarding the following message to me, and you'll see, and Use #test!"
+    )
+    update.effective_message.reply_text(
+        "/save test This is a markdown test. _italics_, *bold*, code, "
+        "[URL](example.com) [button](buttonurl:github.com) "
+        "[button2](buttonurl://google.com:same)")
 
 
-@user_admin
 @run_async
+@user_admin
 def markdown_help(update: Update, context: CallbackContext):
-    chat = update.effective_chat  # type: Optional[Chat]
-
-    update.effective_message.reply_text(chat.id,
-                                        MARKDOWN_HELP,
-                                        parse_mode=ParseMode.HTML)
+    if update.effective_chat.type != "private":
+        update.effective_message.reply_text(
+            'Contact me in pm',
+            reply_markup=InlineKeyboardMarkup([[
+                InlineKeyboardButton(
+                    "Markdown help",
+                    url=f"t.me/{context.bot.username}?start=markdownhelp")
+            ]]))
+        return
+    markdown_help_sender(update)
 
 
 @run_async
