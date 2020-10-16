@@ -694,8 +694,7 @@ def afk(update, context):
         reason = args[1]
     else:
         reason = ""
-    global start_time 
-    start_time = time.time()
+ 
     sql.set_afk(update.effective_user.id, reason)
     fname = update.effective_user.first_name
     update.effective_message.reply_text(f"{fname} is now AFK!")
@@ -711,9 +710,8 @@ def no_longer_afk(update, context):
     res = sql.rm_afk(user.id)
     if res:
         firstname = update.effective_user.first_name
-        elapsed_time = time.time() - start_time
-        final = time.strftime("%Hh: %Mm: %Ss", time.gmtime(elapsed_time))
-        update.effective_message.reply_text(f"{firstname} is no longer AFK !\n\nWas AFK for {final}")
+        
+        update.effective_message.reply_text(f"{firstname} is no longer AFK !")
 
 
 @run_async
@@ -723,9 +721,7 @@ def reply_afk(update: Update, context: CallbackContext):
     userc = update.effective_user
     userc_id = userc.id
     elapsed_time = time.time() - start_time
-    global finalafk
-    finalafk = time.strftime("%Hh: %Mm: %Ss", time.gmtime(elapsed_time))
-
+    
     if message.entities and message.parse_entities(
         [MessageEntity.TEXT_MENTION, MessageEntity.MENTION]):
         entities = message.parse_entities(
@@ -779,12 +775,12 @@ def check_afk(update, context, user_id, fst_name, userc_id):
         if not reason:
             if int(userc_id) == int(user_id):
                 return
-            res = f"{fst_name} is AFK !\n\nLast seen {finalafk} ago"
+            res = f"{fst_name} is AFK !"
             update.effective_message.reply_text(res)
         else:
             if int(userc_id) == int(user_id):
                 return
-            res = f"{fst_name} is AFK !\n\nReason: {reason}\n\nLast seen {finalafk} ago"
+            res = f"{fst_name} is AFK !"
             update.effective_message.reply_text(res, parse_mode="html")
 
 
