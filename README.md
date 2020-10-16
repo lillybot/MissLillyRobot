@@ -3,8 +3,6 @@
 > ⭐️ Thanks to **everyone** who has starred the project, it means a lot!
 
 [![AGPLv3 license](https://img.shields.io/badge/License-AGPLv3-red.svg)]
-[![GitHub stars](https://img.shields.io/github/stars/MissAlexaRobot/MissAlexaRobot?style=social)](https://github.com/MissAlexaRobot/MissAlexaRobot/stargazers)
-[![Heroku](http://heroku-badge.herokuapp.com/?app=alexaisasexybot&style=flat&svg=1)]
 
 **Alexa is a modular telegram bot running on python3 with an sqlalchemy
 database.**
