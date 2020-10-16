@@ -1,0 +1,13 @@
+language: python
+
+python:
+    - 3.8
+
+install:
+    - pip install --upgrade -r requirements.txt
+
+script:
+    - python3 -m alexa
+
+notifications:
+    email: false
