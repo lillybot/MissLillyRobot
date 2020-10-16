@@ -720,7 +720,6 @@ def reply_afk(update: Update, context: CallbackContext):
     message = update.effective_message
     userc = update.effective_user
     userc_id = userc.id
-    elapsed_time = time.time() - start_time
     
     if message.entities and message.parse_entities(
         [MessageEntity.TEXT_MENTION, MessageEntity.MENTION]):
