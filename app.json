@@ -3,7 +3,7 @@
   "description": "A Powerful Telegram Bot written in PTB and Telethon",
   "logo": "https://telegra.ph/file/ff67325252e0b692e4f4d.jpg",
   "keywords": ["telegram", "group", "management", "bot"],
-  "repository": "https://github.com/Ayush131/MissAlexaRobot",
+  "repository": "https://github.com/MissAlexaRobot/MissAlexaRobot",
   "success_url": "https://telegra.ph/MissAlexaRobot-10-09",
   "env": {
     "API_KEY": {
