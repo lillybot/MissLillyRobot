@@ -714,7 +714,6 @@ buttons += [[
     InlineKeyboardButton(text="Source 🌐",
                          url="https://github.com/MissAlexaRobot/MissAlexaRobot"),
 ]]
-buttons += [[InlineKeyboardButton(text="Donate💲", url="https://ko-fi.com/MissAlexaRobot")]]
 
 HELP_STRINGS = """
 [#include <std/disclaimer.h>](https://telegra.ph/MissAlexaRobot-10-09)
