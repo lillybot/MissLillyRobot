@@ -736,7 +736,7 @@ async def _(event):
         shell=True)
     l = glob.glob("*.mp3")
     loa = l[0]
-    await event.reply("sending the song")
+    await event.reply("sending your song...🎶🎵")
     await event.client.send_file(
         event.chat_id,
         loa,
