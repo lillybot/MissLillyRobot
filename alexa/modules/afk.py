@@ -697,7 +697,7 @@ def afk(update, context):
  
     sql.set_afk(update.effective_user.id, reason)
     fname = update.effective_user.first_name
-    update.effective_message.reply_text(f"{fname} is now AFK!")
+    update.effective_message.reply_text(f"{fname} is now AFK🚶")
 
 
 @run_async
@@ -711,7 +711,7 @@ def no_longer_afk(update, context):
     if res:
         firstname = update.effective_user.first_name
         
-        update.effective_message.reply_text(f"{firstname} is no longer AFK !")
+        update.effective_message.reply_text(f"{firstname} is no longer AFK 😺")
 
 
 @run_async
