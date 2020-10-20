@@ -775,7 +775,7 @@ async def carbon_api(e):
         await asyncio.sleep(1)
     await gg.edit("`Processing..\n100%`")
     file = "./carbon.png"
-    await e.edit("`Uploading..`")
+    await e.edit("`Uploading..⚡`")
     await e.client.send_file(
         e.chat_id,
         file,
